@@ -3,7 +3,12 @@ describe('PeriodOfStayInput', function () {
 
     var assert = require('assert'),
         jsdom = require('jsdom'),
+        TestUtils = require('react/addons').addons.TestUtils,
         PeriodOfStayInput = require('../src/PeriodOfStayInput'),
+
+        props = function () {
+            return {};
+        },
 
         $;
 
@@ -21,7 +26,15 @@ describe('PeriodOfStayInput', function () {
         global.window.close();
     });
 
-    it('is defined', function () {
-        assert(PeriodOfStayInput);
+    describe('static markup', function () {
+        var element;
+
+        beforeEach(function () {
+            element = TestUtils.renderIntoDocument(PeriodOfStayInput(props())).getDOMNode();
+        });
+
+        it('has the root element\'s class assigned', function () {
+            assert($(element).hasClass('period-of-stay-input'));
+        });
     });
 });
