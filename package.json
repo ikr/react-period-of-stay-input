@@ -1,0 +1,50 @@
+{
+  "name": "react-period-of-stay-input",
+  "version": "0.1.0",
+  "description": "React.js component for entering a period of stay in a hotel: check-in + check-out date",
+  "main": "index.js",
+  "scripts": {
+    "pretest": "jshint tests src index.js demo.js",
+    "test": "mocha tests/*.spec.js",
+    "build": "browserify demo.js | uglifyjs > www/bundle.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ikr/react-period-of-stay-input.git"
+  },
+  "keywords": [
+    "reactjs",
+    "component",
+    "html",
+    "form",
+    "browser",
+    "browserify",
+    "input",
+    "control",
+    "widget",
+    "check-in",
+    "check-out",
+    "days",
+    "nights",
+    "hotel",
+    "stay",
+    "dates",
+    "accommodation"
+  ],
+  "author": "Ivan Krechetov <ikr@ikr.su>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ikr/react-period-of-stay-input/issues"
+  },
+  "dependencies": {
+    "react": "^0.11.2"
+  },
+  "devDependencies": {
+    "uglify-js": "^2.4.15",
+    "mocha": "^1.21.4",
+    "jshint": "^2.5.6",
+    "sinon": "^1.10.3",
+    "jsdom": "^1.0.0-pre.7",
+    "browserify": "^5.12.0"
+  }
+}
