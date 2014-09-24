@@ -1,8 +1,30 @@
 <!doctype html>
 <html lang="de-CH">
+  <head>
+    <!--[if IE]>
+      <link href="better-dom/dist/better-dom.htc" rel="htc"/>
+      <script src="http://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.0.3/es5-shim.min.js"></script>
+      <script src="http://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.0.3/es5-sham.min.js"></script>
+    <![endif]-->
+
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/yepnope/1.5.4/yepnope.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        yepnope({
+          test: Modernizr.date,
+          nope: [
+            'better-dom/dist/better-dom.js',
+            'better-dateinput-polyfill/dist/better-dateinput-polyfill.css',
+            'better-dateinput-polyfill/dist/better-dateinput-polyfill.js'
+          ]
+        });
+      });
+    </script>
+  </head>
+
   <body>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.0.3/es5-shim.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.0.3/es5-sham.min.js"></script>
     <script src="bundle.js"></script>
   </body>
 </html>
