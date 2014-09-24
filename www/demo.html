@@ -8,14 +8,14 @@
     <![endif]-->
 
     <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/yepnope/1.5.4/yepnope.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/yepnope/1.5.4/yepnope.min.js"></script>
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         yepnope({
-          test: Modernizr.date,
+          test: Modernizr.inputtypes.date,
           nope: [
-            'better-dom/dist/better-dom.js',
+            'better-dom/dist/better-dom.min.js',
             'better-dateinput-polyfill/dist/better-dateinput-polyfill.css',
             'better-dateinput-polyfill/dist/better-dateinput-polyfill.js'
           ]
