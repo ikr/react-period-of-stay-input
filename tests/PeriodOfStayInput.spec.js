@@ -10,13 +10,13 @@ describe('PeriodOfStayInput', function () {
             return {checkInDate: checkInDate, checkOutDate: checkOutDate};
         },
 
-        props = function (checkInDate, checkOutDate, allowZeroNights) {
+        props = function (checkInDate, checkOutDate, zeroNightsAllowed) {
             var result = state(
                     checkInDate ? checkInDate : '2014-09-24',
                     checkOutDate ? checkOutDate : '2014-09-25'
                 );
 
-            result.allowZeroNights = allowZeroNights;
+            result.zeroNightsAllowed = zeroNightsAllowed;
             return result;
         },
 
