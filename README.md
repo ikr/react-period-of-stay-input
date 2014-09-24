@@ -1,3 +1,4 @@
 # About
 
-React.js component for entering a period of stay in a hotel: check-in + check-out date
+Not finished yet. The current progress is visible at
+[the demo page](http://ikr.su/h/react-period-of-stay-input/www/demo.html)
