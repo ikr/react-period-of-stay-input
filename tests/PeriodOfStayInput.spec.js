@@ -100,5 +100,12 @@ describe('PeriodOfStayInput', function () {
         it('sets the maximum number of nights to 27', function () {
             assert.strictEqual(component.refs.nights.getDOMNode().getAttribute('max'), '27');
         });
+
+        it('contains the "1-day stay" link', function () {
+            assert.strictEqual(
+                $('a.period-of-stay-one-day', component.getDOMNode()).text(),
+                '1-day stay'
+            );
+        });
     });
 });
