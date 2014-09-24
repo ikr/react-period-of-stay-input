@@ -11,15 +11,13 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/yepnope/1.5.4/yepnope.min.js"></script>
 
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        yepnope({
-          test: Modernizr.inputtypes.date,
-          nope: [
-            'better-dom/dist/better-dom.min.js',
-            'better-dateinput-polyfill/dist/better-dateinput-polyfill.css',
-            'better-dateinput-polyfill/dist/better-dateinput-polyfill.js'
-          ]
-        });
+      yepnope({
+        test: Modernizr.inputtypes.date,
+        nope: [
+          'better-dom/dist/better-dom.min.js',
+          'better-dateinput-polyfill/dist/better-dateinput-polyfill.css',
+          'better-dateinput-polyfill/dist/better-dateinput-polyfill.js'
+        ]
       });
     </script>
   </head>
