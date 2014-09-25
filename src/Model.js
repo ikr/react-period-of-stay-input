@@ -3,9 +3,10 @@
 
     var moment = require('moment'),
 
-        Model = function (checkInDate, checkOutDate) {
+        Model = function (checkInDate, checkOutDate, message) {
             this.checkInDate = checkInDate;
             this.checkOutDate = checkOutDate;
+            this.message = message;
         },
 
         itsOk = function (mCheckIn, mCheckOut, environment) {

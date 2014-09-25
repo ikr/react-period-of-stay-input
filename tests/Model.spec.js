@@ -5,17 +5,18 @@ describe('Model', function () {
         Model = require('../src/Model'),
         Environment = require('../src/Environment'),
 
-        assertValue = function (model, checkInDate, checkOutDate) {
+        assertValue = function (model, checkInDate, checkOutDate, message) {
             assert.deepEqual(
-                {checkInDate: model.checkInDate, checkOutDate: model.checkOutDate},
-                {checkInDate: checkInDate, checkOutDate: checkOutDate}
+                {checkInDate: model.checkInDate, checkOutDate: model.checkOutDate, message: model.message},
+                {checkInDate: checkInDate, checkOutDate: checkOutDate, message: message}
             );
         };
 
     it('is a constructor', function () {
-        var m = new Model('2014-09-24', '2014-09-25');
+        var m = new Model('2014-09-24', '2014-09-25', 'Hey there');
         assert.strictEqual(m.checkInDate, '2014-09-24');
         assert.strictEqual(m.checkOutDate, '2014-09-25');
+        assert.strictEqual(m.message, 'Hey there');
     });
 
     describe('.prototype', function () {
