@@ -59,7 +59,7 @@ describe('Model', function () {
                 );
             });
 
-            it('yields the day before check-out if the stay is over 27 nights', function () {
+            it('yields the day before check-out if the stay is 28 nights', function () {
                 assertValue(
                     m.newCheckIn('2014-09-02', new Environment(false, '2014-08-01')),
                     '2014-09-29',

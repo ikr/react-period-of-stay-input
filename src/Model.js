@@ -12,6 +12,8 @@
             var mToday = moment(environment.today, 'YYYY-MM-DD');
 
             return (!mCheckIn.isBefore(mToday) && (
+                mCheckOut.diff(mCheckIn, 'days') <= 27
+            ) && (
                 (environment.zeroNightsAllowed && !mCheckOut.isBefore(mCheckIn)) ||
                 (!environment.zeroNightsAllowed && mCheckIn.isBefore(mCheckOut))
             ));
