@@ -29,6 +29,18 @@
             }
         };
 
+    if (!Number.isInteger) {
+        Number.isInteger = function isInteger (nVal) {
+            return (
+                typeof nVal === 'number' &&
+                isFinite(nVal) &&
+                nVal > -9007199254740992 &&
+                nVal < 9007199254740992 &&
+                Math.floor(nVal) === nVal
+            );
+        };
+    }
+
     Model.prototype.newCheckIn = function (checkInDate, environment) {
         var mCheckOut = moment(this.checkOutDate, 'YYYY-MM-DD'),
             mCheckIn,
@@ -75,6 +87,27 @@
             mCheckIn.add(1, 'days').format('YYYY-MM-DD'),
             message
         );
+    };
+
+    Model.prototype.newNights = function (count, environment) {
+        var mCheckIn,
+            mCheckOut,
+            message;
+
+        if (Number.isInteger(count) && (Math.abs(count) < 10000)) {
+            mCheckIn = moment(this.checkInDate, 'YYYY-MM-DD');
+            mCheckOut = moment(this.checkInDate, 'YYYY-MM-DD').add(count, 'days');
+            message = invalidity(mCheckIn, mCheckOut, environment);
+
+            if (!message) {
+                return new Model(this.checkInDate, mCheckOut.format('YYYY-MM-DD'));
+            }
+        }
+        else {
+            message = 'Invalid nights count replaced';
+        }
+
+        return new Model(this.checkInDate, this.checkOutDate, message);
     };
 
     module.exports = Model;

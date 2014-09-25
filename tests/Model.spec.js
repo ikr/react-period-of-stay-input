@@ -113,5 +113,38 @@ describe('Model', function () {
                 );
             });
         });
+
+        describe('.newNights', function () {
+            it('moves the check-out date', function () {
+                assertValue(m.newNights(1, e), '2014-09-24', '2014-09-25');
+            });
+
+            it('complains about an invalid integer', function () {
+                assertValue(
+                    m.newNights('bla', e),
+                    '2014-09-24',
+                    '2014-09-30',
+                    'Invalid nights count replaced'
+                );
+            });
+
+            it('complains about a huge integer', function () {
+                assertValue(
+                    m.newNights(10000, e),
+                    '2014-09-24',
+                    '2014-09-30',
+                    'Invalid nights count replaced'
+                );
+            });
+
+            it('does the common validity checks', function () {
+                assertValue(
+                    m.newNights(0, e),
+                    '2014-09-24',
+                    '2014-09-30',
+                    'Checking out on the check-in day isn\'t allowed'
+                );
+            });
+        });
     });
 });
