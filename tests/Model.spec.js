@@ -20,10 +20,10 @@ describe('Model', function () {
     });
 
     describe('.prototype', function () {
-        describe('.newCheckIn', function () {
-            var m = new Model('2014-09-24', '2014-09-30'),
-                e = new Environment(false, '2014-09-24');
+        var m = new Model('2014-09-24', '2014-09-30'),
+            e = new Environment(false, '2014-09-24');
 
+        describe('.newCheckIn', function () {
             it('on empty value yields the day before the check-out', function () {
                 assertValue(
                     m.newCheckIn('', e),
