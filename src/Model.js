@@ -9,32 +9,47 @@
             this.message = message;
         },
 
-        itsOk = function (mCheckIn, mCheckOut, environment) {
+        invalidity = function (mCheckIn, mCheckOut, environment) {
             var mToday = moment(environment.today, 'YYYY-MM-DD');
 
-            return (!mCheckIn.isBefore(mToday) && (
-                mCheckOut.diff(mCheckIn, 'days') <= 27
-            ) && (
-                (environment.zeroNightsAllowed && !mCheckOut.isBefore(mCheckIn)) ||
-                (!environment.zeroNightsAllowed && mCheckIn.isBefore(mCheckOut))
-            ));
+            if (mCheckOut.isBefore(mCheckIn)) {
+                return 'Check-out day can\'t be before the check-in';
+            }
+
+            if (!environment.zeroNightsAllowed && mCheckIn.isSame(mCheckOut, 'day')) {
+                return 'Checking out on the check-in day isn\'t allowed';
+            }
+
+            if (mCheckIn.isBefore(mToday)) {
+                return 'Can\'t check in earlier than today';
+            }
+
+            if (mCheckOut.diff(mCheckIn, 'days') > 27) {
+                return 'Period of stay can\'t exceed 27 nights';
+            }
         };
 
     Model.prototype.newCheckIn = function (checkInDate, environment) {
         var mCheckOut = moment(this.checkOutDate, 'YYYY-MM-DD'),
-            mCheckIn;
+            mCheckIn,
+            message;
 
         if (moment(checkInDate, 'YYYY-MM-DD').isValid()) {
             mCheckIn = moment(checkInDate, 'YYYY-MM-DD');
+            message = invalidity(mCheckIn, mCheckOut, environment);
 
-            if (itsOk(mCheckIn, mCheckOut, environment)) {
+            if (!message) {
                 return new Model(checkInDate, this.checkOutDate);
             }
+        }
+        else {
+            message = 'Invalid check-in day replaced';
         }
 
         return new Model(
             mCheckOut.subtract(1, 'days').format('YYYY-MM-DD'),
-            this.checkOutDate
+            this.checkOutDate,
+            message
         );
     };
 
