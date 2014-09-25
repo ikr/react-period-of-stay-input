@@ -6,18 +6,8 @@ describe('PeriodOfStayInput', function () {
         TestUtils = require('react/addons').addons.TestUtils,
         PeriodOfStayInput = require('../src/PeriodOfStayInput'),
 
-        state = function (checkInDate, checkOutDate) {
-            return {checkInDate: checkInDate, checkOutDate: checkOutDate};
-        },
-
-        props = function (checkInDate, checkOutDate, zeroNightsAllowed) {
-            var result = state(
-                    checkInDate ? checkInDate : '2014-09-24',
-                    checkOutDate ? checkOutDate : '2014-09-25'
-                );
-
-            result.zeroNightsAllowed = zeroNightsAllowed;
-            return result;
+        props = function () {
+            return {};
         },
 
         $;
