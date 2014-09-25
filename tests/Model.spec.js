@@ -37,7 +37,7 @@ describe('Model', function () {
                 assertValue(m.newCheckIn('2014-09-24', e), '2014-09-24', '2014-09-30');
             });
 
-            it('on value after check-out yields the day before the check out', function () {
+            it('on value after check-out yields the day before the check-out', function () {
                 assertValue(
                     m.newCheckIn('2014-10-01', e),
                     '2014-09-29',
@@ -46,7 +46,7 @@ describe('Model', function () {
                 );
             });
 
-            it('on check-out value yields the day before the check out', function () {
+            it('on check-out value yields the day before the check-out', function () {
                 assertValue(
                     m.newCheckIn('2014-09-30', e),
                     '2014-09-29',
@@ -85,6 +85,30 @@ describe('Model', function () {
                     m.newCheckIn('2014-09-02', new Environment(false, '2014-08-01')),
                     '2014-09-29',
                     '2014-09-30',
+                    'Period of stay can\'t exceed 27 nights'
+                );
+            });
+        });
+
+        describe('.newCheckOut', function () {
+            it('yeilds a new check-out day in a valid case', function () {
+                assertValue(m.newCheckOut('2014-09-25', e), '2014-09-24', '2014-09-25');
+            });
+
+            it('complains about invalid input and yields the day after check-in', function () {
+                assertValue(
+                    m.newCheckOut('2015-02-30', e),
+                    '2014-09-24',
+                    '2014-09-25',
+                    'Invalid check-out day replaced'
+                );
+            });
+
+            it('on value too far in the future complains about the max stay', function () {
+                assertValue(
+                    m.newCheckOut('2016-09-01', e),
+                    '2014-09-24',
+                    '2014-09-25',
                     'Period of stay can\'t exceed 27 nights'
                 );
             });

@@ -53,5 +53,29 @@
         );
     };
 
+    Model.prototype.newCheckOut = function (checkOutDate, environment) {
+        var mCheckIn = moment(this.checkInDate, 'YYYY-MM-DD'),
+            mCheckOut,
+            message;
+
+        if (moment(checkOutDate, 'YYYY-MM-DD').isValid()) {
+            mCheckOut = moment(checkOutDate, 'YYYY-MM-DD');
+            message = invalidity(mCheckIn, mCheckOut, environment);
+
+            if (!message) {
+                return new Model(this.checkInDate, checkOutDate);
+            }
+        }
+        else {
+            message = 'Invalid check-out day replaced';
+        }
+
+        return new Model(
+            this.checkInDate,
+            mCheckIn.add(1, 'days').format('YYYY-MM-DD'),
+            message
+        );
+    };
+
     module.exports = Model;
 }());
