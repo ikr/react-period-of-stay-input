@@ -10,6 +10,8 @@ describe('PeriodOfStayInput instance', function () {
 
         $;
 
+    this.timeout(4000);
+
     beforeEach(function (done) {
         global.document = jsdom.jsdom('<html><body></body></html>', jsdom.level(1, 'core'));
         global.window = global.document.parentWindow;
