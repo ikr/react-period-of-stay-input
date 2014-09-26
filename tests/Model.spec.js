@@ -37,22 +37,12 @@ describe('Model', function () {
                 assertValue(m.newCheckIn('2014-09-24', e), '2014-09-24', '2014-09-30');
             });
 
-            it('on value after check-out yields the day before the check-out', function () {
-                assertValue(
-                    m.newCheckIn('2014-10-01', e),
-                    '2014-09-29',
-                    '2014-09-30',
-                    'Check-out day can\'t be before the check-in'
-                );
+            it('on value after check-out moves the check-out', function () {
+                assertValue(m.newCheckIn('2014-10-01', e), '2014-10-01', '2014-10-02');
             });
 
-            it('on check-out value yields the day before the check-out', function () {
-                assertValue(
-                    m.newCheckIn('2014-09-30', e),
-                    '2014-09-29',
-                    '2014-09-30',
-                    'Checking out on the check-in day isn\'t allowed'
-                );
+            it('on check-out value moves the check-out', function () {
+                assertValue(m.newCheckIn('2014-09-30', e), '2014-09-30', '2014-10-01');
             });
 
             it('allows check-out value when zero nights are allowed', function () {
@@ -80,12 +70,11 @@ describe('Model', function () {
                 );
             });
 
-            it('yields the day before check-out if the stay is 28 nights', function () {
+            it('moves the check-out if the stay is 28 nights', function () {
                 assertValue(
                     m.newCheckIn('2014-09-02', new Environment(false, '2014-08-01')),
-                    '2014-09-29',
-                    '2014-09-30',
-                    'Period of stay can\'t exceed 27 nights'
+                    '2014-09-02',
+                    '2014-09-03'
                 );
             });
         });
@@ -104,13 +93,8 @@ describe('Model', function () {
                 );
             });
 
-            it('on value too far in the future complains about the max stay', function () {
-                assertValue(
-                    m.newCheckOut('2016-09-01', e),
-                    '2014-09-24',
-                    '2014-09-25',
-                    'Period of stay can\'t exceed 27 nights'
-                );
+            it('on value too far in the future moves the check-in', function () {
+                assertValue(m.newCheckOut('2016-09-01', e), '2016-08-31', '2016-09-01');
             });
         });
 
