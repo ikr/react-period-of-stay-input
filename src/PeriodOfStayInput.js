@@ -31,6 +31,7 @@
 
                         React.DOM.a({
                             className: 'got-it',
+                            href: '',
                             key: 1,
                             ref: 'gotIt',
                             onClick: this.removeMessage
@@ -136,7 +137,11 @@
 
         handleNightsChange: function (event) {
             this.props.onChange(
-                this.props.model.newNights(event.target.value, this.props.environment));
+                this.props.model.newNights(
+                    parseInt(event.target.value, 10),
+                    this.props.environment
+                )
+            );
         }
     });
 }());
