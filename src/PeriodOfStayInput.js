@@ -1,7 +1,8 @@
 (function () {
     'use strict';
 
-    var React = require('react');
+    var React = require('react'),
+        Model = require('./Model');
 
     module.exports = React.createClass({
         render: function () {
@@ -27,7 +28,13 @@
 
                     [
                         React.DOM.span({className: 'period-of-stay-message', key: 0}, m.message),
-                        React.DOM.a({className: 'got-it', key: 1, ref: 'gotIt'}, 'Got it')
+
+                        React.DOM.a({
+                            className: 'got-it',
+                            key: 1,
+                            ref: 'gotIt',
+                            onClick: this.removeMessage
+                        }, 'Got it')
                     ] :
 
                     undefined
@@ -94,6 +101,14 @@
             }
 
             return result;
+        },
+
+        removeMessage: function (event) {
+            var m = this.props.model;
+
+            event.preventDefault();
+
+            this.props.onChange(new Model(m.checkInDate, m.checkOutDate));
         }
     });
 }());

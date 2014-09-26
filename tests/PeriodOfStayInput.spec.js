@@ -2,6 +2,7 @@ describe('PeriodOfStayInput instance', function () {
     'use strict';
 
     var assert = require('assert'),
+        sinon = require('sinon'),
         jsdom = require('jsdom'),
         TestUtils = require('react/addons').addons.TestUtils,
         PeriodOfStayInput = require('../src/PeriodOfStayInput'),
@@ -211,6 +212,24 @@ describe('PeriodOfStayInput instance', function () {
                 $('a.period-of-stay-one-day', component.getDOMNode()).attr('data-reactid'),
                 component.refs.oneDay.getDOMNode().getAttribute('data-reactid')
             );
+        });
+    });
+
+    describe('interactions', function () {
+        it('include removing the message on "Got it" click', function () {
+            var spy = sinon.spy(),
+
+                component = TestUtils.renderIntoDocument(PeriodOfStayInput({
+                    model: new Model('2014-09-26', '2014-09-27', 'You look nice today'),
+                    environment: new Environment(false, '2014-09-26'),
+                    onChange: spy
+                }));
+
+            TestUtils.Simulate.click(component.refs.gotIt);
+
+            assert.strictEqual(spy.args[0][0].checkInDate, '2014-09-26');
+            assert.strictEqual(spy.args[0][0].nightsCount(), 1);
+            assert(!spy.args[0][0].message);
         });
     });
 });
