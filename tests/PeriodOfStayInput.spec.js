@@ -1,14 +1,12 @@
-describe('PeriodOfStayInput', function () {
+describe('PeriodOfStayInput instance', function () {
     'use strict';
 
     var assert = require('assert'),
         jsdom = require('jsdom'),
         TestUtils = require('react/addons').addons.TestUtils,
         PeriodOfStayInput = require('../src/PeriodOfStayInput'),
-
-        props = function () {
-            return {};
-        },
+        Environment = require('../src/Environment'),
+        Model = require('../src/Model'),
 
         $;
 
@@ -27,7 +25,14 @@ describe('PeriodOfStayInput', function () {
     });
 
     describe('HTML for 1+ nights', function () {
-        var component;
+        var component,
+
+            props = function () {
+                return {
+                    model: new Model('2014-09-26', '2014-09-27', 'Don\'t worry, be happy'),
+                    environment: new Environment(false, '2014-09-26')
+                };
+            };
 
         beforeEach(function () {
             component = TestUtils.renderIntoDocument(PeriodOfStayInput(props()));
@@ -96,6 +101,16 @@ describe('PeriodOfStayInput', function () {
                 $('a.period-of-stay-one-day', component.getDOMNode()).text(),
                 '1-day stay'
             );
+        });
+
+        describe('wrt model values', function () {
+            it('contains the check-in value', function () {
+                assert.strictEqual(component.refs.checkIn.getDOMNode().value, '2014-09-26');
+            });
+
+            it('contains the check-out value', function () {
+                assert.strictEqual(component.refs.checkOut.getDOMNode().value, '2014-09-27');
+            });
         });
     });
 });
