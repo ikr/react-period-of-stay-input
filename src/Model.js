@@ -110,5 +110,12 @@
         return new Model(this.checkInDate, this.checkOutDate, message);
     };
 
+    Model.prototype.nightsCount = function () {
+        return moment(this.checkOutDate, 'YYYY-MM-DD').diff(
+            moment(this.checkInDate, 'YYYY-MM-DD'),
+            'days'
+        );
+    };
+
     module.exports = Model;
 }());

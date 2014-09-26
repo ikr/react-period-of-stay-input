@@ -146,5 +146,11 @@ describe('Model', function () {
                 );
             });
         });
+
+        describe('.nightsCount', function () {
+            it('returns the difference between the check-in and check-out', function () {
+                assert.strictEqual(m.nightsCount(), 6);
+            });
+        });
     });
 });
