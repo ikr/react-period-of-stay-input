@@ -9,24 +9,26 @@
             this.message = message;
         },
 
-        invalidity = function (mCheckIn, mCheckOut, environment) {
+        validate = function (mCheckIn, mCheckOut, environment) {
             var mToday = moment(environment.today, 'YYYY-MM-DD');
 
             if (mCheckOut.isBefore(mCheckIn)) {
-                return 'Check-out day can\'t be before the check-in';
+                return [false];
             }
 
             if (!environment.zeroNightsAllowed && mCheckIn.isSame(mCheckOut, 'day')) {
-                return 'Checking out on the check-in day isn\'t allowed';
+                return [false];
             }
 
             if (mCheckIn.isBefore(mToday)) {
-                return 'Can\'t check in earlier than today';
+                return [false, 'Can\'t check in earlier than today'];
             }
 
             if (mCheckOut.diff(mCheckIn, 'days') > 27) {
-                return 'Period of stay can\'t exceed 27 nights';
+                return [false];
             }
+
+            return [true];
         };
 
     if (!Number.isInteger) {
@@ -44,70 +46,63 @@
     Model.prototype.newCheckIn = function (checkInDate, environment) {
         var mCheckOut = moment(this.checkOutDate, 'YYYY-MM-DD'),
             mCheckIn,
-            message;
+            v;
 
         if (moment(checkInDate, 'YYYY-MM-DD').isValid()) {
             mCheckIn = moment(checkInDate, 'YYYY-MM-DD');
-            message = invalidity(mCheckIn, mCheckOut, environment);
+            v = validate(mCheckIn, mCheckOut, environment);
 
-            if (!message) {
+            if (v[0]) {
                 return new Model(checkInDate, this.checkOutDate);
             }
-        }
-        else {
-            message = 'Invalid check-in day replaced';
+            else {
+                return new Model(checkInDate, mCheckIn.add(1, 'days').format('YYYY-MM-DD'), v[1]);
+            }
         }
 
-        return new Model(
-            mCheckOut.subtract(1, 'days').format('YYYY-MM-DD'),
-            this.checkOutDate,
-            message
-        );
+        return new Model(this.checkInDate, this.checkOutDate, 'Invalid check-in day replaced');
     };
 
     Model.prototype.newCheckOut = function (checkOutDate, environment) {
         var mCheckIn = moment(this.checkInDate, 'YYYY-MM-DD'),
             mCheckOut,
-            message;
+            v;
 
         if (moment(checkOutDate, 'YYYY-MM-DD').isValid()) {
             mCheckOut = moment(checkOutDate, 'YYYY-MM-DD');
-            message = invalidity(mCheckIn, mCheckOut, environment);
+            v = validate(mCheckIn, mCheckOut, environment);
 
-            if (!message) {
+            if (v[0]) {
                 return new Model(this.checkInDate, checkOutDate);
             }
-        }
-        else {
-            message = 'Invalid check-out day replaced';
+            else {
+                return new Model(
+                    mCheckOut.subtract(1, 'days').format('YYYY-MM-DD'), checkOutDate, v[1]);
+            }
         }
 
-        return new Model(
-            this.checkInDate,
-            mCheckIn.add(1, 'days').format('YYYY-MM-DD'),
-            message
-        );
+        return new Model(this.checkInDate, this.checkOutDate, 'Invalid check-out day replaced');
     };
 
     Model.prototype.newNights = function (count, environment) {
         var mCheckIn,
             mCheckOut,
-            message;
+            v;
 
         if (Number.isInteger(count) && (Math.abs(count) < 10000)) {
             mCheckIn = moment(this.checkInDate, 'YYYY-MM-DD');
             mCheckOut = moment(this.checkInDate, 'YYYY-MM-DD').add(count, 'days');
-            message = invalidity(mCheckIn, mCheckOut, environment);
+            v = validate(mCheckIn, mCheckOut, environment);
 
-            if (!message) {
+            if (v[0]) {
                 return new Model(this.checkInDate, mCheckOut.format('YYYY-MM-DD'));
             }
-        }
-        else {
-            message = 'Invalid nights count replaced';
+            else {
+                return new Model(this.checkInDate, this.checkOutDate, v[1]);
+            }
         }
 
-        return new Model(this.checkInDate, this.checkOutDate, message);
+        return new Model(this.checkInDate, this.checkOutDate, 'Invalid nights count replaced');
     };
 
     Model.prototype.nightsCount = function () {

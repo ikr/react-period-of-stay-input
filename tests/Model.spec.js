@@ -24,10 +24,10 @@ describe('Model', function () {
             e = new Environment(false, '2014-09-24');
 
         describe('.newCheckIn', function () {
-            it('on empty value yields the day before the check-out', function () {
+            it('on empty value refuses the change', function () {
                 assertValue(
                     m.newCheckIn('', e),
-                    '2014-09-29',
+                    '2014-09-24',
                     '2014-09-30',
                     'Invalid check-in day replaced'
                 );
@@ -53,10 +53,10 @@ describe('Model', function () {
                 );
             });
 
-            it('yields the day before check-out if the value is before today', function () {
+            it('reverts the change if the value is before today', function () {
                 assertValue(
                     m.newCheckIn('2014-09-23', e),
-                    '2014-09-29',
+                    '2014-09-24',
                     '2014-09-30',
                     'Can\'t check in earlier than today'
                 );
@@ -121,13 +121,8 @@ describe('Model', function () {
                 );
             });
 
-            it('does the common validity checks', function () {
-                assertValue(
-                    m.newNights(0, e),
-                    '2014-09-24',
-                    '2014-09-30',
-                    'Checking out on the check-in day isn\'t allowed'
-                );
+            it('does the common validition and correction', function () {
+                assertValue(m.newNights(99, e), '2014-09-24', '2014-09-30');
             });
         });
 
