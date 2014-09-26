@@ -25,7 +25,15 @@
                 React.DOM.label(
                     {className: 'period-of-stay-nights', key: 2},
                     'Nights',
-                    React.DOM.input({type: 'number', min: 1, step: 1, max: 27, ref: 'nights'})
+
+                    React.DOM.input({
+                        type: 'number',
+                        min: 1,
+                        step: 1,
+                        max: 27,
+                        ref: 'nights',
+                        value: m.nightsCount()
+                    })
                 ),
 
                 React.DOM.a({className: 'period-of-stay-one-day', href: '', key: 3}, '1-day stay')

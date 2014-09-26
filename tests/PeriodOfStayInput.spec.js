@@ -111,6 +111,10 @@ describe('PeriodOfStayInput instance', function () {
             it('contains the check-out value', function () {
                 assert.strictEqual(component.refs.checkOut.getDOMNode().value, '2014-09-27');
             });
+
+            it('contains the derived nights value', function () {
+                assert.strictEqual(component.refs.nights.getDOMNode().value, '1');
+            });
         });
     });
 });
