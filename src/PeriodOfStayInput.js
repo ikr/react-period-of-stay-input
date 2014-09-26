@@ -125,15 +125,18 @@
         },
 
         handleCheckInChange: function (event) {
-            this.props.model.newCheckIn(event.target.value, this.props.environment);
+            this.props.onChange(
+                this.props.model.newCheckIn(event.target.value, this.props.environment));
         },
 
         handleCheckOutChange: function (event) {
-            this.props.model.newCheckOut(event.target.value, this.props.environment);
+            this.props.onChange(
+                this.props.model.newCheckOut(event.target.value, this.props.environment));
         },
 
         handleNightsChange: function (event) {
-            this.props.model.newNights(event.target.value, this.props.environment);
+            this.props.onChange(
+                this.props.model.newNights(event.target.value, this.props.environment));
         }
     });
 }());

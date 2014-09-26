@@ -246,7 +246,7 @@ describe('PeriodOfStayInput instance', function () {
                 onChange = sinon.spy();
             });
 
-            describe('delegation to the model - 1+ nights', function () {
+            describe('notifications', function () {
                 var environment = new Environment(false, '2014-09-26'),
                     component;
 
@@ -258,25 +258,52 @@ describe('PeriodOfStayInput instance', function () {
                     }));
                 });
 
-                it('happens for the check-in change', function () {
-                    TestUtils.Simulate.change(
-                        component.refs.checkIn.getDOMNode(), {target: {value: '2014-10-02'}});
+                describe('when check-in changes', function () {
+                    beforeEach(function () {
+                        TestUtils.Simulate.change(
+                            component.refs.checkIn.getDOMNode(), {target: {value: '2014-10-02'}});
+                    });
 
-                    assert(model.newCheckIn.calledWith('2014-10-02', environment));
+                    it('start with delegation to model', function () {
+                        assert(model.newCheckIn.calledWith('2014-10-02', environment));
+                    });
+
+                    it('get to onChange', function () {
+                        assert(onChange.calledOnce);
+                        assert(onChange.args[0][0].checkOutDate);
+                    });
                 });
 
-                it('happens for the check-out change', function () {
-                    TestUtils.Simulate.change(
-                        component.refs.checkOut.getDOMNode(), {target: {value: '2014-10-07'}});
+                describe('when check-out changes', function () {
+                    beforeEach(function () {
+                        TestUtils.Simulate.change(
+                            component.refs.checkOut.getDOMNode(), {target: {value: '2014-10-07'}});
+                    });
 
-                    assert(model.newCheckOut.calledWith('2014-10-07', environment));
+                    it('start with delegation to model', function () {
+                        assert(model.newCheckOut.calledWith('2014-10-07', environment));
+                    });
+
+                    it('get to onChange', function () {
+                        assert(onChange.calledOnce);
+                        assert(onChange.args[0][0].checkInDate);
+                    });
                 });
 
-                it('happens for the nights change', function () {
-                    TestUtils.Simulate.change(
-                        component.refs.nights.getDOMNode(), {target: {value: 14}});
+                describe('when nights count changes', function () {
+                    beforeEach(function () {
+                        TestUtils.Simulate.change(
+                            component.refs.nights.getDOMNode(), {target: {value: 14}});
+                    });
 
-                    assert(model.newNights.calledWith(14, environment));
+                    it('start with delegation to model', function () {
+                        assert(model.newNights.calledWith(14, environment));
+                    });
+
+                    it('get to onChange', function () {
+                        assert(onChange.calledOnce);
+                        assert(onChange.args[0][0].checkOutDate);
+                    });
                 });
             });
         });
