@@ -98,10 +98,17 @@ describe('PeriodOfStayInput instance', function () {
             assert.strictEqual(component.refs.nights.getDOMNode().getAttribute('max'), '27');
         });
 
-        it('contains the "1-day stay" link', function () {
+        it('doesn\'t contain the "1-day stay" link', function () {
             assert.strictEqual(
-                $('a.period-of-stay-one-day', component.getDOMNode()).text(),
-                '1-day stay'
+                $('a.period-of-stay-one-day', component.getDOMNode()).size(),
+                0
+            );
+        });
+
+        it('doesn\'t contain the "Overnight stay" link', function () {
+            assert.strictEqual(
+                $('a.period-of-stay-overnight', component.getDOMNode()).size(),
+                0
             );
         });
 
@@ -117,6 +124,50 @@ describe('PeriodOfStayInput instance', function () {
             it('contains the derived nights value', function () {
                 assert.strictEqual(component.refs.nights.getDOMNode().value, '1');
             });
+        });
+    });
+
+    describe('HTML for 0 nights', function () {
+        var component,
+
+            props = function () {
+                return {
+                    model: new Model('2014-09-26', '2014-09-26'),
+                    environment: new Environment(true, '2014-09-26')
+                };
+            };
+
+        beforeEach(function () {
+            component = TestUtils.renderIntoDocument(PeriodOfStayInput(props()));
+        });
+
+        it('contains the "Overnight stay" link', function () {
+            assert.strictEqual(
+                $('a.period-of-stay-overnight', component.getDOMNode()).text(),
+                'Overnight stay'
+            );
+        });
+    });
+
+    describe('HTML for 0+ nights', function () {
+        var component,
+
+            props = function () {
+                return {
+                    model: new Model('2014-09-26', '2014-09-27'),
+                    environment: new Environment(true, '2014-09-26')
+                };
+            };
+
+        beforeEach(function () {
+            component = TestUtils.renderIntoDocument(PeriodOfStayInput(props()));
+        });
+
+        it('contains the "1-day stay" link', function () {
+            assert.strictEqual(
+                $('a.period-of-stay-one-day', component.getDOMNode()).text(),
+                '1-day stay'
+            );
         });
     });
 });
