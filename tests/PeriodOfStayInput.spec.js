@@ -124,6 +124,13 @@ describe('PeriodOfStayInput instance', function () {
             it('contains the derived nights value', function () {
                 assert.strictEqual(component.refs.nights.getDOMNode().value, '1');
             });
+
+            it('contains the message text', function () {
+                assert.strictEqual(
+                    $('span.period-of-stay-message', component.getDOMNode()).text(),
+                    'Don\'t worry, be happy'
+                );
+            });
         });
     });
 
@@ -146,6 +153,10 @@ describe('PeriodOfStayInput instance', function () {
                 $('a.period-of-stay-overnight', component.getDOMNode()).text(),
                 'Overnight stay'
             );
+        });
+
+        it('doesn\'t contain a message when it\'s not in the model', function () {
+            assert.strictEqual($('span.period-of-stay-message', component.getDOMNode()).size(), 0);
         });
     });
 

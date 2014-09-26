@@ -6,7 +6,28 @@
     module.exports = React.createClass({
         render: function () {
             return React.DOM.div(
-                {className: 'period-of-stay-input'}, this.addModeLinks(this.valueInputs()));
+                {className: 'period-of-stay-input'}, this.topRow(), this.bottomRow());
+        },
+
+        topRow: function () {
+            return React.DOM.div(
+                {className: 'period-of-stay-top-row', key: 0},
+                this.addModeLinks(this.valueInputs())
+            );
+        },
+
+        bottomRow: function () {
+            var m = this.props.model;
+
+            return React.DOM.div(
+                {className: 'period-of-stay-top-row', key: 1},
+
+                (
+                    m.message ?
+                    React.DOM.span({className: 'period-of-stay-message'}, m.message) :
+                    undefined
+                )
+            );
         },
 
         valueInputs: function () {
