@@ -132,6 +132,24 @@ describe('PeriodOfStayInput instance', function () {
                 );
             });
         });
+
+        it('contains the message removal link', function () {
+            assert.strictEqual(
+                $('.period-of-stay-bottom-row a.got-it', component.getDOMNode()).text(),
+                'Got it'
+            );
+        });
+
+        it('assignes the message removal link reference', function () {
+            assert.strictEqual(
+                $(
+                    '.period-of-stay-bottom-row a.got-it',
+                    component.getDOMNode()
+                ).attr('data-reactid'),
+
+                component.refs.gotIt.getDOMNode().getAttribute('data-reactid')
+            );
+        });
     });
 
     describe('HTML for 0 nights', function () {
@@ -152,6 +170,13 @@ describe('PeriodOfStayInput instance', function () {
             assert.strictEqual(
                 $('a.period-of-stay-overnight', component.getDOMNode()).text(),
                 'Overnight stay'
+            );
+        });
+
+        it('assignes the "Overnight stay" link reference', function () {
+            assert.strictEqual(
+                $('a.period-of-stay-overnight', component.getDOMNode()).attr('data-reactid'),
+                component.refs.overnight.getDOMNode().getAttribute('data-reactid')
             );
         });
 
@@ -178,6 +203,13 @@ describe('PeriodOfStayInput instance', function () {
             assert.strictEqual(
                 $('a.period-of-stay-one-day', component.getDOMNode()).text(),
                 '1-day stay'
+            );
+        });
+
+        it('assignes the "1-day" link reference', function () {
+            assert.strictEqual(
+                $('a.period-of-stay-one-day', component.getDOMNode()).attr('data-reactid'),
+                component.refs.oneDay.getDOMNode().getAttribute('data-reactid')
             );
         });
     });

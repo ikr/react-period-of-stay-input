@@ -20,11 +20,16 @@
             var m = this.props.model;
 
             return React.DOM.div(
-                {className: 'period-of-stay-top-row', key: 1},
+                {className: 'period-of-stay-bottom-row', key: 1},
 
                 (
                     m.message ?
-                    React.DOM.span({className: 'period-of-stay-message'}, m.message) :
+
+                    [
+                        React.DOM.span({className: 'period-of-stay-message', key: 0}, m.message),
+                        React.DOM.a({className: 'got-it', key: 1, ref: 'gotIt'}, 'Got it')
+                    ] :
+
                     undefined
                 )
             );
@@ -70,16 +75,18 @@
             if (e.zeroNightsAllowed) {
                 if (m.nightsCount() === 0) {
                     result.push(
-                        React.DOM.a(
-                            {className: 'period-of-stay-overnight', href: '', key: 3},
-                            'Overnight stay'
-                        )
+                        React.DOM.a({
+                            className: 'period-of-stay-overnight',
+                            href: '',
+                            key: 3,
+                            ref: 'overnight'
+                        }, 'Overnight stay')
                     );
                 }
                 else {
                     result.push(
                         React.DOM.a(
-                            {className: 'period-of-stay-one-day', href: '', key: 3},
+                            {className: 'period-of-stay-one-day', href: '', key: 3, ref: 'oneDay'},
                             '1-day stay'
                         )
                     );
