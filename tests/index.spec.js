@@ -1,0 +1,18 @@
+describe('index (public API)', function () {
+    'use strict';
+
+    var assert = require('assert'),
+        api = require('../index');
+
+    it('provides the React class', function () {
+        assert.strictEqual(typeof api.Klass, 'function');
+    });
+
+    it('provides the model class', function () {
+        assert.strictEqual(typeof api.Model, 'function');
+    });
+
+    it('provides the environment class', function () {
+        assert.strictEqual(typeof api.Environment, 'function');
+    });
+});

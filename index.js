@@ -1,6 +1,7 @@
 (function () {
     'use strict';
 
-    var PeriodOfStayInput = require('./src/PeriodOfStayInput');
-    module.exports = PeriodOfStayInput;
+    exports.Klass = require('./src/PeriodOfStayInput');
+    exports.Model = require('./src/Model');
+    exports.Environment = require('./src/Environment');
 }());
