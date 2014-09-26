@@ -49,13 +49,25 @@
                 React.DOM.label(
                     {className: 'period-of-stay-check-in', key: 0},
                     'Check-in day',
-                    React.DOM.input({type: 'date', ref: 'checkIn', value: m.checkInDate})
+
+                    React.DOM.input({
+                        type: 'date',
+                        ref: 'checkIn',
+                        value: m.checkInDate,
+                        onChange: this.handleCheckInChange
+                    })
                 ),
 
                 React.DOM.label(
                     {className: 'period-of-stay-check-out', key: 1},
                     'Check-out day',
-                    React.DOM.input({type: 'date', ref: 'checkOut', value: m.checkOutDate})
+
+                    React.DOM.input({
+                        type: 'date',
+                        ref: 'checkOut',
+                        value: m.checkOutDate,
+                        onChange: this.handleCheckOutChange
+                    })
                 ),
 
                 React.DOM.label(
@@ -68,7 +80,8 @@
                         step: 1,
                         max: 27,
                         ref: 'nights',
-                        value: m.nightsCount()
+                        value: m.nightsCount(),
+                        onChange: this.handleNightsChange
                     })
                 )
             ];
@@ -109,6 +122,18 @@
             event.preventDefault();
 
             this.props.onChange(new Model(m.checkInDate, m.checkOutDate));
+        },
+
+        handleCheckInChange: function (event) {
+            this.props.model.newCheckIn(event.target.value, this.props.environment);
+        },
+
+        handleCheckOutChange: function (event) {
+            this.props.model.newCheckOut(event.target.value, this.props.environment);
+        },
+
+        handleNightsChange: function (event) {
+            this.props.model.newNights(event.target.value, this.props.environment);
         }
     });
 }());
