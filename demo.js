@@ -13,7 +13,7 @@
                         moment().add(1, 'days').format('YYYY-MM-DD')
                     ),
 
-                    environment: api.Environment(true, moment().format('YYYY-MM-DD'))
+                    environment: new api.Environment(true, moment().format('YYYY-MM-DD'))
                 });
             }
         });
