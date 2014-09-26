@@ -2,11 +2,19 @@
     'use strict';
 
     var React = require('react'),
-        PeriodOfStayInput = require('./index'),
+        moment = require('moment'),
+        api = require('./index'),
 
         Container = React.createClass({
             render: function () {
-                return PeriodOfStayInput({});
+                return api.Klass({
+                    model: new api.Model(
+                        moment().format('YYYY-MM-DD'),
+                        moment().add(1, 'days').format('YYYY-MM-DD')
+                    ),
+
+                    environment: api.Environment(true, moment().format('YYYY-MM-DD'))
+                });
             }
         });
 
