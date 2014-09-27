@@ -1,44 +1,16 @@
 (function () {
     'use strict';
 
-    var React = require('react'),
-        Model = require('./Model');
+    var React = require('react');
 
     module.exports = React.createClass({
         render: function () {
             return React.DOM.div(
-                {className: 'period-of-stay-input'}, this.topRow(), this.bottomRow());
-        },
+                {className: 'period-of-stay-input'},
 
-        topRow: function () {
-            return React.DOM.div(
-                {className: 'period-of-stay-top-row', key: 0},
-                this.addModeLinks(this.valueInputs())
-            );
-        },
-
-        bottomRow: function () {
-            var m = this.props.model;
-
-            return React.DOM.div(
-                {className: 'period-of-stay-bottom-row', key: 1},
-
-                (
-                    m.message ?
-
-                    [
-                        React.DOM.span({className: 'period-of-stay-message', key: 0}, m.message),
-
-                        React.DOM.a({
-                            className: 'got-it',
-                            href: '',
-                            key: 1,
-                            ref: 'gotIt',
-                            onClick: this.removeMessage
-                        }, 'Got it')
-                    ] :
-
-                    undefined
+                React.DOM.div(
+                    {className: 'period-of-stay-top-row', key: 0},
+                    this.addModeLink(this.valueInputs())
                 )
             );
         },
@@ -71,24 +43,14 @@
                     })
                 ),
 
-                React.DOM.label(
+                React.DOM.span(
                     {className: 'period-of-stay-nights', key: 2},
-                    'Nights',
-
-                    React.DOM.input({
-                        type: 'number',
-                        min: 1,
-                        step: 1,
-                        max: 27,
-                        ref: 'nights',
-                        value: m.nightsCount(),
-                        onChange: this.handleNightsChange
-                    })
+                    '1 night'
                 )
             ];
         },
 
-        addModeLinks: function (componentsArray) {
+        addModeLink: function (componentsArray) {
             var m = this.props.model,
                 e = this.props.environment,
                 result = componentsArray.slice();
@@ -117,14 +79,6 @@
             return result;
         },
 
-        removeMessage: function (event) {
-            var m = this.props.model;
-
-            event.preventDefault();
-
-            this.props.onChange(new Model(m.checkInDate, m.checkOutDate));
-        },
-
         handleCheckInChange: function (event) {
             this.props.onChange(
                 this.props.model.newCheckIn(event.target.value, this.props.environment));
@@ -133,15 +87,6 @@
         handleCheckOutChange: function (event) {
             this.props.onChange(
                 this.props.model.newCheckOut(event.target.value, this.props.environment));
-        },
-
-        handleNightsChange: function (event) {
-            this.props.onChange(
-                this.props.model.newNights(
-                    parseInt(event.target.value, 10),
-                    this.props.environment
-                )
-            );
         }
     });
 }());
