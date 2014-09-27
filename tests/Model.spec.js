@@ -1,4 +1,4 @@
-describe.only('Model', function () {
+describe('Model', function () {
     'use strict';
 
     var assert = require('assert'),
