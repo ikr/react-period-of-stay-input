@@ -134,6 +134,11 @@ describe('PeriodOfStayInput instance', function () {
                 component.refs.overnight.getDOMNode().getAttribute('data-reactid')
             );
         });
+
+        it('displays the 0 nights count', function () {
+            assert.strictEqual(
+                $('span.period-of-stay-nights', component.getDOMNode()).text(), 'Single day');
+        });
     });
 
     describe('HTML for 0+ nights', function () {
@@ -141,7 +146,7 @@ describe('PeriodOfStayInput instance', function () {
 
             props = function () {
                 return {
-                    model: new Model('2014-09-26', '2014-09-27'),
+                    model: new Model('2014-09-26', '2014-09-28'),
                     environment: new Environment(true, '2014-09-26')
                 };
             };
@@ -162,6 +167,11 @@ describe('PeriodOfStayInput instance', function () {
                 $('a.period-of-stay-one-day', component.getDOMNode()).attr('data-reactid'),
                 component.refs.oneDay.getDOMNode().getAttribute('data-reactid')
             );
+        });
+
+        it('displays the 2 nights count', function () {
+            assert.strictEqual(
+                $('span.period-of-stay-nights', component.getDOMNode()).text(), '2 nights');
         });
     });
 

@@ -1,7 +1,20 @@
 (function () {
     'use strict';
 
-    var React = require('react');
+    var React = require('react'),
+
+        nightsText = function (count) {
+            switch (count) {
+            case 0:
+                return 'Single day';
+
+            case 1:
+                return '1 night';
+
+            default:
+                return count + ' nights';
+            }
+        };
 
     module.exports = React.createClass({
         render: function () {
@@ -45,7 +58,7 @@
 
                 React.DOM.span(
                     {className: 'period-of-stay-nights', key: 2},
-                    '1 night'
+                    nightsText(m.nightsCount())
                 )
             ];
         },
