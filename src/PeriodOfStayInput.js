@@ -20,11 +20,7 @@
         render: function () {
             return React.DOM.div(
                 {className: 'period-of-stay-input'},
-
-                React.DOM.div(
-                    {className: 'period-of-stay-top-row', key: 0},
-                    this.addModeLink(this.valueInputs())
-                )
+                this.valueInputs()
             );
         },
 
@@ -61,35 +57,6 @@
                     nightsText(m.nightsCount())
                 )
             ];
-        },
-
-        addModeLink: function (componentsArray) {
-            var m = this.props.model,
-                e = this.props.environment,
-                result = componentsArray.slice();
-
-            if (e.zeroNightsAllowed) {
-                if (m.nightsCount() === 0) {
-                    result.push(
-                        React.DOM.a({
-                            className: 'period-of-stay-overnight',
-                            href: '',
-                            key: 3,
-                            ref: 'overnight'
-                        }, 'Overnight stay')
-                    );
-                }
-                else {
-                    result.push(
-                        React.DOM.a(
-                            {className: 'period-of-stay-one-day', href: '', key: 3, ref: 'oneDay'},
-                            '1-day stay'
-                        )
-                    );
-                }
-            }
-
-            return result;
         },
 
         handleCheckInChange: function (event) {

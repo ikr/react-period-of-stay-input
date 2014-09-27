@@ -77,20 +77,6 @@ describe('PeriodOfStayInput instance', function () {
             assert.strictEqual($('span.period-of-stay-nights', component.getDOMNode()).size(), 1);
         });
 
-        it('doesn\'t contain the "1-day stay" link', function () {
-            assert.strictEqual(
-                $('a.period-of-stay-one-day', component.getDOMNode()).size(),
-                0
-            );
-        });
-
-        it('doesn\'t contain the "Overnight stay" link', function () {
-            assert.strictEqual(
-                $('a.period-of-stay-overnight', component.getDOMNode()).size(),
-                0
-            );
-        });
-
         describe('wrt model values', function () {
             it('contains the check-in value', function () {
                 assert.strictEqual(component.refs.checkIn.getDOMNode().value, '2014-09-26');
@@ -121,20 +107,6 @@ describe('PeriodOfStayInput instance', function () {
             component = TestUtils.renderIntoDocument(PeriodOfStayInput(props()));
         });
 
-        it('contains the "Overnight stay" link', function () {
-            assert.strictEqual(
-                $('a.period-of-stay-overnight', component.getDOMNode()).text(),
-                'Overnight stay'
-            );
-        });
-
-        it('assignes the "Overnight stay" link reference', function () {
-            assert.strictEqual(
-                $('a.period-of-stay-overnight', component.getDOMNode()).attr('data-reactid'),
-                component.refs.overnight.getDOMNode().getAttribute('data-reactid')
-            );
-        });
-
         it('displays the 0 nights count', function () {
             assert.strictEqual(
                 $('span.period-of-stay-nights', component.getDOMNode()).text(), 'Single day');
@@ -153,20 +125,6 @@ describe('PeriodOfStayInput instance', function () {
 
         beforeEach(function () {
             component = TestUtils.renderIntoDocument(PeriodOfStayInput(props()));
-        });
-
-        it('contains the "1-day stay" link', function () {
-            assert.strictEqual(
-                $('a.period-of-stay-one-day', component.getDOMNode()).text(),
-                '1-day stay'
-            );
-        });
-
-        it('assignes the "1-day" link reference', function () {
-            assert.strictEqual(
-                $('a.period-of-stay-one-day', component.getDOMNode()).attr('data-reactid'),
-                component.refs.oneDay.getDOMNode().getAttribute('data-reactid')
-            );
         });
 
         it('displays the 2 nights count', function () {
