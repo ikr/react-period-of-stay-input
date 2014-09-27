@@ -95,8 +95,12 @@ describe.only('Model', function () {
             });
 
             describe('when zero nights are allowed', function () {
-                // var m = new Model('2014-09-24', '2014-09-30'),
-                //     e = new Environment(true, '2014-09-24');
+                var m = new Model('2014-09-24', '2014-09-30'),
+                    e = new Environment(true, '2014-09-24');
+
+                it('allows the check-in value', function () {
+                    assertValue(m.newCheckOut('2014-09-24', e), '2014-09-24', '2014-09-24');
+                });
             });
         });
 

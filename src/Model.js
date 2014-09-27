@@ -14,6 +14,14 @@
 
         fmt = function () {
             return 'YYYY-MM-DD';
+        },
+
+        itsOk = function (mCheckIn, mCheckOut, environment) {
+            return (
+                mCheckOut.isBefore(mCheckIn) ||
+                (!environment.zeroNightsAllowed && mCheckIn.isSame(mCheckOut, 'day')) ||
+                (mCheckOut.diff(mCheckIn, 'days') > maxNightsCount())
+            );
         };
 
     Model.prototype.newCheckIn = function (checkInDate, environment) {
@@ -23,11 +31,7 @@
         if (moment(checkInDate, fmt()).isValid()) {
             mCheckIn = moment(checkInDate, fmt());
 
-            if (
-                mCheckOut.isBefore(mCheckIn) ||
-                (!environment.zeroNightsAllowed && mCheckIn.isSame(mCheckOut, 'day')) ||
-                (mCheckOut.diff(mCheckIn, 'days') > maxNightsCount())
-            ) {
+            if (itsOk(mCheckIn, mCheckOut, environment)) {
                 return new Model(checkInDate, mCheckIn.add(1, 'days').format(fmt()));
             }
 
@@ -48,16 +52,14 @@
         if (moment(checkOutDate, fmt()).isValid()) {
             mCheckOut = moment(checkOutDate, fmt());
 
-            if (
-                mCheckOut.isBefore(mCheckIn) ||
-                mCheckIn.isSame(mCheckOut, 'day') ||
-                (mCheckOut.diff(mCheckIn, 'days') > maxNightsCount())
-
-            ) {
+            if (itsOk(mCheckIn, mCheckOut, environment)) {
                 return new Model(mCheckOut.subtract(1, 'days').format(fmt()), checkOutDate);
             }
 
-            if (!mCheckOut.isAfter(moment(environment.today, fmt()))) {
+            if (
+                !environment.zeroNightsAllowed &&
+                !mCheckOut.isAfter(moment(environment.today, fmt()))
+            ) {
                 return this;
             }
 
