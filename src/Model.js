@@ -50,6 +50,7 @@
 
             if (
                 mCheckOut.isBefore(mCheckIn) ||
+                mCheckIn.isSame(mCheckOut, 'day') ||
                 (mCheckOut.diff(mCheckIn, 'days') > maxNightsCount())
 
             ) {

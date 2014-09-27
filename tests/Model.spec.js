@@ -88,6 +88,10 @@ describe.only('Model', function () {
                 it('on value before the check-in moves the check-in', function () {
                     assertValue(m.newCheckOut('2014-09-23', e), '2014-09-22', '2014-09-23');
                 });
+
+                it('on check-in value moves the check-in', function () {
+                    assertValue(m.newCheckOut('2014-09-24', e), '2014-09-23', '2014-09-24');
+                });
             });
 
             describe('when zero nights are allowed', function () {
