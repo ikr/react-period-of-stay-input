@@ -3,32 +3,13 @@
 
     var moment = require('moment'),
 
-        Model = function (checkInDate, checkOutDate, message) {
+        Model = function (checkInDate, checkOutDate) {
             this.checkInDate = checkInDate;
             this.checkOutDate = checkOutDate;
-            this.message = message;
         },
 
-        validate = function (mCheckIn, mCheckOut, environment) {
-            var mToday = moment(environment.today, 'YYYY-MM-DD');
-
-            if (mCheckOut.isBefore(mCheckIn)) {
-                return [false];
-            }
-
-            if (!environment.zeroNightsAllowed && mCheckIn.isSame(mCheckOut, 'day')) {
-                return [false];
-            }
-
-            if (mCheckIn.isBefore(mToday)) {
-                return [false, 'Can\'t check in earlier than today'];
-            }
-
-            if (mCheckOut.diff(mCheckIn, 'days') > 27) {
-                return [false];
-            }
-
-            return [true];
+        maxNightsCount = function () {
+            return 27;
         };
 
     if (!Number.isInteger) {
@@ -45,22 +26,19 @@
 
     Model.prototype.newCheckIn = function (checkInDate, environment) {
         var mCheckOut = moment(this.checkOutDate, 'YYYY-MM-DD'),
-            mCheckIn,
-            v;
+            mCheckIn;
 
         if (moment(checkInDate, 'YYYY-MM-DD').isValid()) {
             mCheckIn = moment(checkInDate, 'YYYY-MM-DD');
-            v = validate(mCheckIn, mCheckOut, environment);
 
-            if (v[0]) {
-                return new Model(checkInDate, this.checkOutDate);
+            if (mCheckOut.isBefore(mCheckIn)) {
+                return new Model(checkInDate, mCheckIn.add(this.nightsCount(), 'days'));
             }
-            else {
-                return new Model(checkInDate, mCheckIn.add(1, 'days').format('YYYY-MM-DD'), v[1]);
-            }
+
+            return new Model(checkInDate, this.checkOutDate);
         }
 
-        return new Model(this.checkInDate, this.checkOutDate, 'Invalid check-in day replaced');
+        return this;
     };
 
     Model.prototype.newCheckOut = function (checkOutDate, environment) {

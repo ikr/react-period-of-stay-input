@@ -1,22 +1,21 @@
-describe('Model', function () {
+describe.only('Model', function () {
     'use strict';
 
     var assert = require('assert'),
         Model = require('../src/Model'),
         Environment = require('../src/Environment'),
 
-        assertValue = function (model, checkInDate, checkOutDate, message) {
+        assertValue = function (model, checkInDate, checkOutDate) {
             assert.deepEqual(
-                {checkInDate: model.checkInDate, checkOutDate: model.checkOutDate, message: model.message},
-                {checkInDate: checkInDate, checkOutDate: checkOutDate, message: message}
+                {checkInDate: model.checkInDate, checkOutDate: model.checkOutDate},
+                {checkInDate: checkInDate, checkOutDate: checkOutDate}
             );
         };
 
     it('is a constructor', function () {
-        var m = new Model('2014-09-24', '2014-09-25', 'Hey there');
+        var m = new Model('2014-09-24', '2014-09-25');
         assert.strictEqual(m.checkInDate, '2014-09-24');
         assert.strictEqual(m.checkOutDate, '2014-09-25');
-        assert.strictEqual(m.message, 'Hey there');
     });
 
     describe('.prototype', function () {
@@ -25,20 +24,15 @@ describe('Model', function () {
 
         describe('.newCheckIn', function () {
             it('on empty value refuses the change', function () {
-                assertValue(
-                    m.newCheckIn('', e),
-                    '2014-09-24',
-                    '2014-09-30',
-                    'Invalid check-in day replaced'
-                );
+                assertValue(m.newCheckIn('', e), '2014-09-24', '2014-09-30');
             });
 
-            it('propagates identity', function () {
+            it('works in identity case', function () {
                 assertValue(m.newCheckIn('2014-09-24', e), '2014-09-24', '2014-09-30');
             });
 
-            it('on value after check-out moves the check-out', function () {
-                assertValue(m.newCheckIn('2014-10-01', e), '2014-10-01', '2014-10-02');
+            it('on value after check-out moves the check-out, preserving nights', function () {
+                assertValue(m.newCheckIn('2014-10-01', e), '2014-10-01', '2014-10-07');
             });
 
             it('on check-out value moves the check-out', function () {
