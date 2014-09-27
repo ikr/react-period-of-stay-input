@@ -69,24 +69,21 @@ describe.only('Model', function () {
         });
 
         describe('.newCheckOut', function () {
-            var m = new Model('2014-09-24', '2014-09-30'),
-                e = new Environment(false, '2014-09-24');
+            describe('when zero nights aren\'t allowed', function () {
+                var m = new Model('2014-09-24', '2014-09-30'),
+                    e = new Environment(false, '2014-09-24');
 
-            it('yeilds a new check-out day in a valid case', function () {
-                assertValue(m.newCheckOut('2014-09-25', e), '2014-09-24', '2014-09-25');
-            });
+                it('yeilds a new check-out day in a valid case', function () {
+                    assertValue(m.newCheckOut('2014-09-25', e), '2014-09-24', '2014-09-25');
+                });
 
-            it('complains about invalid input and yields the day after check-in', function () {
-                assertValue(
-                    m.newCheckOut('2015-02-30', e),
-                    '2014-09-24',
-                    '2014-09-25',
-                    'Invalid check-out day replaced'
-                );
-            });
+                it('on invalid input ignores the suggested change', function () {
+                    assertValue(m.newCheckOut('2015-02-30', e), '2014-09-24', '2014-09-30');
+                });
 
-            it('on value too far in the future moves the check-in', function () {
-                assertValue(m.newCheckOut('2016-09-01', e), '2016-08-31', '2016-09-01');
+                it('on value too far in the future moves the check-in', function () {
+                    assertValue(m.newCheckOut('2016-09-01', e), '2016-08-31', '2016-09-01');
+                });
             });
         });
 
