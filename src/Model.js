@@ -41,15 +41,23 @@
         return this;
     };
 
-    Model.prototype.newCheckOut = function (checkOutDate) {
+    Model.prototype.newCheckOut = function (checkOutDate, environment) {
         var mCheckIn = moment(this.checkInDate, fmt()),
             mCheckOut;
 
         if (moment(checkOutDate, fmt()).isValid()) {
             mCheckOut = moment(checkOutDate, fmt());
 
-            if (mCheckOut.diff(mCheckIn, 'days') > maxNightsCount()) {
+            if (
+                mCheckOut.isBefore(mCheckIn) ||
+                (mCheckOut.diff(mCheckIn, 'days') > maxNightsCount())
+
+            ) {
                 return new Model(mCheckOut.subtract(1, 'days').format(fmt()), checkOutDate);
+            }
+
+            if (!mCheckOut.isAfter(moment(environment.today, fmt()))) {
+                return this;
             }
 
             return new Model(this.checkInDate, checkOutDate);

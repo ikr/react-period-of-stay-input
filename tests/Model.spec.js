@@ -71,7 +71,7 @@ describe.only('Model', function () {
         describe('.newCheckOut', function () {
             describe('when zero nights aren\'t allowed', function () {
                 var m = new Model('2014-09-24', '2014-09-30'),
-                    e = new Environment(false, '2014-09-24');
+                    e = new Environment(false, '2014-09-20');
 
                 it('yeilds a new check-out day in a valid case', function () {
                     assertValue(m.newCheckOut('2014-09-25', e), '2014-09-24', '2014-09-25');
@@ -84,6 +84,15 @@ describe.only('Model', function () {
                 it('on value too far in the future moves the check-in', function () {
                     assertValue(m.newCheckOut('2016-09-01', e), '2016-08-31', '2016-09-01');
                 });
+
+                it('on value before the check-in moves the check-in', function () {
+                    assertValue(m.newCheckOut('2014-09-23', e), '2014-09-22', '2014-09-23');
+                });
+            });
+
+            describe('when zero nights are allowed', function () {
+                // var m = new Model('2014-09-24', '2014-09-30'),
+                //     e = new Environment(true, '2014-09-24');
             });
         });
 
