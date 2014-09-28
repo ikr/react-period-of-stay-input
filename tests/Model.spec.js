@@ -119,5 +119,22 @@ describe('Model', function () {
                 assert.strictEqual(m.nightsCount(), 6);
             });
         });
+
+        describe('.isSame', function () {
+            it('confirms the same value', function () {
+                var m = new Model('2014-09-27', '2014-09-28');
+                assert(m.isSame(new Model('2014-09-27', '2014-09-28')));
+            });
+
+            it('is false when the check-ins differ', function () {
+                var m = new Model('2014-09-28', '2014-09-28');
+                assert(!m.isSame(new Model('2014-09-27', '2014-09-28')));
+            });
+
+            it('is false when the check-outs differ', function () {
+                var m = new Model('2014-09-27', '2014-09-27');
+                assert(!m.isSame(new Model('2014-09-27', '2014-09-28')));
+            });
+        });
     });
 });

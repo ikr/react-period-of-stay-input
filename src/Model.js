@@ -76,5 +76,12 @@
         );
     };
 
+    Model.prototype.isSame = function (otherModel) {
+        return (
+            this.checkInDate === otherModel.checkInDate &&
+            this.checkOutDate === otherModel.checkOutDate
+        );
+    };
+
     module.exports = Model;
 }());
