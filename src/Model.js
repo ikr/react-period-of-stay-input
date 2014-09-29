@@ -22,13 +22,17 @@
                 (!environment.zeroNightsAllowed && mCheckIn.isSame(mCheckOut, 'day')) ||
                 (mCheckOut.diff(mCheckIn, 'days') > maxNightsCount())
             );
+        },
+
+        isValidDate = function (str) {
+            return (/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(str) && moment(str, fmt()).isValid());
         };
 
     Model.prototype.newCheckIn = function (checkInDate, environment) {
         var mCheckOut = moment(this.checkOutDate, fmt()),
             mCheckIn;
 
-        if (moment(checkInDate, fmt()).isValid()) {
+        if (isValidDate(checkInDate)) {
             mCheckIn = moment(checkInDate, fmt());
 
             if (itsOk(mCheckIn, mCheckOut, environment)) {
@@ -49,7 +53,7 @@
         var mCheckIn = moment(this.checkInDate, fmt()),
             mCheckOut;
 
-        if (moment(checkOutDate, fmt()).isValid()) {
+        if (isValidDate(checkOutDate)) {
             mCheckOut = moment(checkOutDate, fmt());
 
             if (itsOk(mCheckIn, mCheckOut, environment)) {
