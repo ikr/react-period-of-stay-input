@@ -60,13 +60,23 @@
         },
 
         handleCheckInChange: function (event) {
-            this.props.onChange(
-                this.props.model.newCheckIn(event.target.value, this.props.environment));
+            var m = this.props.model.newCheckIn(event.target.value, this.props.environment);
+
+            if (this.props.model.isSame(m)) {
+                return;
+            }
+
+            this.props.onChange(m);
         },
 
         handleCheckOutChange: function (event) {
-            this.props.onChange(
-                this.props.model.newCheckOut(event.target.value, this.props.environment));
+            var m = this.props.model.newCheckOut(event.target.value, this.props.environment);
+
+            if (this.props.model.isSame(m)) {
+                return;
+            }
+
+            this.props.onChange(m);
         }
     });
 }());

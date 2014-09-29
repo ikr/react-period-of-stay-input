@@ -11,7 +11,7 @@ describe('PeriodOfStayInput instance', function () {
 
         $;
 
-    this.timeout(4000);
+    this.timeout(8000);
 
     beforeEach(function (done) {
         global.document = jsdom.jsdom('<html><body></body></html>', jsdom.level(1, 'core'));
@@ -175,6 +175,17 @@ describe('PeriodOfStayInput instance', function () {
                     });
                 });
 
+                describe('when check-in doesn\'t really change', function () {
+                    beforeEach(function () {
+                        TestUtils.Simulate.change(
+                            component.refs.checkIn.getDOMNode(), {target: {value: '2014-10-01'}});
+                    });
+
+                    it('onChange doesn\'t get triggered', function () {
+                        assert(!onChange.called);
+                    });
+                });
+
                 describe('when check-out changes', function () {
                     beforeEach(function () {
                         TestUtils.Simulate.change(
@@ -188,6 +199,17 @@ describe('PeriodOfStayInput instance', function () {
                     it('get to onChange', function () {
                         assert(onChange.calledOnce);
                         assert(onChange.args[0][0].checkInDate);
+                    });
+                });
+
+                describe('when check-out doesn\'t really change', function () {
+                    beforeEach(function () {
+                        TestUtils.Simulate.change(
+                            component.refs.checkOut.getDOMNode(), {target: {value: '2014-10-03'}});
+                    });
+
+                    it('onChange doesn\'t get triggered', function () {
+                        assert(!onChange.called);
                     });
                 });
             });
