@@ -175,21 +175,6 @@ describe('PeriodOfStayInput instance', function () {
                     });
                 });
 
-                describe('when check-in edit isn\'t done yet', function () {
-                    beforeEach(function () {
-                        TestUtils.Simulate.change(
-                            component.refs.checkIn.getDOMNode(), {target: {value: '2014-'}});
-                    });
-
-                    it('onChange doesn\'t get triggered', function () {
-                        assert(!onChange.called);
-                    });
-
-                    it('internal state gets updated', function () {
-                        assert.strictEqual(component.state.draftCheckInDate, '2014-');
-                    });
-                });
-
                 describe('when check-out changes', function () {
                     beforeEach(function () {
                         TestUtils.Simulate.change(
@@ -203,21 +188,6 @@ describe('PeriodOfStayInput instance', function () {
                     it('get to onChange', function () {
                         assert(onChange.calledOnce);
                         assert(onChange.args[0][0].checkInDate);
-                    });
-                });
-
-                describe('when check-out edit isn\'t done yet', function () {
-                    beforeEach(function () {
-                        TestUtils.Simulate.change(
-                            component.refs.checkOut.getDOMNode(), {target: {value: '2014-10-'}});
-                    });
-
-                    it('onChange doesn\'t get triggered', function () {
-                        assert(!onChange.called);
-                    });
-
-                    it('internal state gets updated', function () {
-                        assert.strictEqual(component.state.draftCheckOutDate, '2014-10-');
                     });
                 });
             });

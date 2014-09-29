@@ -2,6 +2,7 @@
     'use strict';
 
     var React = require('react'),
+        DateInput = require('./DateInput'),
 
         nightsText = function (count) {
             switch (count) {
@@ -32,8 +33,7 @@
                     {className: 'period-of-stay-check-in', key: 0},
                     'Check-in day',
 
-                    React.DOM.input({
-                        type: 'date',
+                    DateInput({
                         ref: 'checkIn',
                         value: m.checkInDate,
                         onChange: this.handleCheckInChange
@@ -44,8 +44,7 @@
                     {className: 'period-of-stay-check-out', key: 1},
                     'Check-out day',
 
-                    React.DOM.input({
-                        type: 'date',
+                    DateInput({
                         ref: 'checkOut',
                         value: m.checkOutDate,
                         onChange: this.handleCheckOutChange
@@ -59,24 +58,12 @@
             ];
         },
 
-        handleCheckInChange: function (event) {
-            var m = this.props.model.newCheckIn(event.target.value, this.props.environment);
-
-            if (this.props.model.isSame(m)) {
-                return;
-            }
-
-            this.props.onChange(m);
+        handleCheckInChange: function (value) {
+            this.props.onChange(this.props.model.newCheckIn(value, this.props.environment));
         },
 
-        handleCheckOutChange: function (event) {
-            var m = this.props.model.newCheckOut(event.target.value, this.props.environment);
-
-            if (this.props.model.isSame(m)) {
-                return;
-            }
-
-            this.props.onChange(m);
+        handleCheckOutChange: function (value) {
+            this.props.onChange(this.props.model.newCheckOut(value, this.props.environment));
         }
     });
 }());
