@@ -1,4 +1,4 @@
-describe.only('DateInput instance', function () {
+describe('DateInput instance', function () {
     'use strict';
 
     var assert = require('assert'),

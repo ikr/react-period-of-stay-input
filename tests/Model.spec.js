@@ -1,4 +1,4 @@
-describe('Model', function () {
+describe.only('Model', function () {
     'use strict';
 
     var assert = require('assert'),
@@ -23,10 +23,6 @@ describe('Model', function () {
             describe('when zero nights aren\'t allowed', function () {
                 var m = new Model('2014-09-24', '2014-09-30'),
                     e = new Environment(false, '2014-09-24');
-
-                it('on empty value refuses the change', function () {
-                    assertValue(m.newCheckIn('', e), '2014-09-24', '2014-09-30');
-                });
 
                 it('works in identity case', function () {
                     assertValue(m.newCheckIn('2014-09-24', e), '2014-09-24', '2014-09-30');
@@ -77,10 +73,6 @@ describe('Model', function () {
                     assertValue(m.newCheckOut('2014-09-25', e), '2014-09-24', '2014-09-25');
                 });
 
-                it('on invalid input ignores the suggested change', function () {
-                    assertValue(m.newCheckOut('2015-02-30', e), '2014-09-24', '2014-09-30');
-                });
-
                 it('on value too far in the future moves the check-in', function () {
                     assertValue(m.newCheckOut('2016-09-01', e), '2016-08-31', '2016-09-01');
                 });
@@ -117,23 +109,6 @@ describe('Model', function () {
             it('returns the difference between the check-in and check-out', function () {
                 var m = new Model('2014-09-24', '2014-09-30');
                 assert.strictEqual(m.nightsCount(), 6);
-            });
-        });
-
-        describe('.isSame', function () {
-            it('confirms the same value', function () {
-                var m = new Model('2014-09-27', '2014-09-28');
-                assert(m.isSame(new Model('2014-09-27', '2014-09-28')));
-            });
-
-            it('is false when the check-ins differ', function () {
-                var m = new Model('2014-09-28', '2014-09-28');
-                assert(!m.isSame(new Model('2014-09-27', '2014-09-28')));
-            });
-
-            it('is false when the check-outs differ', function () {
-                var m = new Model('2014-09-27', '2014-09-27');
-                assert(!m.isSame(new Model('2014-09-27', '2014-09-28')));
             });
         });
     });
