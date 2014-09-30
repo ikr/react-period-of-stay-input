@@ -28,12 +28,12 @@
         var mCheckOut = moment(this.checkOutDate, fmt()),
             mCheckIn = moment(checkInDate, fmt());
 
-        if (itsOk(mCheckIn, mCheckOut, environment)) {
-            return new Model(checkInDate, mCheckIn.add(1, 'days').format(fmt()));
-        }
-
         if (mCheckIn.isBefore(moment(environment.today, fmt()))) {
             return this;
+        }
+
+        if (itsOk(mCheckIn, mCheckOut, environment)) {
+            return new Model(checkInDate, mCheckIn.add(1, 'days').format(fmt()));
         }
 
         return new Model(checkInDate, this.checkOutDate);
@@ -41,17 +41,22 @@
 
     Model.prototype.newCheckOut = function (checkOutDate, environment) {
         var mCheckIn = moment(this.checkInDate, fmt()),
-            mCheckOut = moment(checkOutDate, fmt());
+            mCheckOut = moment(checkOutDate, fmt()),
+            mToday = moment(environment.today, fmt());
+
+        if (
+            mCheckOut.isBefore(mToday) ||
+            (!environment.zeroNightsAllowed && mCheckOut.isSame(mToday, 'day'))
+        ) {
+            return this;
+        }
+
+        if (environment.zeroNightsAllowed && mCheckOut.isSame(mToday, 'day')) {
+            return new Model(checkOutDate, checkOutDate);
+        }
 
         if (itsOk(mCheckIn, mCheckOut, environment)) {
             return new Model(mCheckOut.subtract(1, 'days').format(fmt()), checkOutDate);
-        }
-
-        if (
-            !environment.zeroNightsAllowed &&
-            !mCheckOut.isAfter(moment(environment.today, fmt()))
-        ) {
-            return this;
         }
 
         return new Model(this.checkInDate, checkOutDate);

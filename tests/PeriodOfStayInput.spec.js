@@ -202,6 +202,71 @@ describe('PeriodOfStayInput instance', function () {
                         assert(onChange.args[0][0].checkInDate);
                     });
                 });
+
+                describe('when check-in changes to a value in the past', function () {
+                    beforeEach(function () {
+                        TestUtils.Simulate.change(
+                            component.refs.checkIn.getDOMNode(), {target: {value: '2014-09-01'}});
+                    });
+
+                    it('gets to onChange corrected', function () {
+                        assert.strictEqual(onChange.args[0][0].checkInDate, '2014-10-01');
+                        assert.strictEqual(onChange.args[0][0].checkOutDate, '2014-10-03');
+                    });
+                });
+
+                describe('when check-out changes to today', function () {
+                    beforeEach(function () {
+                        TestUtils.Simulate.change(
+                            component.refs.checkOut.getDOMNode(), {target: {value: '2014-09-26'}});
+                    });
+
+                    it('gets to onChange corrected', function () {
+                        assert.strictEqual(onChange.args[0][0].checkInDate, '2014-10-01');
+                        assert.strictEqual(onChange.args[0][0].checkOutDate, '2014-10-03');
+                    });
+                });
+            });
+        });
+    });
+
+    describe('interactions with zero nights allowed', function () {
+        var model = new Model('2014-10-01', '2014-10-03'),
+            environment = new Environment(true, '2014-09-01'),
+            onChange,
+            component;
+
+        beforeEach(function () {
+            onChange = sinon.spy();
+
+            component = TestUtils.renderIntoDocument(PeriodOfStayInput({
+                model: model,
+                environment: environment,
+                onChange: onChange
+            }));
+        });
+
+        describe('when check-out changes to a past value', function () {
+            beforeEach(function () {
+                TestUtils.Simulate.change(
+                    component.refs.checkOut.getDOMNode(), {target: {value: '2014-08-01'}});
+            });
+
+            it('gets to onChange corrected', function () {
+                assert.strictEqual(onChange.args[0][0].checkInDate, '2014-10-01');
+                assert.strictEqual(onChange.args[0][0].checkOutDate, '2014-10-03');
+            });
+        });
+
+        describe('when check-out changes to today', function () {
+            beforeEach(function () {
+                TestUtils.Simulate.change(
+                    component.refs.checkOut.getDOMNode(), {target: {value: '2014-10-01'}});
+            });
+
+            it('gets to onChange with a single day stay', function () {
+                assert.strictEqual(onChange.args[0][0].checkInDate, '2014-10-01');
+                assert.strictEqual(onChange.args[0][0].checkOutDate, '2014-10-01');
             });
         });
     });
