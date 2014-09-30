@@ -33,7 +33,9 @@ describe('PeriodOfStayInput instance', function () {
             props = function () {
                 return {
                     model: new Model('2014-09-26', '2014-09-27'),
-                    environment: new Environment(false, '2014-09-26')
+                    environment: new Environment(false, '2014-09-26'),
+                    checkInInputId: 'A',
+                    checkOutInputId: 'B'
                 };
             };
 
@@ -71,6 +73,16 @@ describe('PeriodOfStayInput instance', function () {
                 $('label.period-of-stay-check-out input', component.getDOMNode()).attr('data-reactid'),
                 component.refs.checkOut.getDOMNode().getAttribute('data-reactid')
             );
+        });
+
+        it('assigns the specified check-in input ID', function () {
+            assert.strictEqual(
+                $('label.period-of-stay-check-in input', component.getDOMNode()).attr('id'), 'A');
+        });
+
+        it('assigns the specified check-out input ID', function () {
+            assert.strictEqual(
+                $('label.period-of-stay-check-out input', component.getDOMNode()).attr('id'), 'B');
         });
 
         it('contains the nights count span', function () {

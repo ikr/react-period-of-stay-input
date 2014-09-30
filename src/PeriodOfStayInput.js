@@ -35,6 +35,7 @@
 
                     DateInput({
                         ref: 'checkIn',
+                        id: this.props.checkInInputId,
                         value: m.checkInDate,
                         onChange: this.handleCheckInChange
                     })
@@ -46,6 +47,7 @@
 
                     DateInput({
                         ref: 'checkOut',
+                        id: this.props.checkOutInputId,
                         value: m.checkOutDate,
                         onChange: this.handleCheckOutChange
                     })
