@@ -1,6 +1,11 @@
+/* global $ */
+
 (function () {
     'use strict';
 
-    // var checkInWidget = DOM.find('.period-of-stay-check-in input[type=date]'),
-    //     checkOutWidget = DOM.find('.period-of-stay-check-out input[type=date]');
+    $(function () {
+        $.datepicker.setDefaults({dateFormat: 'yy-mm-dd'});
+        $('#check-in').datepicker();
+        $('#check-out').datepicker();
+    });
 }());

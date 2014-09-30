@@ -2,7 +2,6 @@
 <html lang="de-CH">
   <head>
     <!--[if IE]>
-      <link href="better-dom/dist/better-dom.htc" rel="htc"/>
       <script src="http://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.0.3/es5-shim.min.js"></script>
       <script src="http://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.0.3/es5-sham.min.js"></script>
     <![endif]-->
@@ -14,9 +13,9 @@
       yepnope({
         test: Modernizr.inputtypes.date,
         nope: [
-          'better-dom/dist/better-dom.min.js',
-          'better-dateinput-polyfill/dist/better-dateinput-polyfill.css',
-          'better-dateinput-polyfill/dist/better-dateinput-polyfill.js',
+          'jquery-ui.min.css',
+          'http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js',
+          'jquery-ui.min.js',
           'date-picker-wiring.js'
         ]
       });
