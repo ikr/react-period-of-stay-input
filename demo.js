@@ -10,6 +10,8 @@
                 return api.Klass({
                     model: this.state.model,
                     environment: new api.Environment(true, moment().format('YYYY-MM-DD')),
+                    checkInInputId: 'check-in',
+                    checkOutInputId: 'check-out',
 
                     onChange: function (model) {
                         this.setState({model: model});
