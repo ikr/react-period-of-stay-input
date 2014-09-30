@@ -35,6 +35,10 @@ describe('Model', function () {
                 it('on check-out value moves the check-out', function () {
                     assertValue(m.newCheckIn('2014-09-30', e), '2014-09-30', '2014-10-01');
                 });
+
+                it('rejects the change when the value is in the past', function () {
+                    assertValue(m.newCheckIn('2014-09-01', e), '2014-09-24', '2014-09-30');
+                });
             });
 
             describe('when zero nights are allowed', function () {
@@ -84,6 +88,10 @@ describe('Model', function () {
                 it('on check-in value moves the check-in', function () {
                     assertValue(m.newCheckOut('2014-09-24', e), '2014-09-23', '2014-09-24');
                 });
+
+                it('reject the change if the new value is today', function () {
+                    assertValue(m.newCheckOut('2014-09-20', e), '2014-09-24', '2014-09-30');
+                });
             });
 
             describe('when zero nights are allowed', function () {
@@ -100,6 +108,14 @@ describe('Model', function () {
                     e = new Environment(true, '2014-09-24');
 
                 it('allows the check-in value', function () {
+                    assertValue(m.newCheckOut('2014-09-24', e), '2014-09-24', '2014-09-24');
+                });
+
+                it('rejects the change when the value is in the past', function () {
+                    assertValue(m.newCheckOut('2014-09-01', e), '2014-09-24', '2014-09-30');
+                });
+
+                it('yields a single-day stay if the value is today', function () {
                     assertValue(m.newCheckOut('2014-09-24', e), '2014-09-24', '2014-09-24');
                 });
             });
