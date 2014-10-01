@@ -31,7 +31,7 @@
         componentDidMount: function () {
             setTimeout(function () {
                 if (isPolyfilled()) {
-                    window.$(this.getDOMNode()).datepicker();
+                    window.$(this.getDOMNode()).datepicker({dateFormat: 'yy-mm-dd', firstDay: 1});
                     window.$(this.getDOMNode()).on('change', this.handleEdit);
                 }
             }.bind(this), 500);
