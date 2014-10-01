@@ -4,8 +4,6 @@
     'use strict';
 
     $(function () {
-        $.datepicker.setDefaults({dateFormat: 'yy-mm-dd'});
-        $('#check-in').datepicker();
-        $('#check-out').datepicker();
+        $.datepicker.setDefaults({dateFormat: 'yy-mm-dd', firstDay: 1});
     });
 }());

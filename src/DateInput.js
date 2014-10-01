@@ -1,3 +1,5 @@
+/* global window */
+
 (function () {
     'use strict';
 
@@ -9,6 +11,10 @@
                 /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(str) &&
                 moment(str, 'YYYY-MM-DD').isValid()
             );
+        },
+
+        isPolyfilled = function () {
+            return (window && window.$ && window.$.datepicker);
         };
 
     module.exports = React.createClass({
@@ -20,6 +26,21 @@
                 onChange: this.handleEdit,
                 className: this.classToRender()
             });
+        },
+
+        componentDidMount: function () {
+            setTimeout(function () {
+                if (isPolyfilled()) {
+                    window.$(this.getDOMNode()).datepicker();
+                    window.$(this.getDOMNode()).on('change', this.handleEdit);
+                }
+            }.bind(this), 500);
+        },
+
+        componentWillUnmount: function () {
+            if (isPolyfilled()) {
+                window.$(this.getDOMNode()).off();
+            }
         },
 
         valueToRender: function () {
