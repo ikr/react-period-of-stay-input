@@ -2,7 +2,7 @@
 
 # About
 
-React.js component for entering a period of stay in a hotel. See
+React.js component for entering a period of stay in a hotel: check-in day and check-out day. See
 [the demo.](http://ikr.su/h/react-period-of-stay-input/demo.html) In case when a native
 `<input type="date">` implementation is not available, it's "polyfilled" with a
 [jQuery UI datepicker.](http://jqueryui.com/datepicker/)
