@@ -72,7 +72,7 @@ describe('DateInput instance', function () {
         });
 
         it('gets rendered', function () {
-            assert.strictEqual(component.getDOMNode().getAttribute('value'), '2014-09-2');
+            assert.strictEqual($(component.getDOMNode()).val(), '2014-09-2');
         });
 
         it('doesn\'t trigger onChange', function () {
