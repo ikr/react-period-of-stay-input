@@ -1,6 +1,6 @@
 {
   "name": "react-period-of-stay-input",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "React.js component for entering a period of stay in a hotel: check-in + check-out date",
   "main": "index.js",
   "scripts": {
