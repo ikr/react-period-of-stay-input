@@ -27,7 +27,7 @@ describe('PeriodOfStayInput', function () {
         global.window.close();
     });
 
-    ['environment', 'model', 'checkInInputId', 'checkOutInputId', 'onChange'].forEach(function (p) {
+    ['environment', 'model', 'onChange'].forEach(function (p) {
         it('declares the ' + p + ' property', function () {
             assert(PeriodOfStayInput.propTypes[p]);
         });
@@ -39,9 +39,7 @@ describe('PeriodOfStayInput', function () {
             props = function () {
                 return {
                     model: new Model('2014-09-26', '2014-09-27'),
-                    environment: new Environment(false, '2014-09-26'),
-                    checkInInputId: 'A',
-                    checkOutInputId: 'B'
+                    environment: new Environment(false, '2014-09-26')
                 };
             };
 
@@ -79,16 +77,6 @@ describe('PeriodOfStayInput', function () {
                 $('label.period-of-stay-check-out input', component.getDOMNode()).attr('data-reactid'),
                 component.refs.checkOut.getDOMNode().getAttribute('data-reactid')
             );
-        });
-
-        it('assigns the specified check-in input ID', function () {
-            assert.strictEqual(
-                $('label.period-of-stay-check-in input', component.getDOMNode()).attr('id'), 'A');
-        });
-
-        it('assigns the specified check-out input ID', function () {
-            assert.strictEqual(
-                $('label.period-of-stay-check-out input', component.getDOMNode()).attr('id'), 'B');
         });
 
         it('contains the nights count span', function () {

@@ -22,7 +22,6 @@
             return React.DOM.input({
                 type: 'date',
                 value: this.valueToRender(),
-                id: this.props.id,
                 onChange: this.handleEdit,
                 className: this.classToRender()
             });

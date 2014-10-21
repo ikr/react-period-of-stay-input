@@ -23,8 +23,6 @@
         propTypes: {
             environment: React.PropTypes.instanceOf(Environment),
             model: React.PropTypes.instanceOf(Model),
-            checkInInputId: React.PropTypes.string,
-            checkOutInputId: React.PropTypes.string,
             onChange: React.PropTypes.func
         },
 
@@ -45,7 +43,6 @@
 
                     DateInput({
                         ref: 'checkIn',
-                        id: this.props.checkInInputId,
                         value: m.checkInDate,
                         onChange: this.handleCheckInChange
                     })
@@ -57,7 +54,6 @@
 
                     DateInput({
                         ref: 'checkOut',
-                        id: this.props.checkOutInputId,
                         value: m.checkOutDate,
                         onChange: this.handleCheckOutChange
                     })

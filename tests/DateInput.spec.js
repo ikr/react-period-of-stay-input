@@ -29,8 +29,7 @@ describe('DateInput instance', function () {
         var element;
 
         beforeEach(function () {
-            element = TestUtils.renderIntoDocument(
-                DateInput({value: '2014-09-29', id: 'foo'})).getDOMNode();
+            element = TestUtils.renderIntoDocument(DateInput({value: '2014-09-29'})).getDOMNode();
         });
 
         it('is an input', function () {
@@ -43,10 +42,6 @@ describe('DateInput instance', function () {
 
         it('renders the property value passed on construction', function () {
             assert.strictEqual(element.getAttribute('value'), '2014-09-29');
-        });
-
-        it('assigns the specified id', function () {
-            assert.strictEqual(element.getAttribute('id'), 'foo');
         });
 
         it('has no error class', function () {
