@@ -1,4 +1,4 @@
-describe('PeriodOfStayInput instance', function () {
+describe('PeriodOfStayInput', function () {
     'use strict';
 
     var assert = require('assert'),
@@ -25,6 +25,12 @@ describe('PeriodOfStayInput instance', function () {
 
     afterEach(function () {
         global.window.close();
+    });
+
+    ['environment', 'model', 'checkInInputId', 'checkOutInputId', 'onChange'].forEach(function (p) {
+        it('declares the ' + p + ' property', function () {
+            assert(PeriodOfStayInput.propTypes[p]);
+        });
     });
 
     describe('HTML for 1+ nights', function () {

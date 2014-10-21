@@ -3,6 +3,8 @@
 
     var React = require('react'),
         DateInput = require('./DateInput'),
+        Environment = require('./Environment'),
+        Model = require('./Model'),
 
         nightsText = function (count) {
             switch (count) {
@@ -18,6 +20,14 @@
         };
 
     module.exports = React.createClass({
+        propTypes: {
+            environment: React.PropTypes.instanceOf(Environment),
+            model: React.PropTypes.instanceOf(Model),
+            checkInInputId: React.PropTypes.string,
+            checkOutInputId: React.PropTypes.string,
+            onChange: React.PropTypes.func
+        },
+
         render: function () {
             return React.DOM.div(
                 {className: 'period-of-stay-input'},
