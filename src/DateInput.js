@@ -30,8 +30,12 @@
         componentDidMount: function () {
             setTimeout(function () {
                 if (isPolyfilled()) {
-                    window.$(this.getDOMNode()).datepicker({dateFormat: 'yy-mm-dd', firstDay: 1});
-                    window.$(this.getDOMNode()).on('change', this.handleEdit);
+                    window.$(this.getDOMNode()).datepicker({
+                        dateFormat: 'yy-mm-dd',
+                        firstDay: 1
+                    }).on('change', this.handleEdit).on('blur', function () {
+                        this.setState({draftValue: null});
+                    }.bind(this));
                 }
             }.bind(this), 500);
         },
