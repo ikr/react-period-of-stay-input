@@ -28,7 +28,7 @@
 
         render: function () {
             return React.DOM.div(
-                {className: 'period-of-stay-input'},
+                {className: 'srch-form__form-group form-group--period-of-stay-input'},
                 this.valueInputs()
             );
         },
@@ -37,26 +37,35 @@
             var m = this.props.model;
 
             return [
-                React.DOM.label(
+                React.DOM.div(
                     {className: 'period-of-stay-check-in', key: 0},
-                    'Check-in day',
+
+                    React.DOM.label(null, 'Check-in day'),
 
                     DateInput({
                         ref: 'checkIn',
                         value: m.checkInDate,
                         onChange: this.handleCheckInChange
-                    })
-                ),
+                    }),
 
-                React.DOM.label(
+                    React.DOM.span({className:'srch-form__help-block'}, 'Format: dd.mm.yyyy'),
+                    React.DOM.i({className:'fa fa-calendar srch-form__calendar-icon'}, '')
+
+            ),
+
+                React.DOM.div(
                     {className: 'period-of-stay-check-out', key: 1},
-                    'Check-out day',
+
+                    React.DOM.label(null, 'Check-out day'),
 
                     DateInput({
                         ref: 'checkOut',
                         value: m.checkOutDate,
                         onChange: this.handleCheckOutChange
-                    })
+                    }),
+
+                    React.DOM.span({className:'srch-form__help-block'}, 'Format: dd.mm.yyyy'),
+                    React.DOM.i({className:'fa fa-calendar srch-form__calendar-icon'}, '')
                 ),
 
                 React.DOM.span(
