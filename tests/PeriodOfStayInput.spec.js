@@ -56,30 +56,30 @@ describe('PeriodOfStayInput', function () {
             assert($(component.getDOMNode()).hasClass('ad-hoc'));
         });
 
-        it('contains labelled check-in input', function () {
+        it('contains check-in date input', function () {
             assert.strictEqual(
-                $('label.period-of-stay-check-in input', component.getDOMNode()).attr('type'),
+                $('.period-of-stay-check-in input', component.getDOMNode()).attr('type'),
                 'date'
             );
         });
 
         it('assignes the check-in input reference', function () {
             assert.strictEqual(
-                $('label.period-of-stay-check-in input', component.getDOMNode()).attr('data-reactid'),
+                $('.period-of-stay-check-in input', component.getDOMNode()).attr('data-reactid'),
                 component.refs.checkIn.getDOMNode().getAttribute('data-reactid')
             );
         });
 
-        it('contains labelled check-out input', function () {
+        it('contains check-out date input', function () {
             assert.strictEqual(
-                $('label.period-of-stay-check-out input', component.getDOMNode()).attr('type'),
+                $('.period-of-stay-check-out input', component.getDOMNode()).attr('type'),
                 'date'
             );
         });
 
         it('assignes the check-out input reference', function () {
             assert.strictEqual(
-                $('label.period-of-stay-check-out input', component.getDOMNode()).attr('data-reactid'),
+                $('.period-of-stay-check-out input', component.getDOMNode()).attr('data-reactid'),
                 component.refs.checkOut.getDOMNode().getAttribute('data-reactid')
             );
         });
