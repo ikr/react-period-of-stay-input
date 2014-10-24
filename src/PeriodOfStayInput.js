@@ -38,9 +38,9 @@
 
             return [
                 React.DOM.div(
-                    {className: 'period-of-stay-check-in', key: 0},
+                    {className: 'period-of-stay-check-in', key: 'k0'},
 
-                    React.DOM.label(null, 'Check-in day'),
+                    React.DOM.label({}, 'Check-in day'),
 
                     DateInput({
                         ref: 'checkIn',
@@ -48,15 +48,14 @@
                         onChange: this.handleCheckInChange
                     }),
 
-                    React.DOM.span({className:'srch-form__help-block'}, 'Format: dd.mm.yyyy'),
-                    React.DOM.i({className:'fa fa-calendar srch-form__calendar-icon'}, '')
+                    React.DOM.i({className:'fa fa-calendar calendar-icon'}, '')
 
-            ),
+                ),
 
                 React.DOM.div(
-                    {className: 'period-of-stay-check-out', key: 1},
+                    {className: 'period-of-stay-check-out', key: 'k1'},
 
-                    React.DOM.label(null, 'Check-out day'),
+                    React.DOM.label({}, 'Check-out day'),
 
                     DateInput({
                         ref: 'checkOut',
@@ -64,12 +63,11 @@
                         onChange: this.handleCheckOutChange
                     }),
 
-                    React.DOM.span({className:'srch-form__help-block'}, 'Format: dd.mm.yyyy'),
-                    React.DOM.i({className:'fa fa-calendar srch-form__calendar-icon'}, '')
+                    React.DOM.i({className:'fa fa-calendar calendar-icon'}, '')
                 ),
 
                 React.DOM.span(
-                    {className: 'period-of-stay-nights', key: 2},
+                    {className: 'period-of-stay-nights', key: 'k2'},
                     nightsText(m.nightsCount())
                 )
             ];
