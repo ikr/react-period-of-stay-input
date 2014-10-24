@@ -28,7 +28,7 @@
 
         render: function () {
             return React.DOM.div(
-                {className: 'srch-form__form-group form-group--period-of-stay-input'},
+                {className: 'srch-form__form-group period-of-stay-input'},
                 this.valueInputs()
             );
         },
