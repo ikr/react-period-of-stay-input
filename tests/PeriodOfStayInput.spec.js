@@ -39,7 +39,8 @@ describe('PeriodOfStayInput', function () {
             props = function () {
                 return {
                     model: new Model('2014-09-26', '2014-09-27'),
-                    environment: new Environment(false, '2014-09-26')
+                    environment: new Environment(false, '2014-09-26'),
+                    className: 'ad-hoc'
                 };
             };
 
@@ -47,8 +48,12 @@ describe('PeriodOfStayInput', function () {
             component = TestUtils.renderIntoDocument(PeriodOfStayInput(props()));
         });
 
-        it('has the root element\'s class assigned', function () {
+        it('has the root element\'s static class assigned', function () {
             assert($(component.getDOMNode()).hasClass('period-of-stay-input'));
+        });
+
+        it('has the root element\'s configurable class assigned', function () {
+            assert($(component.getDOMNode()).hasClass('ad-hoc'));
         });
 
         it('contains labelled check-in input', function () {
