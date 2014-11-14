@@ -7,7 +7,7 @@
 
         Container = React.createClass({
             render: function () {
-                return api.Klass({
+                return React.createElement(api.Klass, {
                     model: this.state.model,
                     environment: new api.Environment(true, moment().format('YYYY-MM-DD')),
 
@@ -27,5 +27,5 @@
             }
         });
 
-    React.renderComponent(React.createElement(Container), global.document.body);
+    React.render(React.createElement(Container), global.document.body);
 }());
