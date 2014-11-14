@@ -3,29 +3,14 @@ describe('PeriodOfStayInput', function () {
 
     var assert = require('assert'),
         sinon = require('sinon'),
-        jsdom = require('jsdom'),
+        bro = require('jsdom-test-browser'),
+        React = require('react'),
         TestUtils = require('react/addons').addons.TestUtils,
         PeriodOfStayInput = require('../src/PeriodOfStayInput'),
         Environment = require('../src/Environment'),
-        Model = require('../src/Model'),
+        Model = require('../src/Model');
 
-        $;
-
-    this.timeout(8000);
-
-    beforeEach(function (done) {
-        global.document = jsdom.jsdom('<html><body></body></html>', jsdom.level(1, 'core'));
-        global.window = global.document.parentWindow;
-
-        jsdom.jQueryify(global.window, 'http://code.jquery.com/jquery-1.11.0.min.js', function () {
-            $ = global.window.$;
-            done();
-        });
-    });
-
-    afterEach(function () {
-        global.window.close();
-    });
+    before(function (done) { bro.jQueryify(done); });
 
     ['environment', 'model', 'onChange'].forEach(function (p) {
         it('declares the ' + p + ' property', function () {
@@ -45,47 +30,49 @@ describe('PeriodOfStayInput', function () {
             };
 
         beforeEach(function () {
-            component = TestUtils.renderIntoDocument(PeriodOfStayInput(props()));
+            component = TestUtils.renderIntoDocument(
+                React.createElement(PeriodOfStayInput, props())
+            );
         });
 
         it('has the root element\'s static class assigned', function () {
-            assert($(component.getDOMNode()).hasClass('period-of-stay-input'));
+            assert(bro.$(component.getDOMNode()).hasClass('period-of-stay-input'));
         });
 
         it('has the root element\'s configurable class assigned', function () {
-            assert($(component.getDOMNode()).hasClass('ad-hoc'));
+            assert(bro.$(component.getDOMNode()).hasClass('ad-hoc'));
         });
 
         it('contains check-in date input', function () {
             assert.strictEqual(
-                $('.period-of-stay-check-in input', component.getDOMNode()).attr('type'),
+                bro.$('.period-of-stay-check-in input', component.getDOMNode()).attr('type'),
                 'date'
             );
         });
 
         it('assignes the check-in input reference', function () {
             assert.strictEqual(
-                $('.period-of-stay-check-in input', component.getDOMNode()).attr('data-reactid'),
+                bro.$('.period-of-stay-check-in input', component.getDOMNode()).attr('data-reactid'),
                 component.refs.checkIn.getDOMNode().getAttribute('data-reactid')
             );
         });
 
         it('contains check-out date input', function () {
             assert.strictEqual(
-                $('.period-of-stay-check-out input', component.getDOMNode()).attr('type'),
+                bro.$('.period-of-stay-check-out input', component.getDOMNode()).attr('type'),
                 'date'
             );
         });
 
         it('assignes the check-out input reference', function () {
             assert.strictEqual(
-                $('.period-of-stay-check-out input', component.getDOMNode()).attr('data-reactid'),
+                bro.$('.period-of-stay-check-out input', component.getDOMNode()).attr('data-reactid'),
                 component.refs.checkOut.getDOMNode().getAttribute('data-reactid')
             );
         });
 
         it('contains the nights count span', function () {
-            assert.strictEqual($('span.period-of-stay-nights', component.getDOMNode()).size(), 1);
+            assert.strictEqual(bro.$('span.period-of-stay-nights', component.getDOMNode()).size(), 1);
         });
 
         describe('wrt model values', function () {
@@ -99,7 +86,7 @@ describe('PeriodOfStayInput', function () {
 
             it('contains the derived nights value', function () {
                 assert.strictEqual(
-                    $('span.period-of-stay-nights', component.getDOMNode()).text(), '1 night');
+                    bro.$('span.period-of-stay-nights', component.getDOMNode()).text(), '1 night');
             });
         });
     });
@@ -115,12 +102,14 @@ describe('PeriodOfStayInput', function () {
             };
 
         beforeEach(function () {
-            component = TestUtils.renderIntoDocument(PeriodOfStayInput(props()));
+            component = TestUtils.renderIntoDocument(
+                React.createElement(PeriodOfStayInput, props())
+            );
         });
 
         it('displays the 0 nights count', function () {
             assert.strictEqual(
-                $('span.period-of-stay-nights', component.getDOMNode()).text(), 'Single day');
+                bro.$('span.period-of-stay-nights', component.getDOMNode()).text(), 'Single day');
         });
     });
 
@@ -135,12 +124,14 @@ describe('PeriodOfStayInput', function () {
             };
 
         beforeEach(function () {
-            component = TestUtils.renderIntoDocument(PeriodOfStayInput(props()));
+            component = TestUtils.renderIntoDocument(
+                React.createElement(PeriodOfStayInput, props())
+            );
         });
 
         it('displays the 2 nights count', function () {
             assert.strictEqual(
-                $('span.period-of-stay-nights', component.getDOMNode()).text(), '2 nights');
+                bro.$('span.period-of-stay-nights', component.getDOMNode()).text(), '2 nights');
         });
     });
 
@@ -163,11 +154,13 @@ describe('PeriodOfStayInput', function () {
                     component;
 
                 beforeEach(function () {
-                    component = TestUtils.renderIntoDocument(PeriodOfStayInput({
-                        model: model,
-                        environment: environment,
-                        onChange: onChange
-                    }));
+                    component = TestUtils.renderIntoDocument(
+                        React.createElement(PeriodOfStayInput, {
+                            model: model,
+                            environment: environment,
+                            onChange: onChange
+                        })
+                    );
                 });
 
                 describe('when check-in changes', function () {

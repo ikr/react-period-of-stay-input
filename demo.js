@@ -27,5 +27,5 @@
             }
         });
 
-    React.renderComponent(Container(), global.document.body);
+    React.renderComponent(React.createElement(Container), global.document.body);
 }());

@@ -42,7 +42,7 @@
 
                     React.DOM.label({}, 'Check-in day'),
 
-                    DateInput({
+                    React.createElement(DateInput, {
                         ref: 'checkIn',
                         value: m.checkInDate,
                         onChange: this.handleCheckInChange
@@ -57,7 +57,7 @@
 
                     React.DOM.label({}, 'Check-out day'),
 
-                    DateInput({
+                    React.createElement(DateInput, {
                         ref: 'checkOut',
                         value: m.checkOutDate,
                         onChange: this.handleCheckOutChange

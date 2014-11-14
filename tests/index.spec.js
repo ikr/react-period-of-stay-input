@@ -2,7 +2,10 @@ describe('index (public API)', function () {
     'use strict';
 
     var assert = require('assert'),
+        bro = require('jsdom-test-browser'),
         api = require('../index');
+
+    assert(bro);
 
     it('provides the React class', function () {
         assert.strictEqual(typeof api.Klass, 'function');

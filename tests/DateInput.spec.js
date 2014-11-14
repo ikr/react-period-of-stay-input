@@ -3,33 +3,20 @@ describe('DateInput instance', function () {
 
     var assert = require('assert'),
         sinon = require('sinon'),
-        jsdom = require('jsdom'),
+        bro = require('jsdom-test-browser'),
+        React = require('react'),
         TestUtils = require('react/addons').addons.TestUtils,
-        DateInput = require('../src/DateInput'),
+        DateInput = require('../src/DateInput');
 
-        $;
-
-    this.timeout(8000);
-
-    beforeEach(function (done) {
-        global.document = jsdom.jsdom('<html><body></body></html>', jsdom.level(1, 'core'));
-        global.window = global.document.parentWindow;
-
-        jsdom.jQueryify(global.window, 'http://code.jquery.com/jquery-1.11.0.min.js', function () {
-            $ = global.window.$;
-            done();
-        });
-    });
-
-    afterEach(function () {
-        global.window.close();
-    });
+    before(function (done) { bro.jQueryify(done); });
 
     describe('HTML', function () {
         var element;
 
         beforeEach(function () {
-            element = TestUtils.renderIntoDocument(DateInput({value: '2014-09-29'})).getDOMNode();
+            element = TestUtils.renderIntoDocument(
+                React.createElement(DateInput, {value: '2014-09-29'})
+            ).getDOMNode();
         });
 
         it('is an input', function () {
@@ -45,7 +32,7 @@ describe('DateInput instance', function () {
         });
 
         it('has no error class', function () {
-            assert(!$(element).hasClass('error'));
+            assert(!bro.$(element).hasClass('error'));
         });
     });
 
@@ -57,7 +44,8 @@ describe('DateInput instance', function () {
             onChange = sinon.spy();
 
             component = TestUtils.renderIntoDocument(
-                DateInput({value: '2014-09-29', onChange: onChange}));
+                React.createElement(DateInput, {value: '2014-09-29', onChange: onChange})
+            );
 
             TestUtils.Simulate.change(component.getDOMNode(), {target: {value: '2014-09-2'}});
         });
@@ -67,7 +55,7 @@ describe('DateInput instance', function () {
         });
 
         it('gets rendered', function () {
-            assert.strictEqual($(component.getDOMNode()).val(), '2014-09-2');
+            assert.strictEqual(bro.$(component.getDOMNode()).val(), '2014-09-2');
         });
 
         it('doesn\'t trigger onChange', function () {
@@ -75,7 +63,7 @@ describe('DateInput instance', function () {
         });
 
         it('sets the error class', function () {
-            assert($(component.getDOMNode()).hasClass('error'));
+            assert(bro.$(component.getDOMNode()).hasClass('error'));
         });
 
         describe('when finalized', function () {
