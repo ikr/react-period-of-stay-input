@@ -13,7 +13,17 @@
 
                     onChange: function (model) {
                         this.setState({model: model});
-                    }.bind(this)
+                    }.bind(this),
+                    lang: 'ru',
+                    messages: {
+                        period: {
+                            singleDay: 'Один день',
+                            oneNight: '1 ночь',
+                            xNights: '{count} ночей'
+                        },
+                        checkInDay: 'День заселения',
+                        checkOutDay: 'День выселения'
+                    }
                 });
             },
 

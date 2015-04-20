@@ -20,6 +20,12 @@
           'jquery-ui.min.js'
         ]
       });
+      yepnope({
+        test: window.Intl,
+        nope: [
+          'https://cdn.rawgit.com/andyearnshaw/Intl.js/master/dist/Intl.complete.js'
+        ]
+      });
     </script>
 
     <style type="text/css">
