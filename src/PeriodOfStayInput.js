@@ -5,21 +5,38 @@
         DateInput = require('./DateInput'),
         Environment = require('./Environment'),
         Model = require('./Model'),
+        ReactIntl = require('react-intl'),
+        FormattedMessage = ReactIntl.FormattedMessage,
+        IntlMixin = ReactIntl.IntlMixin,
 
         nightsText = function (count) {
             switch (count) {
             case 0:
-                return 'Single day';
+                return FormattedMessage({message: this.getIntlMessage('period.singleDay')});
 
             case 1:
-                return '1 night';
+                return FormattedMessage({message: this.getIntlMessage('period.oneNight')});
 
             default:
-                return count + ' nights';
+                return FormattedMessage({message: this.getIntlMessage('period.xNights'), count: count});
             }
-        };
+        },
+        enMessages = function () {
+            return {
+                period: {
+                    singleDay: 'Single day',
+                    oneNight: '1 night',
+                    xNights: '{count} nights'
+                },
+                checkInDay: 'Check-in day',
+                checkOutDay: 'Check-out day'
+            };
+        },
 
-    module.exports = React.createClass({
+        PeriodOfStayInput;
+
+    PeriodOfStayInput = React.createClass({
+        mixins: [IntlMixin],
         propTypes: {
             environment: React.PropTypes.instanceOf(Environment),
             model: React.PropTypes.instanceOf(Model),
@@ -40,7 +57,7 @@
                 React.DOM.div(
                     {className: 'period-of-stay-check-in', key: 'k0'},
 
-                    React.DOM.label({}, 'Check-in day'),
+                    React.DOM.label({}, FormattedMessage({message: this.getIntlMessage('checkInDay')})),
 
                     React.createElement(DateInput, {
                         ref: 'checkIn',
@@ -55,7 +72,7 @@
                 React.DOM.div(
                     {className: 'period-of-stay-check-out', key: 'k1'},
 
-                    React.DOM.label({}, 'Check-out day'),
+                    React.DOM.label({}, FormattedMessage({message: this.getIntlMessage('checkOutDay')})),
 
                     React.createElement(DateInput, {
                         ref: 'checkOut',
@@ -68,7 +85,7 @@
 
                 React.DOM.span(
                     {className: 'period-of-stay-nights', key: 'k2'},
-                    nightsText(m.nightsCount())
+                    nightsText.call(this, m.nightsCount())
                 )
             ];
         },
@@ -79,6 +96,17 @@
 
         handleCheckOutChange: function (value) {
             this.props.onChange(this.props.model.newCheckOut(value, this.props.environment));
+        }
+    });
+
+    module.exports = React.createClass({
+        render: function () {
+            var props = this.props;
+
+            props.lang = this.props.lang || 'en';
+            props.messages = this.props.messages || enMessages();
+
+            return React.createElement(PeriodOfStayInput, props);
         }
     });
 }());
