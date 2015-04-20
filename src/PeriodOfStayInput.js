@@ -30,7 +30,7 @@
                 },
                 checkInDay: 'Check-in day',
                 checkOutDay: 'Check-out day'
-            }
+            };
         },
 
         PeriodOfStayInput;
