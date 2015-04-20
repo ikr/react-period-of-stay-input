@@ -12,13 +12,16 @@
         nightsText = function (count) {
             switch (count) {
             case 0:
-                return FormattedMessage({message: this.getIntlMessage('period.singleDay')});
+                return React.createElement(FormattedMessage, {message: this.getIntlMessage('period.singleDay')});
 
             case 1:
-                return FormattedMessage({message: this.getIntlMessage('period.oneNight')});
+                return React.createElement(FormattedMessage, {message: this.getIntlMessage('period.oneNight')});
 
             default:
-                return FormattedMessage({message: this.getIntlMessage('period.xNights'), count: count});
+                return React.createElement(
+                    FormattedMessage,
+                    {message: this.getIntlMessage('period.xNights'), count: count}
+                );
             }
         },
         enMessages = function () {
@@ -58,7 +61,10 @@
                 React.DOM.div(
                     {className: 'period-of-stay-check-in', key: 'k0'},
 
-                    React.DOM.label({}, FormattedMessage({message: this.getIntlMessage('checkInDay')})),
+                    React.DOM.label({}, React.createElement(
+                        FormattedMessage,
+                        {message: this.getIntlMessage('checkInDay')}
+                    )),
 
                     React.createElement(DateInput, {
                         ref: 'checkIn',
@@ -73,7 +79,10 @@
                 React.DOM.div(
                     {className: 'period-of-stay-check-out', key: 'k1'},
 
-                    React.DOM.label({}, FormattedMessage({message: this.getIntlMessage('checkOutDay')})),
+                    React.DOM.label({}, React.createElement(
+                        FormattedMessage,
+                        {message: this.getIntlMessage('checkOutDay')}
+                    )),
 
                     React.createElement(DateInput, {
                         ref: 'checkOut',
