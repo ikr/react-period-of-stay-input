@@ -31,11 +31,9 @@
                 checkInDay: 'Check-in day',
                 checkOutDay: 'Check-out day'
             };
-        },
+        };
 
-        PeriodOfStayInput;
-
-    PeriodOfStayInput = React.createClass({
+    module.exports = React.createClass({
         mixins: [IntlMixin],
         propTypes: {
             environment: React.PropTypes.instanceOf(Environment),
@@ -44,6 +42,9 @@
         },
 
         render: function () {
+            this.props.lang = this.props.lang || 'en';
+            this.props.messages = this.props.messages || enMessages();
+
             return React.DOM.div(
                 {className: this.props.className + ' period-of-stay-input'},
                 this.valueInputs()
@@ -96,17 +97,6 @@
 
         handleCheckOutChange: function (value) {
             this.props.onChange(this.props.model.newCheckOut(value, this.props.environment));
-        }
-    });
-
-    module.exports = React.createClass({
-        render: function () {
-            var props = this.props;
-
-            props.lang = this.props.lang || 'en';
-            props.messages = this.props.messages || enMessages();
-
-            return React.createElement(PeriodOfStayInput, props);
         }
     });
 }());
