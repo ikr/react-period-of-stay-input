@@ -142,7 +142,7 @@ describe('PeriodOfStayInput', function () {
                 return {
                     model: new Model('2014-09-26', '2014-09-28'),
                     environment: new Environment(true, '2014-09-26'),
-                    lang: 'ru',
+                    locale: 'ru',
                     messages: {
                         period: '{count, plural, =0 {Один день} =1 {1 ночь} =2 {2 ночи} other {# ночей}}',
                         checkInDay: 'День заселения',
