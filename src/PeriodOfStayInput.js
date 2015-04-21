@@ -26,7 +26,7 @@
         },
 
         render: function () {
-            this.props.lang = this.props.lang || 'en';
+            this.props.locales = this.props.locales || 'en';
             this.props.messages = this.props.messages || enMessages();
 
             return React.DOM.div(

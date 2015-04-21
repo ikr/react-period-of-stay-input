@@ -21,8 +21,8 @@ mentioned above. The _polyfilling_ part is visible
 
 ##Internationalization
 
-To translate the component, please pass `lang` and `messages` props to component.
-Where `lang` it's two-letter language code (`en`, `ru`, `de`, etc.); `messages` it's object with following format:
+To translate the component, please pass `locales` and `messages` props to component.
+Where `locales` it's two-letter language code (`en`, `ru`, `de`, etc.); `messages` it's object with following format:
 
 ```js
 {
