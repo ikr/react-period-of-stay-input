@@ -144,11 +144,7 @@ describe('PeriodOfStayInput', function () {
                     environment: new Environment(true, '2014-09-26'),
                     lang: 'ru',
                     messages: {
-                        period: {
-                            singleDay: 'Один день',
-                            oneNight: '1 ночь',
-                            xNights: '{count, plural, =2 {# ночи} =5 {# ночей}}'
-                        },
+                        period: '{count, plural, =0 {Один день} =1 {1 ночь} =2 {2 ночи} other {# ночей}}',
                         checkInDay: 'День заселения',
                         checkOutDay: 'День выселения'
                     }
