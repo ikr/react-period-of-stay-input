@@ -19,10 +19,10 @@ See [the code](https://github.com/ikr/react-period-of-stay-input/blob/master/dem
 mentioned above. The _polyfilling_ part is visible
 [here.](https://github.com/ikr/react-period-of-stay-input/blob/master/www/demo.html)
 
-##Internationalization
+## Internationalization
 
-To translate the component, please pass `locales` and `messages` props to component.
-Where `locales` it's two-letter language code (`en`, `ru`, `de`, etc.); `messages` it's object with following format:
+To translate the component, please pass `messages` property to component.
+Where `messages` it's an object with following format:
 
 ```js
 {
