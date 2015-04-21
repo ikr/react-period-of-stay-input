@@ -9,28 +9,9 @@
         FormattedMessage = ReactIntl.FormattedMessage,
         IntlMixin = ReactIntl.IntlMixin,
 
-        nightsText = function (count) {
-            switch (count) {
-            case 0:
-                return React.createElement(FormattedMessage, {message: this.getIntlMessage('period.singleDay')});
-
-            case 1:
-                return React.createElement(FormattedMessage, {message: this.getIntlMessage('period.oneNight')});
-
-            default:
-                return React.createElement(
-                    FormattedMessage,
-                    {message: this.getIntlMessage('period.xNights'), count: count}
-                );
-            }
-        },
         enMessages = function () {
             return {
-                period: {
-                    singleDay: 'Single day',
-                    oneNight: '1 night',
-                    xNights: '{count} nights'
-                },
+                period: '{count, plural, =0 {Single day} =1 {1 night} other {# nights}}',
                 checkInDay: 'Check-in day',
                 checkOutDay: 'Check-out day'
             };
@@ -95,7 +76,10 @@
 
                 React.DOM.span(
                     {className: 'period-of-stay-nights', key: 'k2'},
-                    nightsText.call(this, m.nightsCount())
+                    React.createElement(
+                        FormattedMessage,
+                        {message: this.getIntlMessage('period'), count: m.nightsCount()}
+                    )
                 )
             ];
         },

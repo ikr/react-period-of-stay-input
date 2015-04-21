@@ -14,15 +14,11 @@
                     onChange: function (model) {
                         this.setState({model: model});
                     }.bind(this),
-                    lang: 'ru',
+                    lang: 'en',
                     messages: {
-                        period: {
-                            singleDay: 'Один день',
-                            oneNight: '1 ночь',
-                            xNights: '{count} ночей'
-                        },
-                        checkInDay: 'День заселения',
-                        checkOutDay: 'День выселения'
+                        period: '{count, plural, =0 {Single day} =1 {1 night} other {# nights}}',
+                        checkInDay: 'Check-in day',
+                        checkOutDay: 'Check-out day'
                     }
                 });
             },

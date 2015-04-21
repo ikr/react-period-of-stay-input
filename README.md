@@ -19,18 +19,14 @@ See [the code](https://github.com/ikr/react-period-of-stay-input/blob/master/dem
 mentioned above. The _polyfilling_ part is visible
 [here.](https://github.com/ikr/react-period-of-stay-input/blob/master/www/demo.html)
 
-##I18N
+##Internationalization
 
-If you need a i18n pass `lang` and `messages` props to component.
+To translate the component, please pass `lang` and `messages` props to component.
 Where `lang` it's two-letter language code (`en`, `ru`, `de`, etc.); `messages` it's object with following format:
 
 ```js
 {
-    period: {
-        singleDay: 'Single day',
-        oneNight: '1 night',
-        xNights: '{count} nights'
-    },
+    period: '{count, plural, =0 {Single day} =1 {1 night} other {# nights}}',
     checkInDay: 'Check-in day',
     checkOutDay: 'Check-out day'
 }
