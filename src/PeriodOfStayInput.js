@@ -11,9 +11,11 @@
 
         enMessages = function () {
             return {
-                period: '{count, plural, =0 {Single day} =1 {1 night} other {# nights}}',
-                checkInDay: 'Check-in day',
-                checkOutDay: 'Check-out day'
+                'react-period-of-stay-input': {
+                    period: '{count, plural, =0 {Single day} =1 {1 night} other {# nights}}',
+                    checkInDay: 'Check-in day',
+                    checkOutDay: 'Check-out day'
+                }
             };
         };
 
@@ -43,7 +45,7 @@
 
                     React.DOM.label({}, React.createElement(
                         FormattedMessage,
-                        {message: this.getIntlMessage('checkInDay')}
+                        {message: this.getIntlMessage('react-period-of-stay-input.checkInDay')}
                     )),
 
                     React.createElement(DateInput, {
@@ -61,7 +63,7 @@
 
                     React.DOM.label({}, React.createElement(
                         FormattedMessage,
-                        {message: this.getIntlMessage('checkOutDay')}
+                        {message: this.getIntlMessage('react-period-of-stay-input.checkOutDay')}
                     )),
 
                     React.createElement(DateInput, {
@@ -77,7 +79,7 @@
                     {className: 'period-of-stay-nights', key: 'k2'},
                     React.createElement(
                         FormattedMessage,
-                        {message: this.getIntlMessage('period'), count: m.nightsCount()}
+                        {message: this.getIntlMessage('react-period-of-stay-input.period'), count: m.nightsCount()}
                     )
                 )
             ];

@@ -144,9 +144,11 @@ describe('PeriodOfStayInput', function () {
                     environment: new Environment(true, '2014-09-26'),
                     locale: 'ru',
                     messages: {
-                        period: '{count, plural, =0 {Один день} =1 {1 ночь} =2 {2 ночи} other {# ночей}}',
-                        checkInDay: 'День заселения',
-                        checkOutDay: 'День выселения'
+                        'react-period-of-stay-input': {
+                            period: '{count, plural, =0 {Один день} =1 {1 ночь} =2 {2 ночи} other {# ночей}}',
+                            checkInDay: 'День заселения',
+                            checkOutDay: 'День выселения'
+                        }
                     }
                 };
             };
