@@ -26,10 +26,18 @@ Where `messages` it's an object with following format:
 
 ```js
 {
-    period: '{count, plural, =0 {Single day} =1 {1 night} other {# nights}}',
-    checkInDay: 'Check-in day',
-    checkOutDay: 'Check-out day'
+    'react-period-of-stay-input': {
+        period: '{count, plural, =0 {Single day} =1 {1 night} other {# nights}}',
+        checkInDay: 'Check-in day',
+        checkOutDay: 'Check-out day'
+    }
 }
 ```
 
-Used [react-intl](https://github.com/yahoo/react-intl).
+This component depends on global `Intl` object. You can polyfill it with [intl](https://github.com/andyearnshaw/Intl.js) package:
+
+```
+if (!global.Intl) {
+    require('intl');
+}
+```
