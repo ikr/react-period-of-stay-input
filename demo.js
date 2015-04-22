@@ -13,13 +13,7 @@
 
                     onChange: function (model) {
                         this.setState({model: model});
-                    }.bind(this),
-                    locales: 'en',
-                    messages: {
-                        period: '{count, plural, =0 {Single day} =1 {1 night} other {# nights}}',
-                        checkInDay: 'Check-in day',
-                        checkOutDay: 'Check-out day'
-                    }
+                    }.bind(this)
                 });
             },
 
