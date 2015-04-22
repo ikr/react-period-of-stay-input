@@ -18,3 +18,18 @@ Made for [Browserify.](http://browserify.org/)
 See [the code](https://github.com/ikr/react-period-of-stay-input/blob/master/demo.js) of the demo
 mentioned above. The _polyfilling_ part is visible
 [here.](https://github.com/ikr/react-period-of-stay-input/blob/master/www/demo.html)
+
+## Internationalization
+
+To translate the component, please pass `messages` property to component.
+Where `messages` it's an object with following format:
+
+```js
+{
+    period: '{count, plural, =0 {Single day} =1 {1 night} other {# nights}}',
+    checkInDay: 'Check-in day',
+    checkOutDay: 'Check-out day'
+}
+```
+
+Used [react-intl](https://github.com/yahoo/react-intl).

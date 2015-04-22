@@ -135,6 +135,34 @@ describe('PeriodOfStayInput', function () {
         });
     });
 
+    describe('HTML for russian translations', function () {
+        var component,
+
+            props = function () {
+                return {
+                    model: new Model('2014-09-26', '2014-09-28'),
+                    environment: new Environment(true, '2014-09-26'),
+                    locale: 'ru',
+                    messages: {
+                        period: '{count, plural, =0 {Один день} =1 {1 ночь} =2 {2 ночи} other {# ночей}}',
+                        checkInDay: 'День заселения',
+                        checkOutDay: 'День выселения'
+                    }
+                };
+            };
+
+        beforeEach(function () {
+            component = TestUtils.renderIntoDocument(
+                React.createElement(PeriodOfStayInput, props())
+            );
+        });
+
+        it('displays the 2 nights count in russian', function () {
+            assert.strictEqual(
+                bro.$('span.period-of-stay-nights', component.getDOMNode()).text(), '2 ночи');
+        });
+    });
+
     describe('interactions', function () {
         describe('dealing with value changes', function () {
             var model,
