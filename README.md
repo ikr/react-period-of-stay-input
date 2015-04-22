@@ -34,4 +34,10 @@ Where `messages` it's an object with following format:
 }
 ```
 
-Used [react-intl](https://github.com/yahoo/react-intl).
+This component depends on global `Intl` object. You can polyfill it with [intl](https://github.com/andyearnshaw/Intl.js) package:
+
+```
+if (!global.Intl) {
+    require('intl');
+}
+```
