@@ -7,6 +7,7 @@ describe('PeriodOfStayInput', function () {
         React = require('react'),
         TestUtils = require('react/addons').addons.TestUtils,
         PeriodOfStayInput = require('../src/PeriodOfStayInput'),
+        intlMessages = require('../src/intlMessages'),
         Environment = require('../src/Environment'),
         Model = require('../src/Model');
 
@@ -25,7 +26,8 @@ describe('PeriodOfStayInput', function () {
                 return {
                     model: new Model('2014-09-26', '2014-09-27'),
                     environment: new Environment(false, '2014-09-26'),
-                    className: 'ad-hoc'
+                    className: 'ad-hoc',
+                    messages: intlMessages().en
                 };
             };
 
@@ -97,7 +99,8 @@ describe('PeriodOfStayInput', function () {
             props = function () {
                 return {
                     model: new Model('2014-09-26', '2014-09-26'),
-                    environment: new Environment(true, '2014-09-26')
+                    environment: new Environment(true, '2014-09-26'),
+                    messages: intlMessages().en
                 };
             };
 
@@ -119,7 +122,8 @@ describe('PeriodOfStayInput', function () {
             props = function () {
                 return {
                     model: new Model('2014-09-26', '2014-09-28'),
-                    environment: new Environment(true, '2014-09-26')
+                    environment: new Environment(true, '2014-09-26'),
+                    messages: intlMessages().en
                 };
             };
 
@@ -188,7 +192,8 @@ describe('PeriodOfStayInput', function () {
                         React.createElement(PeriodOfStayInput, {
                             model: model,
                             environment: environment,
-                            onChange: onChange
+                            onChange: onChange,
+                            messages: intlMessages().en
                         })
                     );
                 });

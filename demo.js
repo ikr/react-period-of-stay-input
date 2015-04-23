@@ -2,10 +2,13 @@
     'use strict';
 
     var React = require('react'),
+        IntlMixin = require('react-intl').IntlMixin,
         moment = require('moment'),
         api = require('./index'),
 
         Container = React.createClass({
+            mixins: [IntlMixin],
+
             render: function () {
                 return React.createElement(api.Klass, {
                     model: this.state.model,
@@ -27,5 +30,11 @@
             }
         });
 
-    React.render(React.createElement(Container), global.document.body);
+    React.render(
+        React.createElement(
+            Container,
+            {messages: api.intlMessages().en}
+        ),
+        global.document.body
+    );
 }());
