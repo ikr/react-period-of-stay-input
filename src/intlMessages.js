@@ -10,6 +10,6 @@
                     checkOutDay: 'Check-out day'
                 }
             }
-        }
+        };
     };
 }());
