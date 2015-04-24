@@ -14,8 +14,7 @@
         propTypes: {
             environment: React.PropTypes.instanceOf(Environment),
             model: React.PropTypes.instanceOf(Model),
-            onChange: React.PropTypes.func,
-            messages: React.PropTypes.object.isRequired
+            onChange: React.PropTypes.func
         },
 
         render: function () {
