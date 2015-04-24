@@ -18,4 +18,8 @@ describe('index (public API)', function () {
     it('provides the environment class', function () {
         assert.strictEqual(typeof api.Environment, 'function');
     });
+
+    it('exports the intlMessages', function () {
+        assert.strictEqual(typeof api.intlMessages, 'function');
+    });
 });

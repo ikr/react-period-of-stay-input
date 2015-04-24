@@ -7,17 +7,7 @@
         Model = require('./Model'),
         ReactIntl = require('react-intl'),
         FormattedMessage = ReactIntl.FormattedMessage,
-        IntlMixin = ReactIntl.IntlMixin,
-
-        enMessages = function () {
-            return {
-                'react-period-of-stay-input': {
-                    period: '{count, plural, =0 {Single day} =1 {1 night} other {# nights}}',
-                    checkInDay: 'Check-in day',
-                    checkOutDay: 'Check-out day'
-                }
-            };
-        };
+        IntlMixin = ReactIntl.IntlMixin;
 
     module.exports = React.createClass({
         mixins: [IntlMixin],
@@ -28,8 +18,6 @@
         },
 
         render: function () {
-            this.props.messages = this.props.messages || enMessages();
-
             return React.DOM.div(
                 {className: this.props.className + ' period-of-stay-input'},
                 this.valueInputs()
