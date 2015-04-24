@@ -5,7 +5,7 @@
 React.js component for entering a period of stay in a hotel: check-in day and check-out day. See
 [the demo.](http://ikr.su/h/react-period-of-stay-input/demo.html) In case when a native
 `<input type="date">` implementation is not available, it's "polyfilled" with a
-[jQuery UI datepicker.](http://jqueryui.com/datepicker/)
+[jQuery UI datepicker](http://jqueryui.com/datepicker/) (English only).
 
 # Installation
 
@@ -21,8 +21,8 @@ mentioned above. The _polyfilling_ part is visible
 
 ## Internationalization
 
-To translate the component, please pass `messages` property to component.
-Where `messages` it's an object with following format:
+[react-intl](https://github.com/yahoo/react-intl)-based. To translate the component, please pass the
+`messages` property, containing:
 
 ```js
 {
@@ -34,9 +34,14 @@ Where `messages` it's an object with following format:
 }
 ```
 
-This component depends on global `Intl` object. You can polyfill it with [intl](https://github.com/andyearnshaw/Intl.js) package:
+`react-intl` allows using `react-period-of-stay-input` uniformly in bigger applications, and passing
+all the namespaced translations, from the root, down the React components hierarchy, --
+automatically, with the help of `IntlMixin`.
 
-```
+Please note, that `react-intl` depends on global `Intl` object. You can polyfill it with
+[intl](https://github.com/andyearnshaw/Intl.js) package:
+
+```js
 if (!global.Intl) {
     require('intl');
 }
