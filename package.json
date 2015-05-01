@@ -40,12 +40,12 @@
     "url": "https://github.com/ikr/react-period-of-stay-input/issues"
   },
   "dependencies": {
-    "intl": "^0.1.4",
     "moment": "^2.8.3",
     "react": "^0.12.0",
     "react-intl": "^1.2.0"
   },
   "devDependencies": {
+    "intl": "^0.1.4",
     "browserify": "^9.0.8",
     "jsdom-test-browser": "^2.1.0",
     "jshint": "^2.7.0",
