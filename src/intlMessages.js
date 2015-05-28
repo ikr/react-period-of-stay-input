@@ -9,6 +9,14 @@
                     checkInDay: 'Check-in day',
                     checkOutDay: 'Check-out day'
                 }
+            },
+
+            de: {
+                'react-period-of-stay-input': {
+                    'period': '{count, plural, =0 {Ein Tag} =1 {1 Nacht} other {# Nächte}}',
+                    'checkInDay': 'Anreise',
+                    'checkOutDay': 'Abreise'
+                }
             }
         };
     };
