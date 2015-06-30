@@ -34,6 +34,10 @@ describe('DateInput instance', function () {
         it('has no error class', function () {
             assert(!bro.$(element).hasClass('error'));
         });
+
+        it('has form-control class', function () {
+            assert(bro.$(element).hasClass('form-control'));
+        });
     });
 
     describe('draft value', function () {
@@ -64,6 +68,10 @@ describe('DateInput instance', function () {
 
         it('sets the error class', function () {
             assert(bro.$(component.getDOMNode()).hasClass('error'));
+        });
+
+        it('has form-control class', function () {
+            assert(bro.$(component.getDOMNode()).hasClass('form-control'));
         });
 
         describe('when finalized', function () {

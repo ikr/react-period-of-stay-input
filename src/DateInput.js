@@ -51,7 +51,7 @@
         },
 
         classToRender: function () {
-            return (this.isDrafting() ? 'error' : '');
+            return (this.isDrafting() ? 'form-control error' : 'form-control');
         },
 
         isDrafting: function () {
