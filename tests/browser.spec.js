@@ -1,4 +1,4 @@
-describe('index (public API)', function () {
+describe('public browser API', function () {
     'use strict';
 
     var assert = require('assert'),
