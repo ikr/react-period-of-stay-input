@@ -13,7 +13,7 @@ describe('DateInput instance', function () {
 
         beforeEach(function () {
             element = TestUtils.renderIntoDocument(
-                React.createElement(DateInput, {value: '2014-09-29'})
+                React.createElement(DateInput, {value: '2014-09-29', onChange: function () {}})
             ).getDOMNode();
         });
 
