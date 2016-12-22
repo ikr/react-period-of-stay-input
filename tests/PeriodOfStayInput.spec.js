@@ -3,15 +3,13 @@ describe('PeriodOfStayInput', function () {
 
     var assert = require('assert'),
         sinon = require('sinon'),
-        bro = require('jsdom-test-browser'),
         React = require('react'),
         TestUtils = require('react/addons').addons.TestUtils,
+        massert = require('./helpers/massert'),
         PeriodOfStayInput = require('../src/PeriodOfStayInput'),
         intlMessages = require('../src/intlMessages'),
         Environment = require('../src/Environment'),
         Model = require('../src/Model');
-
-    before(function (done) { bro.jQueryify(done); });
 
     ['environment', 'model', 'onChange'].forEach(function (p) {
         it('declares the ' + p + ' property', function () {
@@ -38,43 +36,56 @@ describe('PeriodOfStayInput', function () {
         });
 
         it('has the root element\'s static class assigned', function () {
-            assert(bro.$(component.getDOMNode()).hasClass('period-of-stay-input'));
+            massert.cssClass(component.getDOMNode(), 'period-of-stay-input');
         });
 
         it('has the root element\'s configurable class assigned', function () {
-            assert(bro.$(component.getDOMNode()).hasClass('ad-hoc'));
+            massert.cssClass(component.getDOMNode(), 'ad-hoc');
         });
 
         it('contains check-in date input', function () {
             assert.strictEqual(
-                bro.$('.period-of-stay-check-in input', component.getDOMNode()).attr('type'),
+                component.getDOMNode().querySelector(
+                    '.period-of-stay-check-in input'
+                ).getAttribute('type'),
+
                 'date'
             );
         });
 
         it('assignes the check-in input reference', function () {
             assert.strictEqual(
-                bro.$('.period-of-stay-check-in input', component.getDOMNode()).attr('data-reactid'),
+                component.getDOMNode().querySelector(
+                    '.period-of-stay-check-in input'
+                ).getAttribute('data-reactid'),
+
                 component.refs.checkIn.getDOMNode().getAttribute('data-reactid')
             );
         });
 
         it('contains check-out date input', function () {
             assert.strictEqual(
-                bro.$('.period-of-stay-check-out input', component.getDOMNode()).attr('type'),
+                component.getDOMNode().querySelector(
+                    '.period-of-stay-check-out input'
+                ).getAttribute('type'),
+
                 'date'
             );
         });
 
         it('assignes the check-out input reference', function () {
             assert.strictEqual(
-                bro.$('.period-of-stay-check-out input', component.getDOMNode()).attr('data-reactid'),
+                component.getDOMNode().querySelector(
+                    '.period-of-stay-check-out input'
+                ).getAttribute('data-reactid'),
+
                 component.refs.checkOut.getDOMNode().getAttribute('data-reactid')
             );
         });
 
         it('contains the nights count span', function () {
-            assert.strictEqual(bro.$('span.period-of-stay-nights', component.getDOMNode()).size(), 1);
+            assert.strictEqual(
+                component.getDOMNode().querySelectorAll('span.period-of-stay-nights').length, 1);
         });
 
         describe('wrt model values', function () {
@@ -88,7 +99,12 @@ describe('PeriodOfStayInput', function () {
 
             it('contains the derived nights value', function () {
                 assert.strictEqual(
-                    bro.$('span.period-of-stay-nights', component.getDOMNode()).text(), '1 night');
+                    component.getDOMNode().querySelector(
+                        'span.period-of-stay-nights'
+                    ).textContent.trim(),
+
+                    '1 night'
+                );
             });
         });
     });
@@ -112,7 +128,12 @@ describe('PeriodOfStayInput', function () {
 
         it('displays the 0 nights count', function () {
             assert.strictEqual(
-                bro.$('span.period-of-stay-nights', component.getDOMNode()).text(), 'Single day');
+                component.getDOMNode().querySelector(
+                    'span.period-of-stay-nights'
+                ).textContent.trim(),
+
+                'Single day'
+            );
         });
     });
 
@@ -135,7 +156,12 @@ describe('PeriodOfStayInput', function () {
 
         it('displays the 2 nights count', function () {
             assert.strictEqual(
-                bro.$('span.period-of-stay-nights', component.getDOMNode()).text(), '2 nights');
+                component.getDOMNode().querySelector(
+                    'span.period-of-stay-nights'
+                ).textContent.trim(),
+
+                '2 nights'
+            );
         });
     });
 
@@ -165,7 +191,12 @@ describe('PeriodOfStayInput', function () {
 
         it('displays the 2 nights count in russian', function () {
             assert.strictEqual(
-                bro.$('span.period-of-stay-nights', component.getDOMNode()).text(), '2 ночи');
+                component.getDOMNode().querySelector(
+                    'span.period-of-stay-nights'
+                ).textContent.trim(),
+
+                '2 ночи'
+            );
         });
     });
 

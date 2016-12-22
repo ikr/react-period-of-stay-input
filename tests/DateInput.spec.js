@@ -3,12 +3,10 @@ describe('DateInput instance', function () {
 
     var assert = require('assert'),
         sinon = require('sinon'),
-        bro = require('jsdom-test-browser'),
         React = require('react'),
         TestUtils = require('react/addons').addons.TestUtils,
+        massert = require('./helpers/massert'),
         DateInput = require('../src/DateInput');
-
-    before(function (done) { bro.jQueryify(done); });
 
     describe('HTML', function () {
         var element;
@@ -32,11 +30,11 @@ describe('DateInput instance', function () {
         });
 
         it('has no error class', function () {
-            assert(!bro.$(element).hasClass('error'));
+            massert.noCssClass(element, 'error');
         });
 
         it('has form-control class', function () {
-            assert(bro.$(element).hasClass('form-control'));
+            massert.cssClass(element, 'form-control');
         });
     });
 
@@ -59,7 +57,7 @@ describe('DateInput instance', function () {
         });
 
         it('gets rendered', function () {
-            assert.strictEqual(bro.$(component.getDOMNode()).val(), '2014-09-2');
+            assert.strictEqual(component.getDOMNode().value, '2014-09-2');
         });
 
         it('doesn\'t trigger onChange', function () {
@@ -67,11 +65,11 @@ describe('DateInput instance', function () {
         });
 
         it('sets the error class', function () {
-            assert(bro.$(component.getDOMNode()).hasClass('error'));
+            massert.cssClass(component.getDOMNode(), 'error');
         });
 
         it('has form-control class', function () {
-            assert(bro.$(component.getDOMNode()).hasClass('form-control'));
+            massert.cssClass(component.getDOMNode(), 'form-control');
         });
 
         describe('when finalized', function () {
