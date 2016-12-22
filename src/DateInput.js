@@ -14,7 +14,7 @@
         },
 
         isPolyfilled = function () {
-            return (window && window.$ && window.$.datepicker);
+            return !window.Modernizr.inputtypes.date;
         };
 
     module.exports = React.createClass({

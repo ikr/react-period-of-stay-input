@@ -3,22 +3,13 @@
   <head>
     <meta charset="utf-8">
 
-    <script src="//rawgit.com/andyearnshaw/Intl.js/master/dist/Intl.min.js"></script>
-    <script src="//rawgit.com/andyearnshaw/Intl.js/master/locale-data/jsonp/en.js"></script>
+    <script src="https://rawgit.com/andyearnshaw/Intl.js/master/dist/Intl.min.js"></script>
+    <script src="https://rawgit.com/andyearnshaw/Intl.js/master/locale-data/jsonp/en.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/yepnope/1.5.4/yepnope.min.js"></script>
-
-    <script>
-      yepnope({
-        test: Modernizr.inputtypes.date,
-        nope: [
-          'jquery-ui.min.css',
-          'https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js',
-          'jquery-ui.min.js'
-        ]
-      });
-    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="jquery-ui.min.css"/>
 
     <style type="text/css">
       .error { background-color: rgb(255, 145, 145) }
