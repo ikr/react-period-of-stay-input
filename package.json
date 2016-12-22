@@ -9,7 +9,8 @@
     "test": "mocha --require tests/helpers/jsdom-bootstrap -b tests/*.spec.js",
     "tdd": "mocha --require tests/helpers/jsdom-bootstrap -b -R min -w tests/*.spec.js",
     "build": "browserify demo.js | uglifyjs -m > www/bundle.js",
-    "dev-build": "browserify demo.js > www/bundle.js"
+    "dev-build": "browserify demo.js -o www/bundle.js",
+    "watch": "watchify demo.js -vo www/bundle.js"
   },
   "repository": {
     "type": "git",
@@ -52,6 +53,7 @@
     "mocha": "^3.2.0",
     "react": "^0.13.3",
     "sinon": "^1.14.1",
-    "uglify-js": "^2.4.20"
+    "uglify-js": "^2.4.20",
+    "watchify": "^3.8.0"
   }
 }
