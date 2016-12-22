@@ -5,6 +5,7 @@
         IntlMixin = require('react-intl').IntlMixin,
         moment = require('moment'),
         api = require('./index'),
+        intlMessages = require('./src/intlMessages'),
 
         Container = React.createClass({
             mixins: [IntlMixin],
@@ -30,10 +31,11 @@
             }
         });
 
+    /* eslint react/no-deprecated:0 */
     React.render(
         React.createElement(
             Container,
-            {messages: api.intlMessages().en}
+            {messages: intlMessages().en}
         ),
         global.document.body
     );

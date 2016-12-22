@@ -5,11 +5,11 @@
   "main": "index.js",
   "browser": "browser.js",
   "scripts": {
-    "pretest": "jshint tests src index.js demo.js",
-    "test": "mocha --require ./test-hook -b tests/*.spec.js",
-    "tdd": "mocha --require ./test-hook -b -R min -w tests/*.spec.js",
-    "build": "browserify demo.js | uglifyjs > www/bundle.js",
-    "devbuild": "browserify demo.js > www/bundle.js"
+    "lint": "eslint tests src index.js browser.js demo.js",
+    "test": "mocha --require tests/helpers/jsdom-bootstrap -b tests/*.spec.js",
+    "tdd": "mocha --require tests/helpers/jsdom-bootstrap -b -R min -w tests/*.spec.js",
+    "build": "browserify demo.js | uglifyjs -m > www/bundle.js",
+    "dev-build": "browserify demo.js > www/bundle.js"
   },
   "repository": {
     "type": "git",
@@ -45,12 +45,11 @@
     "react-intl": "^1.2.2"
   },
   "devDependencies": {
+    "browserify": "^13.1.1",
+    "eslint": "^3.12.2",
+    "eslint-plugin-react": "^6.8.0",
+    "mocha": "^3.2.0",
     "react": "^0.13.3",
-    "intl": "^0.1.4",
-    "browserify": "^9.0.8",
-    "jsdom-test-browser": "^2.1.0",
-    "jshint": "^2.7.0",
-    "mocha": "^2.2.4",
     "sinon": "^1.14.1",
     "uglify-js": "^2.4.20"
   }

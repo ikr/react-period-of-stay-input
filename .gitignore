@@ -28,3 +28,4 @@ node_modules
 .lock-wscript
 www/bundle.js
 .DS_Store
+npm-debug.log*

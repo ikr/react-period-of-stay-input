@@ -18,6 +18,13 @@
         };
 
     module.exports = React.createClass({
+        displayName: 'DateInput',
+
+        propTypes: {
+            value: React.PropTypes.string.isRequired,
+            onChange: React.PropTypes.func.isRequired
+        },
+
         render: function () {
             return React.DOM.input({
                 type: 'date',

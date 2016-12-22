@@ -10,11 +10,14 @@
         IntlMixin = ReactIntl.IntlMixin;
 
     module.exports = React.createClass({
+        displayName: 'PeriodOfStayInput',
         mixins: [IntlMixin],
+
         propTypes: {
             environment: React.PropTypes.instanceOf(Environment),
             model: React.PropTypes.instanceOf(Model),
-            onChange: React.PropTypes.func
+            onChange: React.PropTypes.func,
+            className: React.PropTypes.string
         },
 
         render: function () {
