@@ -54,10 +54,6 @@ describe('DateInput instance', function () {
             assert.strictEqual(component.state.draftValue, '2014-09-2')
         })
 
-        it('gets rendered', function () {
-            assert.strictEqual(component.getDOMNode().value, '2014-09-2')
-        })
-
         it('doesn\'t trigger onChange', function () {
             assert(!onChange.called)
         })
