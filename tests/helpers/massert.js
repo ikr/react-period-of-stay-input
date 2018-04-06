@@ -6,7 +6,7 @@ exports.cssClass = function (element, className) {
 }
 
 exports.noCssClass = function (element, className) {
-    var cn = element.className;
+    var cn = element.className
 
     assert(
         cn.split(' ').indexOf(className) === -1,

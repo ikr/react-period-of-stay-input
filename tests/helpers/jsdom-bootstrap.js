@@ -1,6 +1,6 @@
-var jsdom = require('jsdom').jsdom,
-    doc = jsdom('<html><body></body></html>'),
-    win = doc.defaultView;
+const jsdom = require('jsdom').jsdom
+const doc = jsdom('<html><body></body></html>')
+const win = doc.defaultView
 
 /* global global */
 

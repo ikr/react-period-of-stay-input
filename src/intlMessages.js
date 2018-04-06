@@ -1,5 +1,5 @@
 (function () {
-    'use strict';
+    'use strict'
 
     module.exports = function () {
         return {
@@ -18,6 +18,6 @@
                     'checkOutDay': 'Abreise'
                 }
             }
-        };
-    };
-}());
+        }
+    }
+}())

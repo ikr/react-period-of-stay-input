@@ -1,8 +1,8 @@
 (function () {
-    'use strict';
+    'use strict'
 
     module.exports = function (zeroNightsAllowed, today) {
-        this.zeroNightsAllowed = zeroNightsAllowed;
-        this.today = today;
-    };
-}());
+        this.zeroNightsAllowed = zeroNightsAllowed
+        this.today = today
+    }
+}())
