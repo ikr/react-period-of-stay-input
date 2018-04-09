@@ -25,7 +25,7 @@ Model.prototype.newCheckIn = function (checkInDate, environment) {
     const mCheckOut = moment(this.checkOutDate, fmt())
     const mCheckIn = moment(checkInDate, fmt())
 
-    if (mCheckIn.isBefore(moment(environment.today, fmt()))) {
+    if (mCheckIn.isBefore(moment(environment.minCheckInDate, fmt()))) {
         return this
     }
 
@@ -39,16 +39,16 @@ Model.prototype.newCheckIn = function (checkInDate, environment) {
 Model.prototype.newCheckOut = function (checkOutDate, environment) {
     const mCheckIn = moment(this.checkInDate, fmt())
     const mCheckOut = moment(checkOutDate, fmt())
-    const mToday = moment(environment.today, fmt())
+    const mMinCheckInDate = moment(environment.minCheckInDate, fmt())
 
     if (
-        mCheckOut.isBefore(mToday) ||
-        (!environment.zeroNightsAllowed && mCheckOut.isSame(mToday, 'day'))
+        mCheckOut.isBefore(mMinCheckInDate) ||
+        (!environment.zeroNightsAllowed && mCheckOut.isSame(mMinCheckInDate, 'day'))
     ) {
         return this
     }
 
-    if (environment.zeroNightsAllowed && mCheckOut.isSame(mToday, 'day')) {
+    if (environment.zeroNightsAllowed && mCheckOut.isSame(mMinCheckInDate, 'day')) {
         return new Model(checkOutDate, checkOutDate)
     }
 
