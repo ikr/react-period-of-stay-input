@@ -47,7 +47,7 @@ describe('Model', function () {
                     assertValue(m.newCheckIn('2014-09-30', e), '2014-09-30', '2014-09-30')
                 })
 
-                it('reverts the change if the value is before today', function () {
+                it('reverts the change if the value is before min checkout', function () {
                     assertValue(m.newCheckIn('2014-09-23', e), '2014-09-24', '2014-09-30')
                 })
             })
@@ -87,7 +87,7 @@ describe('Model', function () {
                     assertValue(m.newCheckOut('2014-09-24', e), '2014-09-23', '2014-09-24')
                 })
 
-                it('reject the change if the new value is today', function () {
+                it('reject the change if the new value is minCheckInDate', function () {
                     assertValue(m.newCheckOut('2014-09-20', e), '2014-09-24', '2014-09-30')
                 })
             })
@@ -101,7 +101,7 @@ describe('Model', function () {
                 })
             })
 
-            describe('when it\'s today and zero nights are allowed', function () {
+            describe('when it\'s minCheckInDate and zero nights are allowed', function () {
                 const m = new Model('2014-09-24', '2014-09-30')
                 const e = new Environment(true, '2014-09-24')
 
@@ -113,7 +113,7 @@ describe('Model', function () {
                     assertValue(m.newCheckOut('2014-09-01', e), '2014-09-24', '2014-09-30')
                 })
 
-                it('yields a single-day stay if the value is today', function () {
+                it('yields a single-day stay if the value is minCheckInDate', function () {
                     assertValue(m.newCheckOut('2014-09-24', e), '2014-09-24', '2014-09-24')
                 })
             })
