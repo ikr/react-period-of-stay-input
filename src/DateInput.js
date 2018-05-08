@@ -20,7 +20,7 @@ module.exports = React.createClass({
         onChange: React.PropTypes.func.isRequired
     },
 
-    render () {
+    render: function () {
         return React.DOM.input({
             type: 'date',
             value: this.valueToRender(),
@@ -29,7 +29,7 @@ module.exports = React.createClass({
         })
     },
 
-    componentDidMount () {
+    componentDidMount: function () {
         setTimeout(function () {
             if (isPolyfilled()) {
                 window.$(this.getDOMNode()).datepicker({
@@ -42,25 +42,25 @@ module.exports = React.createClass({
         }.bind(this), 500)
     },
 
-    componentWillUnmount () {
+    componentWillUnmount: function () {
         if (isPolyfilled()) {
             window.$(this.getDOMNode()).off()
         }
     },
 
-    valueToRender () {
+    valueToRender: function () {
         return (this.isDrafting() ? this.state.draftValue : this.props.value)
     },
 
-    classToRender () {
+    classToRender: function () {
         return (this.isDrafting() ? 'form-control error' : 'form-control')
     },
 
-    isDrafting () {
+    isDrafting: function () {
         return (this.state && this.state.draftValue !== null)
     },
 
-    handleEdit (event) {
+    handleEdit: function (event) {
         var v = event.target.value
 
         if (isValidDate(v)) {
