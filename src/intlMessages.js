@@ -17,9 +17,9 @@ module.exports = function () {
         },
         zh: {
             'react-period-of-stay-input': {
-                "period": "{count, plural, =0 {一晚} =1 {1 晚} other {# 晚}}",
-                "checkInDay": "入住日期",
-                "checkOutDay": "退房日期"
+                'period': '{count, plural, =0 {一晚} =1 {1 晚} other {# 晚}}',
+                'checkInDay': '入住日期',
+                'checkOutDay': '退房日期'
             }
         }
     }
