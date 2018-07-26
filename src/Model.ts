@@ -1,4 +1,8 @@
+import * as moment from 'moment'
 import Day from './Day'
+import Environment from './Environment'
+
+const MAX_NIGHTS_COUNT = 27
 
 export default class Model {
     private _checkInDate: Day
@@ -22,4 +26,28 @@ export default class Model {
     get checkOutDate(): Day {
         return this._checkOutDate
     }
+
+    newCheckIn(checkInDate: string, environment: Environment): Model {
+        const mCheckOut = this._checkOutDate.toMoment()
+        const checkIn = new Day(checkInDate)
+        const mCheckIn = checkIn.toMoment()
+
+        if (mCheckIn.isBefore(environment.minCheckInDate.toMoment())) {
+            return this
+        }
+
+        if (itsOk(mCheckIn, mCheckOut, environment)) {
+            return new Model(checkIn, checkIn.next())
+        }
+
+        return new Model(checkIn, this._checkOutDate)
+    }
+}
+
+function itsOk(mCheckIn: moment.Moment, mCheckOut: moment.Moment, environment: Environment): boolean {
+    return (
+        mCheckOut.isBefore(mCheckIn) ||
+        (!environment.zeroNightsAllowed && mCheckIn.isSame(mCheckOut, 'day')) ||
+        (mCheckOut.diff(mCheckIn, 'days') > MAX_NIGHTS_COUNT)
+    )
 }
