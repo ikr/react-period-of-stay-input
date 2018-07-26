@@ -22,6 +22,10 @@ export default class Day {
     }
 
     toMoment(): moment.Moment {
-        return moment(this.stringValue)
+        return moment(this.stringValue, FORMAT)
+    }
+
+    next(): Day {
+        return new Day(this.toMoment().add(1, 'days').format(FORMAT))
     }
 }

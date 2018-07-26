@@ -21,4 +21,9 @@ describe('Day', () => {
         assert(moment.isMoment(d.toMoment()))
         assert.strictEqual(d.toMoment().format(FORMAT), '2017-11-17')
     })
+
+    it('has the next day provider method', () => {
+        const d = new Day('2017-11-17')
+        assert.strictEqual(d.next().toString(), '2017-11-18')
+    })
 })
