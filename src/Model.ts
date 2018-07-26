@@ -42,6 +42,34 @@ export default class Model {
 
         return new Model(checkIn, this._checkOutDate)
     }
+
+    newCheckOut(checkOutDate: string, environment: Environment): Model {
+        const mCheckIn = this.checkInDate.toMoment()
+        const checkOut = new Day(checkOutDate)
+        const mCheckOut = checkOut.toMoment()
+        const mMinCheckInDate = environment.minCheckInDate.toMoment()
+
+        if (
+            mCheckOut.isBefore(mMinCheckInDate) ||
+            (!environment.zeroNightsAllowed && mCheckOut.isSame(mMinCheckInDate, 'day'))
+        ) {
+            return this
+        }
+
+        if (environment.zeroNightsAllowed && mCheckOut.isSame(mMinCheckInDate, 'day')) {
+            return new Model(checkOut, checkOut)
+        }
+
+        if (itsOk(mCheckIn, mCheckOut, environment)) {
+            return new Model(checkOut.previous(), checkOut)
+        }
+
+        return new Model(this._checkInDate, checkOut)
+    }
+
+    nightsCount(): number {
+        return this._checkOutDate.toMoment().diff(this._checkInDate.toMoment(), 'days')
+    }
 }
 
 function itsOk(mCheckIn: moment.Moment, mCheckOut: moment.Moment, environment: Environment): boolean {
