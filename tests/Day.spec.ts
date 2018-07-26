@@ -26,4 +26,9 @@ describe('Day', () => {
         const d = new Day('2017-11-17')
         assert.strictEqual(d.next().toString(), '2017-11-18')
     })
+
+    it('has the previous day provider method', () => {
+        const d = new Day('2017-11-17')
+        assert.strictEqual(d.previous().toString(), '2017-11-16')
+    })
 })

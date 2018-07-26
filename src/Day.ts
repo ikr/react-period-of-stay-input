@@ -28,4 +28,8 @@ export default class Day {
     next(): Day {
         return new Day(this.toMoment().add(1, 'days').format(FORMAT))
     }
+
+    previous(): Day {
+        return new Day(this.toMoment().subtract(1, 'days').format(FORMAT))
+    }
 }
