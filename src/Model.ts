@@ -7,7 +7,7 @@ export default class Model {
     constructor(checkInDate: Day, checkOutDate: Day) {
         if (checkOutDate.toMoment().isBefore(checkInDate.toMoment())) {
             throw new Error(
-                `Check-out date can be before check-in. Got ${checkInDate}, ${checkOutDate}`
+                `Check-out date can't be before check-in. Got ${checkInDate}, ${checkOutDate}`
             )
         }
 
