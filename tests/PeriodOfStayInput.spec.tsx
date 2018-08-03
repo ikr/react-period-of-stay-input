@@ -38,4 +38,16 @@ describe('PeriodOfStayInput for 1+ nights', () => {
             assert(divWrapper.hasClass('ad-hoc'))
         })
     })
+
+    describe('DatePicker for the check-in date', () => {
+        const datePickerWrapper = wrapper.find('DatePicker').at(0)
+
+        it('is present', () => {
+            assert(datePickerWrapper.exists())
+        })
+
+        it('has the locale-bound date format', () => {
+            assert.strictEqual(datePickerWrapper.prop('dateFormat'), 'L')
+        })
+    })
 })
