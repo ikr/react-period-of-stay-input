@@ -17,7 +17,7 @@ class Container extends React.Component<{}, State> {
             <div>
                 <DatePicker
                     locale='de-ch'
-                    selected={moment.unix(this.state.unixSeconds)}
+                    selected={moment.unix(this.state.unixSeconds).utc()}
                     onChange={() => null} />
             </div>
         )
