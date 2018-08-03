@@ -1,3 +1,5 @@
+/* tslint:disable:max-line-length */
+
 export default `:global .react-datepicker-popper[data-placement^="bottom"] .react-datepicker__triangle, :global .react-datepicker-popper[data-placement^="top"] .react-datepicker__triangle, :global .react-datepicker__year-read-view--down-arrow, :global .react-datepicker__month-read-view--down-arrow, :global .react-datepicker__month-year-read-view--down-arrow {
   margin-left: -8px;
   position: absolute;
