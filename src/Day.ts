@@ -1,4 +1,5 @@
 import * as moment from 'moment'
+import { Moment } from 'moment'
 
 export const FORMAT = 'YYYY-MM-DD'
 
@@ -9,12 +10,16 @@ function isValidDate(stringValue: string): boolean {
 export default class Day {
     private stringValue: string
 
-    constructor(yyyyDashMmDashDd: string) {
-        if (!isValidDate(yyyyDashMmDashDd)) {
-            throw new Error(`${yyyyDashMmDashDd} isn't a valid ISO 8601 date literal`)
-        }
+    constructor(value: string | Moment) {
+        if (typeof value === 'string') {
+            if (!isValidDate(value)) {
+                throw new Error(`${value} isn't a valid ISO 8601 date literal`)
+            }
 
-        this.stringValue = yyyyDashMmDashDd
+            this.stringValue = value
+        } else {
+            this.stringValue = value.format(FORMAT)
+        }
     }
 
     toString(): string {

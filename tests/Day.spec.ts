@@ -31,4 +31,11 @@ describe('Day', () => {
         const d = new Day('2017-11-17')
         assert.strictEqual(d.previous().toString(), '2017-11-16')
     })
+
+    it('can be constructed from a moment instance', () => {
+        assert.strictEqual(
+            (new Day('2018-08-03')).toString(),
+            (new Day(moment('2018-08-03'))).toString()
+        )
+    })
 })
