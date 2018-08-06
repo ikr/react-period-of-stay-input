@@ -1,4 +1,6 @@
-export default function (): { [locale: string]: { [key: string]: string } } {
+import Locale from './Locale'
+
+export default function (): { [locale in Locale]: { [key: string]: string } } {
     return {
         en: {
             'react-period-of-stay-input.period': '{count, plural, =0 {Single day} =1 {1 night} other {# nights}}',
