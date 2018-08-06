@@ -4,6 +4,7 @@ import { IntlProvider } from 'react-intl'
 import { mount } from 'enzyme'
 import * as moment from 'moment'
 import Day from '../src/Day'
+import Locale from '../src/Locale'
 import Environment from '../src/Environment'
 import Model from '../src/Model'
 import intlMessages from '../src/intlMessages'
@@ -12,9 +13,10 @@ import PeriodOfStayInput, { Props } from '../src/PeriodOfStayInput'
 describe('PeriodOfStayInput for 1+ nights', () => {
     function props(): Props {
         return {
+            className: 'ad-hoc',
+            locale: Locale.DE,
             model: new Model(new Day('2014-09-26'), new Day('2014-09-27')),
             environment: new Environment(false, new Day('2014-09-26')),
-            className: 'ad-hoc'
         }
     }
 
@@ -47,6 +49,10 @@ describe('PeriodOfStayInput for 1+ nights', () => {
             assert(datePickerWrapper.exists())
         })
 
+        it('has the locale prop assigned', () => {
+            assert.strictEqual(typeof datePickerWrapper.prop('locale'), 'string')
+        })
+
         it('receives the selected value from the model', () => {
             assert.deepStrictEqual(datePickerWrapper.prop('selected'), moment('2014-09-26'))
         })
@@ -69,6 +75,10 @@ describe('PeriodOfStayInput for 1+ nights', () => {
 
         it('is present', () => {
             assert(datePickerWrapper.exists())
+        })
+
+        it('has the locale prop assigned', () => {
+            assert.strictEqual(typeof datePickerWrapper.prop('locale'), 'string')
         })
 
         it('receives the selected value from the model', () => {
