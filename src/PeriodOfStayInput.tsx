@@ -9,9 +9,17 @@ export default class PeriodOfStayInput extends React.Component<Props> {
             this.props.className ? ` ${this.props.className}` : ''
         )
 
+        const mCheckIn = this.props.model.checkInDate.toMoment()
+        const mCheckOut = this.props.model.checkOutDate.toMoment()
+
         return (
             <div {...{ className }}>
-                <DatePicker onChange={() => 0} />
+                <DatePicker
+                    selected={mCheckIn}
+                    selectsStart
+                    startDate={mCheckIn}
+                    endDate={mCheckOut}
+                    onChange={() => 0} />
             </div>
         )
     }

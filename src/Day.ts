@@ -27,14 +27,14 @@ export default class Day {
     }
 
     toMoment(): moment.Moment {
-        return moment(this.stringValue, FORMAT)
+        return moment(this.stringValue)
     }
 
     next(): Day {
-        return new Day(this.toMoment().add(1, 'days').format(FORMAT))
+        return new Day(this.toMoment().add(1, 'days'))
     }
 
     previous(): Day {
-        return new Day(this.toMoment().subtract(1, 'days').format(FORMAT))
+        return new Day(this.toMoment().subtract(1, 'days'))
     }
 }
