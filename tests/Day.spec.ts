@@ -33,9 +33,6 @@ describe('Day', () => {
     })
 
     it('can be constructed from a moment instance', () => {
-        assert.strictEqual(
-            (new Day('2018-08-03')).toString(),
-            (new Day(moment('2018-08-03'))).toString()
-        )
+        assert.deepStrictEqual(new Day('2018-08-03'), new Day(moment('2018-08-03')))
     })
 })
