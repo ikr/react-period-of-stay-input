@@ -47,16 +47,36 @@ describe('PeriodOfStayInput for 1+ nights', () => {
             assert(datePickerWrapper.exists())
         })
 
-        it('has the locale-bound date format', () => {
-            assert.strictEqual(datePickerWrapper.prop('dateFormat'), 'L')
-        })
-
         it('receives the selected value from the model', () => {
             assert.deepStrictEqual(datePickerWrapper.prop('selected'), moment('2014-09-26'))
         })
 
         it('has the selectsStart prop set', () => {
             assert.strictEqual(datePickerWrapper.prop('selectsStart'), true)
+        })
+
+        it('receives the startDate value from the model', () => {
+            assert.deepStrictEqual(datePickerWrapper.prop('startDate'), moment('2014-09-26'))
+        })
+
+        it('receives the endDate value from the model', () => {
+            assert.deepStrictEqual(datePickerWrapper.prop('endDate'), moment('2014-09-27'))
+        })
+    })
+
+    describe('DatePicker for the check-out date', () => {
+        const datePickerWrapper = wrapper.find('DatePicker').at(1)
+
+        it('is present', () => {
+            assert(datePickerWrapper.exists())
+        })
+
+        it('receives the selected value from the model', () => {
+            assert.deepStrictEqual(datePickerWrapper.prop('selected'), moment('2014-09-27'))
+        })
+
+        it('has the selectsEnd prop set', () => {
+            assert.strictEqual(datePickerWrapper.prop('selectsEnd'), true)
         })
 
         it('receives the startDate value from the model', () => {

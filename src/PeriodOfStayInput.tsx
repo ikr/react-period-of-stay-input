@@ -20,6 +20,13 @@ export default class PeriodOfStayInput extends React.Component<Props> {
                     startDate={mCheckIn}
                     endDate={mCheckOut}
                     onChange={() => 0} />
+
+                <DatePicker
+                    selected={mCheckOut}
+                    selectsEnd
+                    startDate={mCheckIn}
+                    endDate={mCheckOut}
+                    onChange={() => 0} />
             </div>
         )
     }
