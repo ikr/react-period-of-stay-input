@@ -21,7 +21,7 @@ describe('PeriodOfStayInput for 1+ nights', () => {
     }
 
     const wrapper = mount(
-        <IntlProvider locale='ru' messages={intlMessages().en}>
+        <IntlProvider locale='ru' messages={intlMessages().de}>
             <PeriodOfStayInput {...props()} />
         </IntlProvider>
     ).find('PeriodOfStayInput')
@@ -95,6 +95,30 @@ describe('PeriodOfStayInput for 1+ nights', () => {
 
         it('receives the endDate value from the model', () => {
             assert.deepStrictEqual(datePickerWrapper.prop('endDate'), moment('2014-09-27'))
+        })
+    })
+
+    describe('markup and i18n', () => {
+        describe('for check-in', () => {
+            it('contains the label', () => {
+                assert.strictEqual(
+                    wrapper.find('.period-of-stay-check-in > label').text(), 'Anreise')
+            })
+
+            it('contains the calendar icon', () => {
+                assert(wrapper.find('.period-of-stay-check-in > i.calendar-icon').exists())
+            })
+        })
+
+        describe('for check-out', () => {
+            it('contains the label', () => {
+                assert.strictEqual(
+                    wrapper.find('.period-of-stay-check-out > label').text(), 'Abreise')
+            })
+
+            it('contains the calendar icon', () => {
+                assert(wrapper.find('.period-of-stay-check-out > i.calendar-icon').exists())
+            })
         })
     })
 })

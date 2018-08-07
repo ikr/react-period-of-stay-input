@@ -1,5 +1,6 @@
 import * as React from 'react'
 import DatePicker from 'react-datepicker'
+import { FormattedMessage } from 'react-intl'
 import Locale from './Locale'
 import momentLocale from './momentLocale'
 import Model from './Model'
@@ -17,21 +18,37 @@ export default class PeriodOfStayInput extends React.Component<Props> {
 
         return (
             <div {...{ className }}>
-                <DatePicker
-                    locale={locale}
-                    selected={mCheckIn}
-                    selectsStart
-                    startDate={mCheckIn}
-                    endDate={mCheckOut}
-                    onChange={() => 0} />
+                <div className='period-of-stay-check-in'>
+                    <label>
+                        <FormattedMessage id='react-period-of-stay-input.checkInDay' />
+                    </label>
 
-                <DatePicker
-                    locale={locale}
-                    selected={mCheckOut}
-                    selectsEnd
-                    startDate={mCheckIn}
-                    endDate={mCheckOut}
-                    onChange={() => 0} />
+                    <DatePicker
+                        locale={locale}
+                        selected={mCheckIn}
+                        selectsStart
+                        startDate={mCheckIn}
+                        endDate={mCheckOut}
+                        onChange={() => 0} />
+
+                    <i className='fa fa-calendar calendar-icon' />
+                </div>
+
+                <div className='period-of-stay-check-out'>
+                    <label>
+                        <FormattedMessage id='react-period-of-stay-input.checkOutDay' />
+                    </label>
+
+                    <DatePicker
+                        locale={locale}
+                        selected={mCheckOut}
+                        selectsEnd
+                        startDate={mCheckIn}
+                        endDate={mCheckOut}
+                        onChange={() => 0} />
+
+                    <i className='fa fa-calendar calendar-icon' />
+                </div>
             </div>
         )
     }
