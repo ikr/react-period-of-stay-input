@@ -1,3 +1,4 @@
+src
 tests
-www
-demo.js
+dist/demo.js
+dist/demo.d.ts
