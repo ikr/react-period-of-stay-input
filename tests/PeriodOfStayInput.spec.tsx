@@ -98,7 +98,7 @@ describe('PeriodOfStayInput for 1+ nights', () => {
         })
     })
 
-    describe('markup and i18n', () => {
+    describe('additional markup and i18n', () => {
         describe('for check-in', () => {
             it('contains the label', () => {
                 assert.strictEqual(
@@ -119,6 +119,10 @@ describe('PeriodOfStayInput for 1+ nights', () => {
             it('contains the calendar icon', () => {
                 assert(wrapper.find('.period-of-stay-check-out > CalendarIcon').exists())
             })
+        })
+
+        it('contains the derived nights value', () => {
+            assert.strictEqual(wrapper.find('span.period-of-stay-nights').text(), '1 Nacht')
         })
     })
 })

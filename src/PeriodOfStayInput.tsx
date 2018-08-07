@@ -55,6 +55,12 @@ export default class PeriodOfStayInput extends React.Component<Props> {
 
                     <CalendarIcon />
                 </div>
+
+                <span className='period-of-stay-nights'>
+                    <FormattedMessage
+                        id='react-period-of-stay-input.period'
+                        values={{ count: this.props.model.nightsCount() }} />
+                </span>
             </div>
         )
     }
