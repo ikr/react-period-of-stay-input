@@ -139,12 +139,12 @@ describe('PeriodOfStayInput notification', () => {
         }
     }
 
-    let model
     let onChange
     let wrapper: ReactWrapper
+    let instance: PeriodOfStayInput
 
     beforeEach(function() {
-        model = new Model(new Day('2014-10-01'), new Day('2014-10-03'))
+        const model = new Model(new Day('2014-10-01'), new Day('2014-10-03'))
 
         spy(model, 'newCheckIn')
         spy(model, 'newCheckOut')
@@ -156,15 +156,11 @@ describe('PeriodOfStayInput notification', () => {
                 <PeriodOfStayInput {...props(model, onChange)} />
             </IntlProvider>
         ).find('PeriodOfStayInput')
+
+        instance = wrapper.instance() as PeriodOfStayInput
     })
 
     describe('wiring', () => {
-        let instance: PeriodOfStayInput
-
-        beforeEach(() => {
-            instance = wrapper.instance() as PeriodOfStayInput
-        })
-
         it('is done for the check-in', () => {
             assert.strictEqual(
                 wrapper.find('DatePicker').at(0).prop('onChange'),
