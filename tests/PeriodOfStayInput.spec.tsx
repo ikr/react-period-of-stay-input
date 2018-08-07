@@ -3,7 +3,7 @@ import * as React from 'react'
 import { IntlProvider } from 'react-intl'
 import { mount, ReactWrapper } from 'enzyme'
 import * as moment from 'moment'
-import { spy } from 'sinon'
+import { spy, SinonSpy } from 'sinon'
 import Day from '../src/Day'
 import Locale from '../src/Locale'
 import Environment from '../src/Environment'
@@ -130,21 +130,24 @@ describe('PeriodOfStayInput for 1+ nights', () => {
 })
 
 describe('PeriodOfStayInput notification', () => {
+    const environment = new Environment(false, new Day('2014-09-26'))
+
     function props(model: Model, onChange: (m: Model) => void): Props {
         return {
             locale: Locale.EN,
             model,
-            environment: new Environment(false, new Day('2014-09-26')),
+            environment,
             onChange
         }
     }
 
-    let onChange
+    let model: Model
+    let onChange: (m: Model) => void
     let wrapper: ReactWrapper
     let instance: PeriodOfStayInput
 
-    beforeEach(function() {
-        const model = new Model(new Day('2014-10-01'), new Day('2014-10-03'))
+    beforeEach(() => {
+        model = new Model(new Day('2014-10-01'), new Day('2014-10-03'))
 
         spy(model, 'newCheckIn')
         spy(model, 'newCheckOut')
@@ -173,6 +176,36 @@ describe('PeriodOfStayInput notification', () => {
                 wrapper.find('DatePicker').at(1).prop('onChange'),
                 instance.handleCheckOutChange
             )
+        })
+    })
+
+    describe('when check-in changes', function() {
+        beforeEach(() => {
+            instance.handleCheckInChange(moment('2014-10-02'))
+        })
+
+        it('start with delegation to model', function() {
+            assert((model.newCheckIn as SinonSpy).calledOnceWith('2014-10-02', environment))
+        })
+
+        it('gets to onChange', function() {
+            assert((onChange as SinonSpy).calledOnce)
+            assert((onChange as SinonSpy).args[0][0].checkOutDate)
+        })
+    })
+
+    describe('when check-out changes', function() {
+        beforeEach(() => {
+            instance.handleCheckOutChange(moment('2014-10-07'))
+        })
+
+        it('start with delegation to model', function() {
+            assert((model.newCheckOut as SinonSpy).calledOnceWith('2014-10-07', environment))
+        })
+
+        it('gets to onChange', function() {
+            assert((onChange as SinonSpy).calledOnce)
+            assert((onChange as SinonSpy).args[0][0].checkOutDate)
         })
     })
 })

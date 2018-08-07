@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl'
 import { Moment } from 'moment'
 import Locale from './Locale'
 import momentLocale from './momentLocale'
+import { FORMAT } from './Day'
 import Model from './Model'
 import Environment from './Environment'
 
@@ -73,11 +74,15 @@ export default class PeriodOfStayInput extends React.Component<Props> {
     }
 
     handleCheckInChange(newValue: Moment): void {
-        return
+        this.props.onChange(
+            this.props.model.newCheckIn(newValue.format(FORMAT), this.props.environment)
+        )
     }
 
     handleCheckOutChange(newValue: Moment): void {
-        return
+        this.props.onChange(
+            this.props.model.newCheckOut(newValue.format(FORMAT), this.props.environment)
+        )
     }
 }
 
