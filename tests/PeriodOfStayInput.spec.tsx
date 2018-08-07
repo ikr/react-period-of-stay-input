@@ -106,7 +106,7 @@ describe('PeriodOfStayInput for 1+ nights', () => {
             })
 
             it('contains the calendar icon', () => {
-                assert(wrapper.find('.period-of-stay-check-in > i.calendar-icon').exists())
+                assert(wrapper.find('.period-of-stay-check-in > CalendarIcon').exists())
             })
         })
 
@@ -117,7 +117,7 @@ describe('PeriodOfStayInput for 1+ nights', () => {
             })
 
             it('contains the calendar icon', () => {
-                assert(wrapper.find('.period-of-stay-check-out > i.calendar-icon').exists())
+                assert(wrapper.find('.period-of-stay-check-out > CalendarIcon').exists())
             })
         })
     })

@@ -6,6 +6,12 @@ import momentLocale from './momentLocale'
 import Model from './Model'
 import Environment from './Environment'
 
+function CalendarIcon() {
+    return (
+        <i className='fa fa-calendar calendar-icon' />
+    )
+}
+
 export default class PeriodOfStayInput extends React.Component<Props> {
     render() {
         const className = 'period-of-stay-input' + (
@@ -31,7 +37,7 @@ export default class PeriodOfStayInput extends React.Component<Props> {
                         endDate={mCheckOut}
                         onChange={() => 0} />
 
-                    <i className='fa fa-calendar calendar-icon' />
+                    <CalendarIcon />
                 </div>
 
                 <div className='period-of-stay-check-out'>
@@ -47,7 +53,7 @@ export default class PeriodOfStayInput extends React.Component<Props> {
                         endDate={mCheckOut}
                         onChange={() => 0} />
 
-                    <i className='fa fa-calendar calendar-icon' />
+                    <CalendarIcon />
                 </div>
             </div>
         )
