@@ -1,8 +1,9 @@
 import * as assert from 'assert'
 import * as React from 'react'
 import { IntlProvider } from 'react-intl'
-import { mount } from 'enzyme'
+import { mount, ReactWrapper } from 'enzyme'
 import * as moment from 'moment'
+import { spy } from 'sinon'
 import Day from '../src/Day'
 import Locale from '../src/Locale'
 import Environment from '../src/Environment'
@@ -17,6 +18,7 @@ describe('PeriodOfStayInput for 1+ nights', () => {
             locale: Locale.DE,
             model: new Model(new Day('2014-09-26'), new Day('2014-09-27')),
             environment: new Environment(false, new Day('2014-09-26')),
+            onChange: () => undefined
         }
     }
 
@@ -124,5 +126,53 @@ describe('PeriodOfStayInput for 1+ nights', () => {
         it('contains the derived nights value', () => {
             assert.strictEqual(wrapper.find('span.period-of-stay-nights').text(), '1 Nacht')
         })
+    })
+})
+
+describe('PeriodOfStayInput notification', () => {
+    function props(model: Model, onChange: (m: Model) => void): Props {
+        return {
+            locale: Locale.EN,
+            model,
+            environment: new Environment(false, new Day('2014-09-26')),
+            onChange
+        }
+    }
+
+    let model
+    let onChange
+    let wrapper: ReactWrapper
+
+    beforeEach(function() {
+        model = new Model(new Day('2014-10-01'), new Day('2014-10-03'))
+
+        spy(model, 'newCheckIn')
+        spy(model, 'newCheckOut')
+
+        onChange = spy()
+
+        wrapper = mount(
+            <IntlProvider locale='ru' messages={intlMessages().en}>
+                <PeriodOfStayInput {...props(model, onChange)} />
+            </IntlProvider>
+        ).find('PeriodOfStayInput')
+    })
+
+    it('is wired for the check-in', () => {
+        const instance = wrapper.instance() as PeriodOfStayInput
+
+        assert.strictEqual(
+            wrapper.find('DatePicker').at(0).prop('onChange'),
+            instance.handleCheckInChange
+        )
+    })
+
+    it('is wired for the check-out', () => {
+        const instance = wrapper.instance() as PeriodOfStayInput
+
+        assert.strictEqual(
+            wrapper.find('DatePicker').at(1).prop('onChange'),
+            instance.handleCheckOutChange
+        )
     })
 })

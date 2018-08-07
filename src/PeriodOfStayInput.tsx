@@ -1,6 +1,7 @@
 import * as React from 'react'
 import DatePicker from 'react-datepicker'
 import { FormattedMessage } from 'react-intl'
+import { Moment } from 'moment'
 import Locale from './Locale'
 import momentLocale from './momentLocale'
 import Model from './Model'
@@ -13,6 +14,12 @@ function CalendarIcon() {
 }
 
 export default class PeriodOfStayInput extends React.Component<Props> {
+    constructor(props: Props) {
+        super(props)
+        this.handleCheckInChange = this.handleCheckInChange.bind(this)
+        this.handleCheckOutChange = this.handleCheckOutChange.bind(this)
+    }
+
     render() {
         const className = 'period-of-stay-input' + (
             this.props.className ? ` ${this.props.className}` : ''
@@ -35,7 +42,7 @@ export default class PeriodOfStayInput extends React.Component<Props> {
                         selectsStart
                         startDate={mCheckIn}
                         endDate={mCheckOut}
-                        onChange={() => 0} />
+                        onChange={this.handleCheckInChange} />
 
                     <CalendarIcon />
                 </div>
@@ -51,7 +58,7 @@ export default class PeriodOfStayInput extends React.Component<Props> {
                         selectsEnd
                         startDate={mCheckIn}
                         endDate={mCheckOut}
-                        onChange={() => 0} />
+                        onChange={this.handleCheckOutChange} />
 
                     <CalendarIcon />
                 </div>
@@ -64,11 +71,20 @@ export default class PeriodOfStayInput extends React.Component<Props> {
             </div>
         )
     }
+
+    handleCheckInChange(newValue: Moment): void {
+        return
+    }
+
+    handleCheckOutChange(newValue: Moment): void {
+        return
+    }
 }
 
 export interface Props {
     className?: string,
     locale: Locale,
     model: Model,
-    environment: Environment
+    environment: Environment,
+    onChange: (newValue: Model) => void
 }
