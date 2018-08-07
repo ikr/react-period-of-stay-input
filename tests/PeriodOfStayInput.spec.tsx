@@ -158,21 +158,25 @@ describe('PeriodOfStayInput notification', () => {
         ).find('PeriodOfStayInput')
     })
 
-    it('is wired for the check-in', () => {
-        const instance = wrapper.instance() as PeriodOfStayInput
+    describe('wiring', () => {
+        let instance: PeriodOfStayInput
 
-        assert.strictEqual(
-            wrapper.find('DatePicker').at(0).prop('onChange'),
-            instance.handleCheckInChange
-        )
-    })
+        beforeEach(() => {
+            instance = wrapper.instance() as PeriodOfStayInput
+        })
 
-    it('is wired for the check-out', () => {
-        const instance = wrapper.instance() as PeriodOfStayInput
+        it('is done for the check-in', () => {
+            assert.strictEqual(
+                wrapper.find('DatePicker').at(0).prop('onChange'),
+                instance.handleCheckInChange
+            )
+        })
 
-        assert.strictEqual(
-            wrapper.find('DatePicker').at(1).prop('onChange'),
-            instance.handleCheckOutChange
-        )
+        it('is done for the check-out', () => {
+            assert.strictEqual(
+                wrapper.find('DatePicker').at(1).prop('onChange'),
+                instance.handleCheckOutChange
+            )
+        })
     })
 })
