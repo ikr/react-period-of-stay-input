@@ -1,4 +1,5 @@
 import * as assert from 'assert'
+import Locale from '../src/Locale'
 import intlMessages from '../src/intlMessages'
 
 describe('intlMessages', () => {
@@ -7,10 +8,11 @@ describe('intlMessages', () => {
     })
 
     describe('react-star-rating-input namespace', function() {
-        ['en', 'de', 'zh'].forEach(function(locale) {
+        [Locale.EN, Locale.DE, Locale.ZH].forEach(function(locale) {
             ['period', 'checkInDay', 'checkOutDay'].forEach(function(messageName) {
-                it('defines ' + messageName + ' for ' + locale + ' locale', () => {
-                    const key = ['react-period-of-stay-input', messageName].join('.')
+                const key = ['react-period-of-stay-input', messageName].join('.')
+
+                it(`defines ${key} for locale ${locale}`, () => {
                     assert(intlMessages()[locale][key].length > 0)
                 })
             })
