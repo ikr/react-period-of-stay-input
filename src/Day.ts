@@ -27,7 +27,7 @@ export default class Day {
     }
 
     toMoment(): moment.Moment {
-        return moment(this.stringValue)
+        return moment.utc(this.stringValue)
     }
 
     next(): Day {
