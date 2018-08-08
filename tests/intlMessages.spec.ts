@@ -7,9 +7,9 @@ describe('intlMessages', () => {
         assert.strictEqual(typeof intlMessages, 'function')
     })
 
-    describe('react-star-rating-input namespace', function() {
-        [Locale.EN, Locale.DE, Locale.ZH].forEach(function(locale) {
-            ['period', 'checkInDay', 'checkOutDay'].forEach(function(messageName) {
+    describe('react-star-rating-input namespace', () => {
+        [Locale.EN, Locale.DE, Locale.ZH].forEach(locale => {
+            ['period', 'checkInDay', 'checkOutDay'].forEach(messageName => {
                 const key = ['react-period-of-stay-input', messageName].join('.')
 
                 it(`defines ${key} for locale ${locale}`, () => {
