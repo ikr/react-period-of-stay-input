@@ -2,31 +2,36 @@ import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import DatePicker from 'react-datepicker'
 import insertCss from 'insert-css'
-import * as moment from 'moment'
+import { IntlProvider } from 'react-intl'
 import 'moment/locale/de-ch'
-import { css } from './index'
+import intlMessages from './intlMessages'
+import { css, Locale, Day, Environment, Model, PeriodOfStayInput } from './index'
+
+const environment = new Environment(true, new Day('1979-11-16'))
 
 class Container extends React.Component<{}, State> {
     constructor(props: any) {
         super(props)
-        this.state = { unixSeconds: moment.utc().unix() }
+
+        this.state = {
+            model: new Model(new Day('1979-11-16'), new Day('1979-11-17'))
+        }
     }
 
     render() {
         return (
-            <div>
-                <DatePicker
-                    locale='de-ch'
-                    selected={moment.unix(this.state.unixSeconds).utc()}
-                    onChange={() => null} />
-            </div>
+            <IntlProvider locale='de' messages={intlMessages().de}>
+                <PeriodOfStayInput
+                    locale={Locale.DE}
+                    environment={environment}
+                    model={this.state.model}
+                    onChange={model => { this.setState({ model }) }} />
+            </IntlProvider>
         )
     }
 }
 
-interface State {
-    unixSeconds: number
-}
+interface State { model: Model }
 
 insertCss(css)
 
