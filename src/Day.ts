@@ -4,7 +4,7 @@ import { Moment } from 'moment'
 export const FORMAT = 'YYYY-MM-DD'
 
 function isValidDate(stringValue: string): boolean {
-    return /^\d{4}-\d{2}-\d{2}$/.test(stringValue) && moment(stringValue, FORMAT).isValid()
+    return /^\d{4}-\d{2}-\d{2}$/.test(stringValue) && moment.utc(stringValue, FORMAT).isValid()
 }
 
 export default class Day {
