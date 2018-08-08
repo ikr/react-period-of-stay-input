@@ -7,7 +7,7 @@ describe('momentLocale', () => {
         assert.strictEqual(typeof momentLocale, 'function')
     })
 
-    const testCases: [string, string][] = [
+    const testCases: [Locale, string][] = [
         [Locale.EN, 'en-ie'], [Locale.DE, 'de-ch'], [Locale.ZH, 'zh-cn']
     ]
 
