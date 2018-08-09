@@ -2,11 +2,13 @@ import * as React from 'react'
 import * as ReactDOM from 'react-dom'
 import DatePicker from 'react-datepicker'
 import insertCss from 'insert-css'
-import { IntlProvider } from 'react-intl'
+import { IntlProvider, addLocaleData } from 'react-intl'
+import de from 'react-intl/locale-data/de'
 import 'moment/locale/de-ch'
 import intlMessages from './intlMessages'
 import { css, Locale, Day, Environment, Model, PeriodOfStayInput } from './index'
 
+addLocaleData(de)
 const environment = new Environment(true, new Day('1979-11-16'))
 
 class Container extends React.Component<{}, State> {
