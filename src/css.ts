@@ -184,6 +184,10 @@ export default `.react-datepicker-popper[data-placement^="bottom"] .react-datepi
   padding: 0;
   border: 0.45rem solid transparent;
   z-index: 1;
+  height: 10px;
+  width: 10px;
+  text-indent: -999em;
+  overflow: hidden;
 }
 
 .react-datepicker__navigation--previous {
@@ -543,11 +547,14 @@ export default `.react-datepicker-popper[data-placement^="bottom"] .react-datepi
   background-color: transparent;
   border: 0;
   cursor: pointer;
-  display: inline-block;
-  height: 0;
   outline: 0;
   padding: 0;
   vertical-align: middle;
+  position: absolute;
+  height: 16px;
+  width: 16px;
+  top: 25%;
+  right: 7px;
 }
 
 .react-datepicker__close-icon::after {
@@ -565,9 +572,8 @@ export default `.react-datepicker-popper[data-placement^="bottom"] .react-datepi
   margin: -8px auto 0;
   padding: 2px;
   position: absolute;
-  right: 7px;
+  right: 0px;
   text-align: center;
-  top: 50%;
 }
 
 .react-datepicker__today-button {
