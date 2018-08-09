@@ -1,6 +1,5 @@
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
-import DatePicker from 'react-datepicker'
 import insertCss from 'insert-css'
 import { IntlProvider, addLocaleData } from 'react-intl'
 import de from 'react-intl/locale-data/de'
