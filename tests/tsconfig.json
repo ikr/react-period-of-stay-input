@@ -3,6 +3,7 @@
     "noEmit": true,
     "strict": true,
     "module": "commonjs",
+    "allowSyntheticDefaultImports": true,
     "target": "ES2015",
     "jsx": "react"
   },

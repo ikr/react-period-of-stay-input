@@ -33,6 +33,6 @@ describe('Day', () => {
     })
 
     it('can be constructed from a moment instance', () => {
-        assert.deepStrictEqual(new Day('2018-08-03'), new Day(moment.utc('2018-08-03')))
+        assert.deepStrictEqual(new Day('2018-08-03'), new Day(moment('2018-08-03')))
     })
 })

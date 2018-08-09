@@ -3,6 +3,7 @@
     "outDir": "./dist/",
     "strict": true,
     "module": "commonjs",
+    "allowSyntheticDefaultImports": true,
     "target": "ES5",
     "lib": ["ES2015", "DOM"],
     "jsx": "react",
