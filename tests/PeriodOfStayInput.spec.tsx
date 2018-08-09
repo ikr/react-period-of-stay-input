@@ -56,7 +56,7 @@ describe('PeriodOfStayInput for 1+ nights', () => {
         })
 
         it('receives the selected value from the model', () => {
-            assert.deepStrictEqual(datePickerWrapper.prop('selected'), moment('2014-09-26'))
+            assert.deepStrictEqual(datePickerWrapper.prop('selected'), moment.utc('2014-09-26'))
         })
 
         it('has the selectsStart prop set', () => {
@@ -64,11 +64,11 @@ describe('PeriodOfStayInput for 1+ nights', () => {
         })
 
         it('receives the startDate value from the model', () => {
-            assert.deepStrictEqual(datePickerWrapper.prop('startDate'), moment('2014-09-26'))
+            assert.deepStrictEqual(datePickerWrapper.prop('startDate'), moment.utc('2014-09-26'))
         })
 
         it('receives the endDate value from the model', () => {
-            assert.deepStrictEqual(datePickerWrapper.prop('endDate'), moment('2014-09-27'))
+            assert.deepStrictEqual(datePickerWrapper.prop('endDate'), moment.utc('2014-09-27'))
         })
     })
 
@@ -84,7 +84,7 @@ describe('PeriodOfStayInput for 1+ nights', () => {
         })
 
         it('receives the selected value from the model', () => {
-            assert.deepStrictEqual(datePickerWrapper.prop('selected'), moment('2014-09-27'))
+            assert.deepStrictEqual(datePickerWrapper.prop('selected'), moment.utc('2014-09-27'))
         })
 
         it('has the selectsEnd prop set', () => {
@@ -92,11 +92,11 @@ describe('PeriodOfStayInput for 1+ nights', () => {
         })
 
         it('receives the startDate value from the model', () => {
-            assert.deepStrictEqual(datePickerWrapper.prop('startDate'), moment('2014-09-26'))
+            assert.deepStrictEqual(datePickerWrapper.prop('startDate'), moment.utc('2014-09-26'))
         })
 
         it('receives the endDate value from the model', () => {
-            assert.deepStrictEqual(datePickerWrapper.prop('endDate'), moment('2014-09-27'))
+            assert.deepStrictEqual(datePickerWrapper.prop('endDate'), moment.utc('2014-09-27'))
         })
     })
 
