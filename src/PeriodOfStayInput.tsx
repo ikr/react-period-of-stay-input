@@ -14,10 +14,16 @@ function CalendarIcon() {
     )
 }
 
+function datePickerData(props: Props) {
+    return {
+        locale: momentLocale(props.locale),
+        mCheckIn: props.model.checkInDate.toMoment(),
+        mCheckOut: props.model.checkOutDate.toMoment()
+    }
+}
+
 function CheckIn(props: Props & { handleCheckInChange: (v: Moment) => void }) {
-    const locale = momentLocale(props.locale)
-    const mCheckIn = props.model.checkInDate.toMoment()
-    const mCheckOut = props.model.checkOutDate.toMoment()
+    const { locale, mCheckIn, mCheckOut } = datePickerData(props)
 
     return (
         <DatePicker
@@ -31,9 +37,7 @@ function CheckIn(props: Props & { handleCheckInChange: (v: Moment) => void }) {
 }
 
 function CheckOut(props: Props & { handleCheckOutChange: (v: Moment) => void }) {
-    const locale = momentLocale(props.locale)
-    const mCheckIn = props.model.checkInDate.toMoment()
-    const mCheckOut = props.model.checkOutDate.toMoment()
+    const { locale, mCheckIn, mCheckOut } = datePickerData(props)
 
     return (
         <DatePicker
