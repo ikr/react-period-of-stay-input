@@ -30,6 +30,22 @@ function CheckIn(props: Props & { handleCheckInChange: (v: Moment) => void }) {
     )
 }
 
+function CheckOut(props: Props & { handleCheckOutChange: (v: Moment) => void }) {
+    const locale = momentLocale(props.locale)
+    const mCheckIn = props.model.checkInDate.toMoment()
+    const mCheckOut = props.model.checkOutDate.toMoment()
+
+    return (
+        <DatePicker
+            locale={locale}
+            selected={mCheckOut}
+            selectsEnd
+            startDate={mCheckIn}
+            endDate={mCheckOut}
+            onChange={props.handleCheckOutChange} />
+    )
+}
+
 export default class PeriodOfStayInput extends React.Component<Props> {
     constructor(props: Props) {
         super(props)
@@ -43,10 +59,6 @@ export default class PeriodOfStayInput extends React.Component<Props> {
         const className = 'period-of-stay-input' + (
             this.props.className ? ` ${this.props.className}` : ''
         )
-
-        const locale = momentLocale(this.props.locale)
-        const mCheckIn = this.props.model.checkInDate.toMoment()
-        const mCheckOut = this.props.model.checkOutDate.toMoment()
 
         return (
             <div {...{ className }}>
@@ -64,14 +76,7 @@ export default class PeriodOfStayInput extends React.Component<Props> {
                         <FormattedMessage id='react-period-of-stay-input.checkOutDay' />
                     </label>
 
-                    <DatePicker
-                        locale={locale}
-                        selected={mCheckOut}
-                        selectsEnd
-                        startDate={mCheckIn}
-                        endDate={mCheckOut}
-                        onChange={this.handleCheckOutChange} />
-
+                    <CheckOut {...{ ...this.props, handleCheckOutChange: this.handleCheckOutChange }} />
                     <CalendarIcon />
                 </div>
 
