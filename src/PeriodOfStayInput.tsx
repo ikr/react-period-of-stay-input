@@ -102,6 +102,7 @@ export default class PeriodOfStayInput extends React.Component<Props> {
 
 export interface Props {
     className?: string,
+    useInputTypeDate: boolean,
     locale: Locale,
     model: Model,
     environment: Environment,

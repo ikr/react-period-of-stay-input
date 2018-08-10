@@ -5,10 +5,20 @@ import { IntlProvider, addLocaleData } from 'react-intl'
 import de from 'react-intl/locale-data/de'
 import 'moment/locale/de-ch'
 import intlMessages from './intlMessages'
-import { css, Locale, Day, Environment, Model, PeriodOfStayInput } from './index'
+
+import {
+    css,
+    Locale,
+    Day,
+    Environment,
+    Model,
+    PeriodOfStayInput,
+    isInputTypeDateSupported
+} from './index'
 
 addLocaleData(de)
 const environment = new Environment(true, new Day('1979-11-16'))
+const useInputTypeDate = isInputTypeDateSupported()
 
 class Container extends React.Component<{}, State> {
     constructor(props: any) {
@@ -23,6 +33,7 @@ class Container extends React.Component<{}, State> {
         return (
             <IntlProvider locale='de' messages={intlMessages().de}>
                 <PeriodOfStayInput
+                    useInputTypeDate={useInputTypeDate}
                     locale={Locale.DE}
                     environment={environment}
                     model={this.state.model}

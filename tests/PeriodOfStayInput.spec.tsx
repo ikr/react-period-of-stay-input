@@ -15,6 +15,7 @@ describe('PeriodOfStayInput for 1+ nights', () => {
     function props(): Props {
         return {
             className: 'ad-hoc',
+            useInputTypeDate: false,
             locale: Locale.DE,
             model: new Model(new Day('2014-09-26'), new Day('2014-09-27')),
             environment: new Environment(false, new Day('2014-09-26')),
@@ -134,6 +135,7 @@ describe('PeriodOfStayInput notification', () => {
 
     function props(model: Model, onChange: (m: Model) => void): Props {
         return {
+            useInputTypeDate: false,
             locale: Locale.EN,
             model,
             environment,
