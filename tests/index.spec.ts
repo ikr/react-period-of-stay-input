@@ -6,6 +6,7 @@ import Model from '../src/Model'
 import Environment from '../src/Environment'
 import PeriodOfStayInput from '../src/PeriodOfStayInput'
 import Locale from '../src/Locale'
+import isInputTypeDateSupported from '../src/isInputTypeDateSupported'
 
 describe('top-level API', () => {
     it('exposes the css submodule', () => {
@@ -30,5 +31,9 @@ describe('top-level API', () => {
 
     it('exposes the Locale', () => {
         assert.strictEqual(api.Locale, Locale)
+    })
+
+    it('exposes the isInputTypeDateSupported', () => {
+        assert.strictEqual(api.isInputTypeDateSupported, isInputTypeDateSupported)
     })
 })
