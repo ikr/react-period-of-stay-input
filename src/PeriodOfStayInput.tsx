@@ -22,7 +22,10 @@ function datePickerData(props: Props) {
     }
 }
 
-function CheckIn(props: Props & { handleCheckInChange: (v: Moment) => void }) {
+function CheckIn(props: Props & {
+    handleCheckInChange: (v: Moment) => void,
+    handleNativeCheckInChange: (ev: InputChangeEvent) => void
+}) {
     const { locale, mCheckIn, mCheckOut } = datePickerData(props)
 
     return (
@@ -36,7 +39,10 @@ function CheckIn(props: Props & { handleCheckInChange: (v: Moment) => void }) {
     )
 }
 
-function CheckOut(props: Props & { handleCheckOutChange: (v: Moment) => void }) {
+function CheckOut(props: Props & {
+    handleCheckOutChange: (v: Moment) => void,
+    handleNativeCheckOutChange: (ev: InputChangeEvent) => void
+}) {
     const { locale, mCheckIn, mCheckOut } = datePickerData(props)
 
     return (
@@ -71,7 +77,11 @@ export default class PeriodOfStayInput extends React.Component<Props> {
                         <FormattedMessage id='react-period-of-stay-input.checkInDay' />
                     </label>
 
-                    <CheckIn {...{ ...this.props, handleCheckInChange: this.handleCheckInChange }} />
+                    <CheckIn {...{
+                        ...this.props,
+                        handleCheckInChange: this.handleCheckInChange,
+                        handleNativeCheckInChange: this.handleNativeCheckInChange
+                    }} />
                     <CalendarIcon />
                 </div>
 
@@ -80,7 +90,11 @@ export default class PeriodOfStayInput extends React.Component<Props> {
                         <FormattedMessage id='react-period-of-stay-input.checkOutDay' />
                     </label>
 
-                    <CheckOut {...{ ...this.props, handleCheckOutChange: this.handleCheckOutChange }} />
+                    <CheckOut {...{
+                        ...this.props,
+                        handleCheckOutChange: this.handleCheckOutChange,
+                        handleNativeCheckOutChange: this.handleNativeCheckOutChange
+                    }} />
                     <CalendarIcon />
                 </div>
 
