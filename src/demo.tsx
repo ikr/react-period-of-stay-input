@@ -19,7 +19,7 @@ import {
 addLocaleData(de)
 const environment = new Environment(true, new Day('1979-11-16'))
 
-// That function manipulates the DOM, in order to detect the feature, and is therefore slow. I'd
+// That function manipulates the DOM, in order to detect the feature, and is therefore slow. You'd
 // probably not want to have it called in a render() method.
 //
 const useInputTypeDate = isInputTypeDateSupported()
