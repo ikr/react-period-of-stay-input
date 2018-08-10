@@ -19,6 +19,8 @@ export default class PeriodOfStayInput extends React.Component<Props> {
         super(props)
         this.handleCheckInChange = this.handleCheckInChange.bind(this)
         this.handleCheckOutChange = this.handleCheckOutChange.bind(this)
+        this.handleNativeCheckInChange = this.handleNativeCheckInChange.bind(this)
+        this.handleNativeCheckOutChange = this.handleNativeCheckOutChange.bind(this)
     }
 
     render() {
@@ -84,6 +86,18 @@ export default class PeriodOfStayInput extends React.Component<Props> {
             this.props.model.newCheckOut(newValue.format(FORMAT), this.props.environment)
         )
     }
+
+    handleNativeCheckInChange(ev: InputChangeEvent): void {
+        this.props.onChange(
+            this.props.model.newCheckIn(ev.target.value, this.props.environment)
+        )
+    }
+
+    handleNativeCheckOutChange(ev: InputChangeEvent): void {
+        this.props.onChange(
+            this.props.model.newCheckOut(ev.target.value, this.props.environment)
+        )
+    }
 }
 
 export interface Props {
@@ -92,4 +106,8 @@ export interface Props {
     model: Model,
     environment: Environment,
     onChange: (newValue: Model) => void
+}
+
+interface InputChangeEvent {
+    target: { value: string }
 }

@@ -208,4 +208,34 @@ describe('PeriodOfStayInput notification', () => {
             assert((onChange as SinonSpy).args[0][0].checkOutDate)
         })
     })
+
+    describe('when <input type=date> check-in changes', function() {
+        beforeEach(() => {
+            instance.handleNativeCheckInChange({ target: { value: '2014-10-02' } })
+        })
+
+        it('start with delegation to model', function() {
+            assert((model.newCheckIn as SinonSpy).calledOnceWith('2014-10-02', environment))
+        })
+
+        it('gets to onChange', function() {
+            assert((onChange as SinonSpy).calledOnce)
+            assert((onChange as SinonSpy).args[0][0].checkOutDate)
+        })
+    })
+
+    describe('when <input type=date> check-out changes', function() {
+        beforeEach(() => {
+            instance.handleNativeCheckOutChange({ target: { value: '2014-10-07' } })
+        })
+
+        it('start with delegation to model', function() {
+            assert((model.newCheckOut as SinonSpy).calledOnceWith('2014-10-07', environment))
+        })
+
+        it('gets to onChange', function() {
+            assert((onChange as SinonSpy).calledOnce)
+            assert((onChange as SinonSpy).args[0][0].checkOutDate)
+        })
+    })
 })
