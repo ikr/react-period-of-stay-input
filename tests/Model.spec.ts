@@ -1,5 +1,6 @@
 import * as assert from 'assert'
 import Model from '../src/Model'
+import ZeroNightsPolicy from '../src/ZeroNightsPolicy'
 import Environment from '../src/Environment'
 import Day from '../src/Day'
 
@@ -24,7 +25,7 @@ describe('Model', () => {
 describe('Model::newCheckIn', () => {
     describe('when zero nights aren\'t allowed', () => {
         const m = new Model(new Day('2014-09-24'), new Day('2014-09-30'))
-        const e = new Environment(false, new Day('2014-09-24'))
+        const e = new Environment(ZeroNightsPolicy.DENY, new Day('2014-09-24'))
 
         it('works in identity case', () => {
             assertValue(m.newCheckIn('2014-09-24', e), '2014-09-24', '2014-09-30')
@@ -45,7 +46,7 @@ describe('Model::newCheckIn', () => {
 
     describe('when zero nights are allowed', () => {
         const m = new Model(new Day('2014-09-24'), new Day('2014-09-30'))
-        const e = new Environment(true, new Day('2014-09-24'))
+        const e = new Environment(ZeroNightsPolicy.ALLOW, new Day('2014-09-24'))
 
         it('allows check-out value', () => {
             assertValue(m.newCheckIn('2014-09-30', e), '2014-09-30', '2014-09-30')
@@ -58,7 +59,7 @@ describe('Model::newCheckIn', () => {
 
     describe('for longger stays', () => {
         const m = new Model(new Day('2014-09-24'), new Day('2014-09-30'))
-        const e = new Environment(false, new Day('2014-08-01'))
+        const e = new Environment(ZeroNightsPolicy.DENY, new Day('2014-08-01'))
 
         it('allows 27 nights stay', () => {
             assertValue(m.newCheckIn('2014-09-03', e), '2014-09-03', '2014-09-30')
@@ -73,7 +74,7 @@ describe('Model::newCheckIn', () => {
 describe('Model::newCheckOut', () => {
     describe('when zero nights aren\'t allowed', () => {
         const m = new Model(new Day('2014-09-24'), new Day('2014-09-30'))
-        const e = new Environment(false, new Day('2014-09-20'))
+        const e = new Environment(ZeroNightsPolicy.DENY, new Day('2014-09-20'))
 
         it('yeilds a new check-out day in a valid case', () => {
             assertValue(m.newCheckOut('2014-09-25', e), '2014-09-24', '2014-09-25')
@@ -98,7 +99,7 @@ describe('Model::newCheckOut', () => {
 
     describe('when zero nights are allowed', () => {
         const m = new Model(new Day('2014-09-24'), new Day('2014-09-30'))
-        const e = new Environment(true, new Day('2014-09-01'))
+        const e = new Environment(ZeroNightsPolicy.ALLOW, new Day('2014-09-01'))
 
         it('allows the check-in value', () => {
             assertValue(m.newCheckOut('2014-09-24', e), '2014-09-24', '2014-09-24')
@@ -107,7 +108,7 @@ describe('Model::newCheckOut', () => {
 
     describe('when it\'s minCheckInDate and zero nights are allowed', () => {
         const m = new Model(new Day('2014-09-24'), new Day('2014-09-30'))
-        const e = new Environment(true, new Day('2014-09-24'))
+        const e = new Environment(ZeroNightsPolicy.ALLOW, new Day('2014-09-24'))
 
         it('allows the check-in value', () => {
             assertValue(m.newCheckOut('2014-09-24', e), '2014-09-24', '2014-09-24')

@@ -1,16 +1,17 @@
 import Day from './Day'
+import ZeroNightsPolicy from './ZeroNightsPolicy'
 
 export default class Environment {
-    private _zeroNightsAllowed: boolean
+    private _zeroNightsPolicy: ZeroNightsPolicy
     private _minCheckInDate: Day
 
-    constructor(zeroNightsAllowed: boolean, minCheckInDate: Day) {
-        this._zeroNightsAllowed = zeroNightsAllowed
+    constructor(zeroNightsPolicy: ZeroNightsPolicy, minCheckInDate: Day) {
+        this._zeroNightsPolicy = zeroNightsPolicy
         this._minCheckInDate = minCheckInDate
     }
 
     get zeroNightsAllowed(): boolean {
-        return this._zeroNightsAllowed
+        return this._zeroNightsPolicy === ZeroNightsPolicy.ALLOW
     }
 
     get minCheckInDate(): Day {

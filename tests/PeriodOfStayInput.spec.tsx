@@ -6,6 +6,7 @@ import * as moment from 'moment'
 import { spy, SinonSpy } from 'sinon'
 import Day from '../src/Day'
 import Locale from '../src/Locale'
+import ZeroNightsPolicy from '../src/ZeroNightsPolicy'
 import Environment from '../src/Environment'
 import Model from '../src/Model'
 import intlMessages from '../src/intlMessages'
@@ -18,7 +19,7 @@ describe('PeriodOfStayInput for 1+ nights', () => {
             useInputTypeDate: false,
             locale: Locale.DE,
             model: new Model(new Day('2014-09-26'), new Day('2014-09-27')),
-            environment: new Environment(false, new Day('2014-09-26')),
+            environment: new Environment(ZeroNightsPolicy.DENY, new Day('2014-09-26')),
             onChange: () => undefined
         }
     }
@@ -135,7 +136,7 @@ describe('PeriodOfStayInput for 1+ nights', () => {
 })
 
 describe('PeriodOfStayInput notification', () => {
-    const environment = new Environment(false, new Day('2014-09-26'))
+    const environment = new Environment(ZeroNightsPolicy.DENY, new Day('2014-09-26'))
 
     function props(model: Model, onChange: (m: Model) => void): Props {
         return {
@@ -252,7 +253,7 @@ describe('PeriodOfStayInput with native date input controls', () => {
             useInputTypeDate: true,
             locale: Locale.DE,
             model: new Model(new Day('2014-09-26'), new Day('2014-09-27')),
-            environment: new Environment(false, new Day('2014-09-26')),
+            environment: new Environment(ZeroNightsPolicy.DENY, new Day('2014-09-26')),
             onChange: () => undefined
         }
     }

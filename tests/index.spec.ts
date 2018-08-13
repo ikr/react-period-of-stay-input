@@ -3,6 +3,7 @@ import * as api from '../src/index'
 import css from '../src/css'
 import Day from '../src/Day'
 import Model from '../src/Model'
+import ZeroNightsPolicy from '../src/ZeroNightsPolicy'
 import Environment from '../src/Environment'
 import PeriodOfStayInput from '../src/PeriodOfStayInput'
 import Locale from '../src/Locale'
@@ -35,5 +36,9 @@ describe('top-level API', () => {
 
     it('exposes the isInputTypeDateSupported', () => {
         assert.strictEqual(api.isInputTypeDateSupported, isInputTypeDateSupported)
+    })
+
+    it('exposes the ZeroNightsPolicy', () => {
+        assert.strictEqual(api.ZeroNightsPolicy, ZeroNightsPolicy)
     })
 })
