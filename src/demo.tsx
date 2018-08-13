@@ -40,6 +40,8 @@ class Container extends React.Component<{}, State> {
     constructor(props: any) {
         super(props)
 
+        // onChange, we'll do a state transition from one model value to the other.
+        //
         this.state = {
             model: new Model(new Day('1979-11-16'), new Day('1979-11-17'))
         }
@@ -47,13 +49,17 @@ class Container extends React.Component<{}, State> {
 
     render() {
         return (
+            // In a real application all the intlMessages for a given locale, for all the
+            // sub-components would probably be pre-compiled on the server side into a single
+            // bundle, and placed into a single global var, like `window['my-app-i18n']`.
+            //
             <IntlProvider locale='de' messages={intlMessages().de}>
                 <PeriodOfStayInput
                     useInputTypeDate={useInputTypeDate}
                     locale={Locale.DE}
                     environment={environment}
                     model={this.state.model}
-                    onChange={model => { this.setState({ model }) }} />
+                    onChange={(model: Model) => { this.setState({ model }) }} />
             </IntlProvider>
         )
     }
@@ -61,6 +67,8 @@ class Container extends React.Component<{}, State> {
 
 interface State { model: Model }
 
+// It's a simple utility that inserts the react-datepicker CSS into the HTML document's <head>
+//
 insertCss(css)
 
 ReactDOM.render(
