@@ -16,7 +16,11 @@ import {
     isInputTypeDateSupported
 } from './index'
 
+// In order to display localized messages, react-intl needs the locale definitions data, describing
+// the formats, and the pluralization/gender rules.
+//
 addLocaleData(de)
+
 const environment = new Environment(true, new Day('1979-11-16'))
 
 // That function manipulates the DOM, in order to detect the feature, and is therefore slow. You'd
