@@ -4,7 +4,6 @@ import insertCss from 'insert-css'
 import { IntlProvider, addLocaleData } from 'react-intl'
 import de from 'react-intl/locale-data/de'
 import 'moment/locale/de-ch'
-import intlMessages from './intlMessages'
 
 import {
     css,
@@ -14,7 +13,8 @@ import {
     Environment,
     Model,
     PeriodOfStayInput,
-    isInputTypeDateSupported
+    isInputTypeDateSupported,
+    intlMessages
 } from './index'
 
 // In order to display localized messages, react-intl needs the locale definitions data, describing

@@ -8,6 +8,8 @@ import Environment from '../src/Environment'
 import PeriodOfStayInput from '../src/PeriodOfStayInput'
 import Locale from '../src/Locale'
 import isInputTypeDateSupported from '../src/isInputTypeDateSupported'
+import intlMessages from '../src/intlMessages'
+
 
 describe('top-level API', () => {
     it('exposes the css submodule', () => {
@@ -40,5 +42,9 @@ describe('top-level API', () => {
 
     it('exposes the ZeroNightsPolicy', () => {
         assert.strictEqual(api.ZeroNightsPolicy, ZeroNightsPolicy)
+    })
+
+    it('exposes the intlMessages', () => {
+        assert.strictEqual(api.intlMessages, intlMessages)
     })
 })
