@@ -24,7 +24,7 @@ describe('PeriodOfStayInput for 1+ nights', () => {
     }
 
     const wrapper = mount(
-        <IntlProvider locale='ru' messages={intlMessages().de}>
+        <IntlProvider locale='de' messages={intlMessages().de}>
             <PeriodOfStayInput {...props()} />
         </IntlProvider>
     ).find('PeriodOfStayInput')
@@ -43,6 +43,10 @@ describe('PeriodOfStayInput for 1+ nights', () => {
         it('has the configurable class assigned', () => {
             assert(divWrapper.hasClass('ad-hoc'))
         })
+    })
+
+    it('has no native date inputs', () => {
+        assert.strictEqual(wrapper.find('input[type="date"]').length, 0)
     })
 
     describe('DatePicker for the check-in date', () => {
@@ -157,7 +161,7 @@ describe('PeriodOfStayInput notification', () => {
         onChange = spy()
 
         wrapper = mount(
-            <IntlProvider locale='ru' messages={intlMessages().en}>
+            <IntlProvider locale='de' messages={intlMessages().en}>
                 <PeriodOfStayInput {...props(model, onChange)} />
             </IntlProvider>
         ).find('PeriodOfStayInput')
@@ -238,6 +242,48 @@ describe('PeriodOfStayInput notification', () => {
         it('gets to onChange', function() {
             assert((onChange as SinonSpy).calledOnce)
             assert((onChange as SinonSpy).args[0][0].checkOutDate)
+        })
+    })
+})
+
+describe('PeriodOfStayInput with native date input controls', () => {
+    function props(): Props {
+        return {
+            useInputTypeDate: true,
+            locale: Locale.DE,
+            model: new Model(new Day('2014-09-26'), new Day('2014-09-27')),
+            environment: new Environment(false, new Day('2014-09-26')),
+            onChange: () => undefined
+        }
+    }
+
+    const wrapper = mount(
+        <IntlProvider locale='de' messages={intlMessages().de}>
+            <PeriodOfStayInput {...props()} />
+        </IntlProvider>
+    ).find('PeriodOfStayInput')
+
+
+    const instance = wrapper.instance() as PeriodOfStayInput
+
+
+    it('actually has the two date inputs', () => {
+        assert.strictEqual(wrapper.find('input[type="date"]').length, 2)
+    })
+
+    describe('wiring', () => {
+        it('is done for the check-in', () => {
+            assert.strictEqual(
+                wrapper.find('input[type="date"]').at(0).prop('onChange'),
+                instance.handleNativeCheckInChange
+            )
+        })
+
+        it('is done for the check-out', () => {
+            assert.strictEqual(
+                wrapper.find('input[type="date"]').at(1).prop('onChange'),
+                instance.handleNativeCheckOutChange
+            )
         })
     })
 })

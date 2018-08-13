@@ -26,6 +26,15 @@ function CheckIn(props: Props & {
     handleCheckInChange: (v: Moment) => void,
     handleNativeCheckInChange: (ev: InputChangeEvent) => void
 }) {
+    if (props.useInputTypeDate) {
+        return (
+            <input
+                type='date'
+                value={props.model.checkInDate.toString()}
+                onChange={props.handleNativeCheckInChange} />
+        )
+    }
+
     const { locale, mCheckIn, mCheckOut } = datePickerData(props)
 
     return (
@@ -43,6 +52,15 @@ function CheckOut(props: Props & {
     handleCheckOutChange: (v: Moment) => void,
     handleNativeCheckOutChange: (ev: InputChangeEvent) => void
 }) {
+    if (props.useInputTypeDate) {
+        return (
+            <input
+                type='date'
+                value={props.model.checkOutDate.toString()}
+                onChange={props.handleNativeCheckOutChange} />
+        )
+    }
+
     const { locale, mCheckIn, mCheckOut } = datePickerData(props)
 
     return (
