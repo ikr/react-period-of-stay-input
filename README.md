@@ -3,46 +3,27 @@
 # About
 
 React.js component for entering a period of stay in a hotel: check-in day and check-out day. See
-[the demo.](http://ikr.su/h/react-period-of-stay-input/demo.html) In case when a native
-`<input type="date">` implementation is not available, it's "polyfilled" with a
-[jQuery UI datepicker](http://jqueryui.com/datepicker/) (English only).
+[the demo.](http://ikr.su/h/react-period-of-stay-input/demo.html) In case when the native `<input
+type=date>` implementation is not available, it's “polyfilled” with [the react-datepicker
+component](https://github.com/Hacker0x01/react-datepicker).
 
 # Installation
-
-Made for [Browserify.](http://browserify.org/)
 
     npm install --save react-period-of-stay-input
 
 # Usage
 
-See [the code](https://github.com/ikr/react-period-of-stay-input/blob/master/demo.js) of the demo
-mentioned above. The _polyfilling_ part is visible
-[here.](https://github.com/ikr/react-period-of-stay-input/blob/master/www/demo.html)
+See [the annotated source code of the
+demo](https://github.com/ikr/react-period-of-stay-input/blob/master/src/demo.tsx) mentioned
+above.
 
 ## Internationalization
 
-[react-intl](https://github.com/yahoo/react-intl)-based. To translate the component, please pass the
-`messages` property, containing:
+The i18n is based on the [react-intl library.](https://github.com/yahoo/react-intl) `react-intl`
+facilitates using `react-period-of-stay-input`, and other similarly organized modules, in a large
+single-page application (SPA). Its `IntlProvider` wrapper passes all the app translations, for all
+the sub-modules, from the root, down the React components hierarchy.
 
-```js
-{
-    'react-period-of-stay-input': {
-        period: '{count, plural, =0 {Single day} =1 {1 night} other {# nights}}',
-        checkInDay: 'Check-in day',
-        checkOutDay: 'Check-out day'
-    }
-}
-```
-
-`react-intl` allows using `react-period-of-stay-input` uniformly in bigger applications, and passing
-all the namespaced translations, from the root, down the React components hierarchy, --
-automatically, with the help of `IntlMixin`.
-
-Please note, that `react-intl` depends on global `Intl` object. You can polyfill it with
-[intl](https://github.com/andyearnshaw/Intl.js) package:
-
-```js
-if (!global.Intl) {
-    require('intl');
-}
-```
+Normally, translations for every supported locale are collected from all the sub-modules, and
+pre-compiled into a separate JS bundle, during the SPA build step. Thus, the browser doesn't have to
+download the translations for the locales it doesn't display at the moment.
